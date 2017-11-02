@@ -2,7 +2,6 @@ package ch.hevs.denisdaniel.androidmusicapp;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.provider.SyncStateContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
@@ -88,14 +87,30 @@ public class MainActivity extends AppCompatActivity
 
         switch(id)
         {
-            case R.id.test:
-                //load fragment
-                changeFragment(new TestFragment());
+            case R.id.search:
+                changeFragment(new SearchFragment());
                 break;
-            case R.id.test2:
-                //load fragment
-                changeFragment(new TestFragment2());
-
+            case R.id.albums:
+                changeFragment(new AlbumsFragment());
+                break;
+            case R.id.artists:
+                changeFragment(new ArtistsFragment());
+                break;
+            case R.id.tracks:
+                changeFragment(new TracksFragment());
+                break;
+            case R.id.add_albums:
+                changeFragment(new AddAlbumFragment());
+                break;
+            case R.id.add_artists:
+                changeFragment(new AddArtistFragment());
+                break;
+            case R.id.add_tracks:
+                changeFragment(new AddTrackFragment());
+                break;
+            case R.id.settings:
+                changeFragment(new SettingsFragment());
+                changeFragment(new SettingsFragment());
                 break;
 //            case R.id.nav_gallery:
 //                //load fragment

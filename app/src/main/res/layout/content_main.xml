@@ -9,7 +9,7 @@
     tools:context="ch.hevs.denisdaniel.androidmusicapp.MainActivity"
     tools:showIn="@layout/app_bar_main">
     <!--fragment-->
-    <fragment android:name="ch.hevs.denisdaniel.androidmusicapp.TestFragment"
+    <fragment android:name="ch.hevs.denisdaniel.androidmusicapp.SearchFragment"
         android:id="@+id/test_fragment"
         android:tag="mainFrag"
         android:layout_width="368dp"
