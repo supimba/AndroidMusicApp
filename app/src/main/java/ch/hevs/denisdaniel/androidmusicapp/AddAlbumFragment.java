@@ -16,8 +16,6 @@ import java.util.ArrayList;
  */
 
 public class AddAlbumFragment extends Fragment {
-    private Spinner spinner;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.add_album, container, false);

@@ -17,6 +17,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -116,7 +118,7 @@ public class MainActivity extends AppCompatActivity
                 changeFragment(fragment);
                 break;
             case R.id.add_tracks:
-                fragment = new AddArtistFragment();
+                fragment = new AddTrackFragment();
                 changeFragment(fragment);
                 break;
             case R.id.settings:
@@ -138,7 +140,7 @@ public class MainActivity extends AppCompatActivity
     {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction ft = fragmentManager.beginTransaction();
-        ft.replace(R.id.content_main, fragment);
+        ft.replace(R.id.main_frame, fragment);
         ft.addToBackStack(null);
         ft.commit();
     }
