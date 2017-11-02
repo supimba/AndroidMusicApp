@@ -1,10 +1,18 @@
 package ch.hevs.denisdaniel.androidmusicapp;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 /**
  * Created by Denis Woeffray on 30.10.2017.
  */
 
-class SettingsFragment extends Fragment {
+public class SettingsFragment extends Fragment {
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.settings, container, false);
+    }
 }

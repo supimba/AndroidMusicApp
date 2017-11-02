@@ -8,11 +8,11 @@
     android:padding="@dimen/activity_horizontal_margin">
 
     <TextView
-        android:id="@+id/textViewAlbum"
+        android:id="@+id/textViewArtist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/activity_horizontal_margin"
-        android:text="@string/album"
+        android:text="@string/artist"
         android:textColor="@color/colorPrimary"
         android:textSize="24sp" />
 
@@ -30,19 +30,6 @@
         android:inputType="textPersonName" />
 
     <TextView
-        android:id="@+id/textViewReleaseDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/release_date" />
-
-    <EditText
-        android:id="@+id/editTextReleaseDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="date" />
-
-    <TextView
         android:id="@+id/textViewDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -54,18 +41,6 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textMultiLine" />
-
-    <TextView
-        android:id="@+id/textViewNote"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/rate" />
-
-    <RatingBar
-        android:id="@+id/ratingBar"
-        android:layout_width="339dp"
-        android:layout_height="wrap_content" />
-
 
 
 </LinearLayout>

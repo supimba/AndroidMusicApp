@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="@dimen/activity_horizontal_margin">
 
     <TextView
-        android:id="@+id/textViewAlbum"
+        android:id="@+id/textViewTrack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/activity_horizontal_margin"
-        android:text="@string/album"
+        android:text="@string/track"
         android:textColor="@color/colorPrimary"
         android:textSize="24sp" />
 
@@ -30,42 +30,17 @@
         android:inputType="textPersonName" />
 
     <TextView
-        android:id="@+id/textViewReleaseDate"
+        android:id="@+id/textViewDuration"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/release_date" />
+        android:text="@string/duration" />
 
     <EditText
-        android:id="@+id/editTextReleaseDate"
+        android:id="@+id/editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="date" />
-
-    <TextView
-        android:id="@+id/textViewDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/description" />
-
-    <EditText
-        android:id="@+id/editTextDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textMultiLine" />
-
-    <TextView
-        android:id="@+id/textViewNote"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/rate" />
-
-    <RatingBar
-        android:id="@+id/ratingBar"
-        android:layout_width="339dp"
-        android:layout_height="wrap_content" />
-
+        android:inputType="time" />
 
 
 </LinearLayout>

@@ -9,12 +9,19 @@
     tools:context="ch.hevs.denisdaniel.androidmusicapp.MainActivity"
     tools:showIn="@layout/app_bar_main">
     <!--fragment-->
-    <fragment android:name="ch.hevs.denisdaniel.androidmusicapp.SearchFragment"
-        android:id="@+id/test_fragment"
-        android:tag="mainFrag"
+    <!--<fragment android:name="ch.hevs.denisdaniel.androidmusicapp.SearchFragment"-->
+        <!--android:id="@+id/test_fragment"-->
+        <!--android:tag="mainFrag"-->
+        <!--android:layout_width="368dp"-->
+        <!--android:layout_height="495dp"-->
+        <!--tools:layout_editor_absoluteY="8dp"-->
+        <!--tools:layout_editor_absoluteX="8dp" />-->
+    <!--endfragment-->
+
+    <FrameLayout
+        android:id="@+id/main_frame"
         android:layout_width="368dp"
         android:layout_height="495dp"
-        tools:layout_editor_absoluteY="8dp"
-        tools:layout_editor_absoluteX="8dp" />
-    <!--endfragment-->
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp" />
 </android.support.constraint.ConstraintLayout>

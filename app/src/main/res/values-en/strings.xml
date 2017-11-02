@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">AndroidMusicApp</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="search">Search</string>
+    <string name="albums">Albums</string>
+    <string name="artists">Artists</string>
+    <string name="tracks">Tracks</string>
+    <string name="add_albums">Add album</string>
+    <string name="add_artists">Add artiste</string>
+    <string name="add_tracks">Add track</string>
+    <string name="settings">Settings</string>
+    <string name="name">Name</string>
+    <string name="description">Description</string>
+    <string name="release_date">Release date</string>
+    <string name="rate">Rating</string>
+    <string name="album">Album</string>
+    <string name="artist">Artist</string>
+    <string name="track">Track</string>
+    <string name="duration">Duration</string>
+    <string name="french">Français</string>
+    <string name="english">English</string>
+    <string name="language">Language</string>
+</resources>
