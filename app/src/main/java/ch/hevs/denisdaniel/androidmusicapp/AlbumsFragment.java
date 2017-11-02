@@ -6,5 +6,8 @@ import android.support.v4.app.Fragment;
  * Created by Denis Woeffray on 30.10.2017.
  */
 
-class AlbumsFragment extends Fragment {
+public class AlbumsFragment extends Fragment {
+
+
+
 }

@@ -39,7 +39,9 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+
+        // TODO Changer le set > add
+        drawer.addDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -85,31 +87,40 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         Log.d(MainActivity.class.getSimpleName(), "Click");
 
+        Fragment fragment = null;
+
         switch(id)
         {
             case R.id.search:
-                changeFragment(new SearchFragment());
+                fragment = new SearchFragment();
+                changeFragment(fragment);
                 break;
             case R.id.albums:
-                changeFragment(new AlbumsFragment());
+                fragment = new AlbumsFragment();
+                changeFragment(fragment);
                 break;
             case R.id.artists:
+                fragment = new ArtistsFragment();
                 changeFragment(new ArtistsFragment());
                 break;
             case R.id.tracks:
-                changeFragment(new TracksFragment());
+                fragment = new TracksFragment();
+                changeFragment(fragment);
                 break;
             case R.id.add_albums:
-                changeFragment(new AddAlbumFragment());
+                fragment = new AddAlbumFragment();
+                changeFragment(fragment);
                 break;
             case R.id.add_artists:
-                changeFragment(new AddArtistFragment());
+                fragment = new AddArtistFragment();
+                changeFragment(fragment);
                 break;
             case R.id.add_tracks:
-                changeFragment(new AddTrackFragment());
+                fragment = new AddArtistFragment();
+                changeFragment(fragment);
                 break;
             case R.id.settings:
-                changeFragment(new SettingsFragment());
+                fragment = new SettingsFragment();
                 changeFragment(new SettingsFragment());
                 break;
 //            case R.id.nav_gallery:

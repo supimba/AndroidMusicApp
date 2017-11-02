@@ -1,9 +1,11 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
+    <!-- TODO Changer la couleur de la navigation-->
     <gradient
+
         android:angle="135"
-        android:centerColor="#4CAF50"
-        android:endColor="#2E7D32"
-        android:startColor="#81C784"
+        android:centerColor="#f38176"
+        android:endColor="#F38C65"
+        android:startColor="#6b3fdd"
         android:type="linear" />
 </shape>
