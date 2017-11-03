@@ -1,5 +1,6 @@
 package ch.hevs.denisdaniel.androidmusicapp;
 
+import android.arch.persistence.room.Room;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.design.widget.FloatingActionButton;
@@ -16,15 +17,27 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 
-import java.util.Locale;
+import java.util.List;
+
+import ch.hevs.denisdaniel.androidmusicapp.Artists.Artist;
+import ch.hevs.denisdaniel.androidmusicapp.Artists.ArtistDao;
+import ch.hevs.denisdaniel.androidmusicapp.Artists.Views.ArtistsFragment;
+import ch.hevs.denisdaniel.androidmusicapp.DB.AppDatabase;
+import ch.hevs.denisdaniel.androidmusicapp.Artists.Views.AddArtistFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -143,5 +156,14 @@ public class MainActivity extends AppCompatActivity
         ft.replace(R.id.main_frame, fragment);
         ft.addToBackStack(null);
         ft.commit();
+    }
+
+    public void addArtist(View view)
+    {
+        EditText editTextname = (EditText)findViewById(R.id.editTextName);
+        String name = editTextname.getText().toString();
+        EditText editTextDescription = (EditText)findViewById(R.id.editTextDescription);
+        String description = editTextDescription.getText().toString();
+        App.get().getDB().artistDao().add(new Artist(name,description));
     }
 }
