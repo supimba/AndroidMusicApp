@@ -191,4 +191,24 @@ public class MainActivity extends AppCompatActivity
             Log.d("Exception found :",e.getMessage());
         }
     }
+
+    public void deleteAllArtists(View view)
+    {
+        try
+        {
+            db = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME).build();
+            new AsyncTask<Void, Void, Integer>() {
+                @Override
+                protected Integer doInBackground(Void... voids) {
+                    db.artistDao().deleteAll();
+                    return null;
+                }
+
+            }.execute();
+        }
+        catch (Exception e)
+        {
+            Log.d("Exception found :",e.getMessage());
+        }
+    }
 }

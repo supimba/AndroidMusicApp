@@ -60,9 +60,10 @@ public class ArtistsFragment extends Fragment {
             e.printStackTrace();
         }
 
+        Log.i("data", ""+data.size());
         for(int i=0;i<data.size(); i++)
         {
-            Log.d("Artist "+i, data.get(i).getName());
+            Log.i("Artist "+i, data.get(i).getName());
         }
 
         BindDictionary<Artist> dictionary = new BindDictionary<>();

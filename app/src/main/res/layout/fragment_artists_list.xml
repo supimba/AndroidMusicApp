@@ -3,7 +3,13 @@
 android:orientation="vertical" android:layout_width="match_parent"
 android:layout_height="match_parent">
 
-
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:onClick="deleteAllArtists"
+        android:text="@string/delete_all" />
 <ListView
     android:id="@+id/artist_listview"
     android:layout_width="match_parent"

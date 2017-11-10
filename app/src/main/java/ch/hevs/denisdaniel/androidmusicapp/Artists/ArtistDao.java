@@ -1,6 +1,7 @@
 package ch.hevs.denisdaniel.androidmusicapp.Artists;
 
 import android.arch.persistence.room.Dao;
+import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 
@@ -16,4 +17,9 @@ public interface ArtistDao {
 
     @Insert
     void add(Artist artist);
+
+    @Query("DELETE FROM artist")
+    void deleteAll();
+
+
 }
