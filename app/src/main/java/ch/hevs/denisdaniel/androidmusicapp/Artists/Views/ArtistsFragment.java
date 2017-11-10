@@ -60,6 +60,11 @@ public class ArtistsFragment extends Fragment {
             e.printStackTrace();
         }
 
+        for(int i=0;i<data.size(); i++)
+        {
+            Log.d("Artist "+i, data.get(i).getName());
+        }
+
         BindDictionary<Artist> dictionary = new BindDictionary<>();
         dictionary.addStringField(R.id.textViewName, new StringExtractor<Artist>() {
             @Override
