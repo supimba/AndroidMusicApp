@@ -1,7 +1,12 @@
 package ch.hevs.denisdaniel.androidmusicapp;
 
-import android.arch.persistence.room.Room;
+import android.app.Activity;
+import android.arch.persistence.db.SupportSQLiteOpenHelper;
+import android.arch.persistence.room.*;
+import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -18,25 +23,28 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ch.hevs.denisdaniel.androidmusicapp.Artists.Artist;
 import ch.hevs.denisdaniel.androidmusicapp.Artists.ArtistDao;
 import ch.hevs.denisdaniel.androidmusicapp.Artists.Views.ArtistsFragment;
-import ch.hevs.denisdaniel.androidmusicapp.DB.AppDatabase;
 import ch.hevs.denisdaniel.androidmusicapp.Artists.Views.AddArtistFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private AppDatabase db;
 
-
+    public interface OnArtistsListener {
+        void onArtistsCompleted(ArrayList<Artist> artists);
+        void onArtistsError(String error);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -161,9 +169,26 @@ public class MainActivity extends AppCompatActivity
     public void addArtist(View view)
     {
         EditText editTextname = (EditText)findViewById(R.id.editTextName);
-        String name = editTextname.getText().toString();
+        String artistName = editTextname.getText().toString();
         EditText editTextDescription = (EditText)findViewById(R.id.editTextDescription);
-        String description = editTextDescription.getText().toString();
-        App.get().getDB().artistDao().add(new Artist(name,description));
+        String artistDescription = editTextDescription.getText().toString();
+        final Artist newArtist = new Artist(artistName,artistDescription);
+        try
+        {
+            db = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME).build();
+            new AsyncTask<Void, Void, Integer>() {
+                @Override
+                protected Integer doInBackground(Void... voids) {
+                    db.artistDao().add(newArtist);
+                    return null;
+                }
+
+            }.execute();
+            Log.d("Artist added",newArtist.getName());
+        }
+        catch (Exception e)
+        {
+            Log.d("Exception found :",e.getMessage());
+        }
     }
 }
