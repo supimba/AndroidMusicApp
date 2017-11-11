@@ -27,6 +27,7 @@ import java.util.concurrent.ExecutionException;
 import ch.hevs.denisdaniel.androidmusicapp.AppDatabase;
 import ch.hevs.denisdaniel.androidmusicapp.Artists.Artist;
 import ch.hevs.denisdaniel.androidmusicapp.Artists.ArtistTask;
+import ch.hevs.denisdaniel.androidmusicapp.MainActivity;
 import ch.hevs.denisdaniel.androidmusicapp.R;
 
 /**
@@ -37,9 +38,18 @@ public class ArtistsFragment extends Fragment {
     private AppDatabase db;
     void deleteArtist(int id)
     {
-        Log.i("",""+id);
         db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
-        new ArtistTask(db, "delete",id);
+        new ArtistTask(db, "delete",id).execute();
+        changeFragment(new ArtistsFragment());
+    }
+
+    public void changeFragment(Fragment fragment)
+    {
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction ft = fragmentManager.beginTransaction();
+        ft.replace(R.id.main_frame, fragment);
+        ft.addToBackStack(null);
+        ft.commit();
     }
 
     @Override
@@ -104,7 +114,7 @@ public class ArtistsFragment extends Fragment {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setView(R.layout.artist_popup);
-                AlertDialog alertDialog = builder.create();
+                final AlertDialog alertDialog = builder.create();
                 alertDialog.show();
 
                 Button deleteButton = alertDialog.findViewById(R.id.deleteButton);
@@ -113,6 +123,7 @@ public class ArtistsFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         deleteArtist(ArtistId);
+                        alertDialog.hide();
                     }
                 });
 
