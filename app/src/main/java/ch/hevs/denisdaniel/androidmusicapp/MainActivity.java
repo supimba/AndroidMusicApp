@@ -176,6 +176,13 @@ public class MainActivity extends AppCompatActivity
         String artistName = editTextname.getText().toString();
         EditText editTextDescription = (EditText)findViewById(R.id.editTextDescription);
         String artistDescription = editTextDescription.getText().toString();
+
+        if(artistName.equals("") || artistDescription.equals(""))
+        {
+            Toast toast = Toast.makeText(getApplicationContext(), R.string.fill_fields, Toast.LENGTH_SHORT);
+            toast.show();
+            return;
+        }
         final Artist newArtist = new Artist(artistName,artistDescription);
         try
         {
@@ -194,6 +201,12 @@ public class MainActivity extends AppCompatActivity
         {
             Log.d("Exception found :",e.getMessage());
         }
+
+        editTextname.setText("");
+        editTextDescription.setText("");
+
+        Toast toast = Toast.makeText(getApplicationContext(), R.string.artist_created+" : "+newArtist.getName(), Toast.LENGTH_SHORT);
+        toast.show();
     }
 
     public void deleteAllArtists(View view)
