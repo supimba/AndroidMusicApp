@@ -1,35 +1,32 @@
 package ch.hevs.denisdaniel.androidmusicapp.Artists.Views;
 
 import android.arch.persistence.room.Room;
-import android.arch.persistence.room.RoomDatabase;
-import android.database.Observable;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.amigold.fundapter.BindDictionary;
 import com.amigold.fundapter.FunDapter;
 import com.amigold.fundapter.extractors.StringExtractor;
+import com.amigold.fundapter.fields.StringField;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 
-import javax.xml.transform.Result;
-
-import ch.hevs.denisdaniel.androidmusicapp.Album;
-import ch.hevs.denisdaniel.androidmusicapp.AlbumsFragment;
 import ch.hevs.denisdaniel.androidmusicapp.AppDatabase;
 import ch.hevs.denisdaniel.androidmusicapp.Artists.Artist;
-import ch.hevs.denisdaniel.androidmusicapp.Artists.ArtistDao;
+import ch.hevs.denisdaniel.androidmusicapp.Artists.ArtistTask;
 import ch.hevs.denisdaniel.androidmusicapp.R;
 
 /**
@@ -38,6 +35,12 @@ import ch.hevs.denisdaniel.androidmusicapp.R;
 
 public class ArtistsFragment extends Fragment {
     private AppDatabase db;
+    void deleteArtist(int id)
+    {
+        Log.i("",""+id);
+        db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
+        new ArtistTask(db, "delete",id);
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,59 +51,78 @@ public class ArtistsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_artists_list, container, false);
+        final View view = inflater.inflate(R.layout.fragment_artists_list, container, false);
         db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
         ArrayList<Artist> data = null;
 
         try {
-            data = new ArtistsLoader(db).execute().get();
+            data = (ArrayList) new ArtistTask(db, "getAll", 0).execute().get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
 
-        Log.i("data", ""+data.size());
-        for(int i=0;i<data.size(); i++)
-        {
-            Log.i("Artist "+i, data.get(i).getName());
-        }
-
         BindDictionary<Artist> dictionary = new BindDictionary<>();
+
         dictionary.addStringField(R.id.textViewName, new StringExtractor<Artist>() {
             @Override
             public String getStringValue(Artist artist, int position) {
                 return artist.getName();
             }
         });
+        dictionary.addStringField(R.id.textViewId, new StringExtractor<Artist>() {
+            @Override
+            public String getStringValue(Artist artist, int position) {
+                return String.valueOf(artist.getUid());
+            }
+        });
 
-
-        FunDapter adapter = new FunDapter(ArtistsFragment.this.getActivity(), (ArrayList<Artist>)data, R.layout.fragment_artists, dictionary) ;
+        FunDapter adapter = new FunDapter(ArtistsFragment.this.getActivity(), (ArrayList<Artist>) data, R.layout.fragment_artists, dictionary);
         ListView artist_listview = (ListView) view.findViewById(R.id.artist_listview);
         artist_listview.setAdapter(adapter);
-        return view;
 
-    }
 
-    private class ArtistsLoader extends AsyncTask<Void, Void, ArrayList<Artist>> {
+        artist_listview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> arg0, View v,
+                                           int pos, long id) {
 
-        AppDatabase db;
+                TextView editTextname = (TextView) v.findViewById(R.id.textViewId);
 
-        public ArtistsLoader(AppDatabase db) {
-            super();
-            this.db = db;
+                final int ArtistId = Integer.parseInt(editTextname.getText().toString());
+
+                Artist artist = new Artist("", "");
+
+                try {
+                    artist = (Artist) new ArtistTask(db, "get", ArtistId).execute().get();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setView(R.layout.artist_popup);
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+
+                Button deleteButton = alertDialog.findViewById(R.id.deleteButton);
+
+                deleteButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        deleteArtist(ArtistId);
+                    }
+                });
+
+
+                return true;
+            }
+
+            ;
+        });
+
+            return view;
         }
-        protected ArrayList<Artist> doInBackground(Void... params) {
-            return getArtists(new ArrayList<Artist>());
-        }
-        protected void onPostExecute(Void result) {
-        }
-
-    }
-
-    private ArrayList<Artist> getArtists(ArrayList<Artist> artists) {
-        return (ArrayList<Artist>)db.artistDao().getAll();
-    }
-
-
 }

@@ -13,6 +13,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -22,6 +24,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -30,6 +34,7 @@ import java.util.List;
 
 import ch.hevs.denisdaniel.androidmusicapp.Artists.Artist;
 import ch.hevs.denisdaniel.androidmusicapp.Artists.ArtistDao;
+import ch.hevs.denisdaniel.androidmusicapp.Artists.ArtistTask;
 import ch.hevs.denisdaniel.androidmusicapp.Artists.Views.ArtistsFragment;
 import ch.hevs.denisdaniel.androidmusicapp.Artists.Views.AddArtistFragment;
 
@@ -108,7 +113,6 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        Log.d(MainActivity.class.getSimpleName(), "Click");
 
         Fragment fragment = null;
 
@@ -157,7 +161,7 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    private void changeFragment(Fragment fragment)
+    public void changeFragment(Fragment fragment)
     {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction ft = fragmentManager.beginTransaction();
@@ -211,4 +215,37 @@ public class MainActivity extends AppCompatActivity
             Log.d("Exception found :",e.getMessage());
         }
     }
+
+    public void deleteArtist(View view)
+    {
+        db = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME).build();
+        Button deleteButton = (Button)view.findViewById(R.id.deleteButton);
+
+        new ArtistTask(db, "delete",0);
+        changeFragment(new ArtistsFragment());
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+                                    ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.artist_context_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        switch (item.getItemId()) {
+            case R.id.edit:
+                Log.i("edit","");
+                return true;
+            case R.id.delete:
+                Log.i("delete","");
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
+
 }
