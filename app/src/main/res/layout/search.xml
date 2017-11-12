@@ -5,16 +5,26 @@
     android:orientation="vertical">
 
     <SearchView
+        android:id="@+id/searchView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="@dimen/activity_horizontal_margin">
-
         <TextView
+            android:id="@+id/textViewTracks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingBottom="@dimen/activity_horizontal_margin"
+            android:text="@string/tracks"
+            android:textColor="@color/colorPrimary"
+            android:textSize="24sp" />
+        <!--<TextView
             android:id="@+id/textViewAlbum"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -43,6 +53,22 @@
             android:text="@string/artists"
             android:textColor="@color/colorPrimary"
             android:textSize="24sp" />
+
+        <ListView
+            android:id="@+id/artist_listview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />-->
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/activity_horizontal_margin">
+        <ListView
+            android:id="@+id/artist_listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+        </LinearLayout>
 
 </LinearLayout>

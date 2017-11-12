@@ -13,9 +13,9 @@ public class ArtistTask extends AsyncTask<Void, Void, Object> {
 
     AppDatabase db;
     String task;
-    int id;
+    Object id;
 
-    public ArtistTask(AppDatabase db, String task, int id) {
+    public ArtistTask(AppDatabase db, String task, Object id) {
         super();
         this.db = db;
         this.task = task;
@@ -27,11 +27,13 @@ public class ArtistTask extends AsyncTask<Void, Void, Object> {
             case "getAll":
                 return db.artistDao().getAll();
             case "get":
-                return db.artistDao().get(id);
+                return db.artistDao().get(Integer.parseInt((String.valueOf(id))));
             case "delete":
-                Artist artist = db.artistDao().get(id);
+                Artist artist = db.artistDao().get(Integer.parseInt((String.valueOf(id))));
                 db.artistDao().delete(artist);
                 return null;
+            case "search":
+                return db.artistDao().search((String) id);
         }
         return null;
     }

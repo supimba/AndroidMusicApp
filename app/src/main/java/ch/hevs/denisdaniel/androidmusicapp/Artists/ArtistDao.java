@@ -13,7 +13,7 @@ import java.util.List;
  */
 @Dao
 public interface ArtistDao {
-    @Query("SELECT * FROM artist")
+    @Query("SELECT * FROM artist ORDER BY name")
     List<Artist> getAll();
 
     @Query("SELECT * FROM artist WHERE artist.uid = :uid")
@@ -30,4 +30,7 @@ public interface ArtistDao {
 
     @Update
     void update(Artist artist);
+
+    @Query("SELECT * FROM artist WHERE name LIKE :searchTerm ORDER BY name")
+    List<Artist> search(String searchTerm);
 }
