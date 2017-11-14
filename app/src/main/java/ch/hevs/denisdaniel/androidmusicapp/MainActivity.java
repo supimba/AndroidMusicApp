@@ -8,10 +8,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
@@ -42,38 +42,33 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private AppDatabase db;
 
-    public interface OnArtistsListener {
-        void onArtistsCompleted(ArrayList<Artist> artists);
-        void onArtistsError(String error);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-
-        // TODO Changer le set > add
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        Fragment fragment = new SearchFragment();
+
+
+
+
+        changeFragment(fragment);
+
     }
 
     @Override
@@ -176,6 +171,14 @@ public class MainActivity extends AppCompatActivity
         String artistName = editTextname.getText().toString();
         EditText editTextDescription = (EditText)findViewById(R.id.editTextDescription);
         String artistDescription = editTextDescription.getText().toString();
+
+        if(artistName.equals(""))
+        {
+            Toast toast = Toast.makeText(getApplicationContext(), R.string.fill_field_artist, Toast.LENGTH_SHORT);
+            toast.show();
+            return;
+        }
+
         final Artist newArtist = new Artist(artistName,artistDescription);
         try
         {
@@ -194,6 +197,12 @@ public class MainActivity extends AppCompatActivity
         {
             Log.d("Exception found :",e.getMessage());
         }
+
+        editTextname.setText("");
+        editTextDescription.setText("");
+
+        Toast toast = Toast.makeText(getApplicationContext(), R.string.artist_created+" : "+newArtist.getName(), Toast.LENGTH_SHORT);
+        toast.show();
     }
 
     public void deleteAllArtists(View view)
@@ -225,27 +234,7 @@ public class MainActivity extends AppCompatActivity
         changeFragment(new ArtistsFragment());
     }
 
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v,
-                                    ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.artist_context_menu, menu);
-    }
 
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        switch (item.getItemId()) {
-            case R.id.edit:
-                Log.i("edit","");
-                return true;
-            case R.id.delete:
-                Log.i("delete","");
-                return true;
-            default:
-                return super.onContextItemSelected(item);
-        }
-    }
+
 
 }

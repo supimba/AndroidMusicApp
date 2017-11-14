@@ -25,5 +25,7 @@
     <string name="french">Français</string>
     <string name="english">English</string>
     <string name="language">Language</string>
-    <string name="delete_all" />
+    <string name="delete_all">Delete all</string>
+    <string name="artist_created">Artiste créé</string>
+    <string name="fill_fields">Please fill all fields</string>
 </resources>
