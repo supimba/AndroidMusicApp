@@ -7,6 +7,20 @@
     android:orientation="vertical"
     android:padding="@dimen/activity_horizontal_margin">
 
+    <ImageView
+        android:id="@+id/albumImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="16dp"
+        android:src="@drawable/musicapp_logo_black"/>
+
+    <ImageButton android:id="@+id/chgtImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_edit_black_24dp"/>
+
     <TextView
         android:id="@+id/textViewAlbum"
         android:layout_width="match_parent"
@@ -17,10 +31,10 @@
         android:textSize="24sp" />
 
     <TextView
-        android:id="@+id/textViewName"
+        android:id="@+id/albumTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/name" />
+        android:text="@string/albumTitle" />
 
     <EditText
         android:id="@+id/editTextName"
@@ -65,6 +79,11 @@
         android:id="@+id/ratingBar"
         android:layout_width="339dp"
         android:layout_height="wrap_content" />
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 
 

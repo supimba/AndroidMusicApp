@@ -1,4 +1,6 @@
-package ch.hevs.denisdaniel.androidmusicapp;
+package ch.hevs.denisdaniel.androidmusicapp.Albums.Albums;
+
+import android.arch.persistence.room.Entity;
 
 import java.util.Date;
 
@@ -6,6 +8,7 @@ import java.util.Date;
  * Created by dnlro on 02/11/2017.
  */
 
+@Entity
 public class Album {
     private int id;
     private String title;

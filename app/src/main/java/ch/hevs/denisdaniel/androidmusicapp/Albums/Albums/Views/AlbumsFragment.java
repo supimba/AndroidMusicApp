@@ -1,4 +1,4 @@
-package ch.hevs.denisdaniel.androidmusicapp;
+package ch.hevs.denisdaniel.androidmusicapp.Albums.Albums.Views;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,6 +14,9 @@ import com.amigold.fundapter.extractors.StringExtractor;
 
 import java.util.ArrayList;
 
+import ch.hevs.denisdaniel.androidmusicapp.Albums.Albums.Album;
+import ch.hevs.denisdaniel.androidmusicapp.R;
+
 /**
  * Created by Denis Woeffray on 30.10.2017.
  */
@@ -27,12 +30,12 @@ public class AlbumsFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
 
         View view = inflater.inflate(R.layout.fragment_albums_list, container, false);
 
@@ -60,6 +63,7 @@ public class AlbumsFragment extends Fragment {
         });
 
         FunDapter adapter = new FunDapter(AlbumsFragment.this.getActivity(), data, R.layout.fragment_albums, dictionary) ;
+
 
         ListView lvData = (ListView) view.findViewById(R.id.lvData);
         lvData.setAdapter(adapter);

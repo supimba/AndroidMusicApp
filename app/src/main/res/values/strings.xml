@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="delete_all">Delete All</string>
     <string name="edit">Modifier</string>
     <string name="delete">Delete</string>
+
     <string name="artist_created">Artiste créé</string>
     <string name="fill_fields">Please fill all fields</string>
     <string name="fill_field_artist">Please fill name field</string>
+
+
+    <string-array name="language_names">
+        <item>English</item>
+        <item>French</item>
+
+    </string-array>
+    <string-array name="language_keys">
+        <item>en</item>
+        <item>fr</item>
+    </string-array>
+
 </resources>

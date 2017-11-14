@@ -14,19 +14,26 @@
     <string name="add_artists">Ajouter artiste</string>
     <string name="add_tracks">Ajouter titre</string>
     <string name="settings">Paramètres</string>
-    <string name="name">Nom</string>
+    <string name="albumTitle">Titre</string>
     <string name="description">Description</string>
     <string name="release_date">Date de sortie</string>
     <string name="rate">Note</string>
     <string name="album">Album</string>
     <string name="artist">Artiste</string>
+    <string name="name">Name</string>
     <string name="track">Titre</string>
     <string name="duration">Durée</string>
     <string name="french">Français</string>
     <string name="english">English</string>
     <string name="language">Langue</string>
     <string name="add">Ajouter</string>
-    <string name="delete_all">Supprimer tous</string>
+
     <string name="artist_created">Artiste créé</string>
     <string name="fill_fields">Please fill all fields</string>
+=======
+    <string name="changeLang">Modifier langue</string>
+    <string name="settings_main">Langues</string>
+    <string name="header_language">Choisir la langue</string>
+    <string name="delete_all" />
+>>>>>>> Stashed changes
 </resources>

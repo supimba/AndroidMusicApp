@@ -1,42 +1,31 @@
 package ch.hevs.denisdaniel.androidmusicapp;
 
-import android.app.Activity;
-import android.arch.persistence.db.SupportSQLiteOpenHelper;
-import android.arch.persistence.room.*;
-import android.content.Context;
+import android.arch.persistence.room.Room;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.ContactsContract;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.SearchView;
-import android.util.Log;
-import android.view.ContextMenu;
-import android.view.MenuInflater;
-import android.view.View;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AdapterView;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import ch.hevs.denisdaniel.androidmusicapp.Albums.Albums.Views.AddAlbumFragment;
+import ch.hevs.denisdaniel.androidmusicapp.Albums.Albums.Views.AlbumsFragment;
 import ch.hevs.denisdaniel.androidmusicapp.Artists.Artist;
-import ch.hevs.denisdaniel.androidmusicapp.Artists.ArtistDao;
 import ch.hevs.denisdaniel.androidmusicapp.Artists.ArtistTask;
-import ch.hevs.denisdaniel.androidmusicapp.Artists.Views.ArtistsFragment;
 import ch.hevs.denisdaniel.androidmusicapp.Artists.Views.AddArtistFragment;
+import ch.hevs.denisdaniel.androidmusicapp.Artists.Views.ArtistsFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -52,6 +41,8 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setTitle("Ni");
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -63,11 +54,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         Fragment fragment = new SearchFragment();
-
-
-
-
-        changeFragment(fragment);
+        changeFragment(fragment, "Search");
 
     }
 
@@ -110,40 +97,49 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         Fragment fragment = null;
+        String fragmentTitle = null;
 
         switch(id)
         {
             case R.id.search:
                 fragment = new SearchFragment();
-                changeFragment(fragment);
+                fragmentTitle = "search";
+                changeFragment(fragment, fragmentTitle);
                 break;
             case R.id.albums:
                 fragment = new AlbumsFragment();
-                changeFragment(fragment);
+                fragmentTitle = "albums";
+                changeFragment(fragment, fragmentTitle);
                 break;
             case R.id.artists:
                 fragment = new ArtistsFragment();
-                changeFragment(new ArtistsFragment());
+                fragmentTitle = "artists";
+                changeFragment(new ArtistsFragment(), fragmentTitle);
                 break;
             case R.id.tracks:
                 fragment = new TracksFragment();
-                changeFragment(fragment);
+                fragmentTitle = "tracks";
+                changeFragment(fragment, fragmentTitle);
                 break;
             case R.id.add_albums:
                 fragment = new AddAlbumFragment();
-                changeFragment(fragment);
+                fragmentTitle = "add album";
+                changeFragment(fragment, fragmentTitle);
                 break;
             case R.id.add_artists:
                 fragment = new AddArtistFragment();
-                changeFragment(fragment);
+                fragmentTitle = "add artist";
+                changeFragment(fragment, fragmentTitle);
                 break;
             case R.id.add_tracks:
                 fragment = new AddTrackFragment();
-                changeFragment(fragment);
+                fragmentTitle = "track";
+                changeFragment(fragment, fragmentTitle);
                 break;
             case R.id.settings:
                 fragment = new SettingsFragment();
-                changeFragment(new SettingsFragment());
+                fragmentTitle = "settings";
+                changeFragment(fragment, fragmentTitle);
                 break;
 //            case R.id.nav_gallery:
 //                //load fragment
@@ -156,13 +152,21 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    public void changeFragment(Fragment fragment)
+    public void changeFragment(Fragment fragment, String fragmentTitle)
     {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction ft = fragmentManager.beginTransaction();
-        ft.replace(R.id.main_frame, fragment);
-        ft.addToBackStack(null);
-        ft.commit();
+        if(fragment!=null) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction ft = fragmentManager.beginTransaction();
+            ft.replace(R.id.main_frame, fragment);
+            ft.addToBackStack(null);
+            ft.commit();
+            getSupportActionBar().setTitle(fragmentTitle);
+        }
+    }
+
+    public void setActionBarTitle(String title){
+        setTitle(title);
+
     }
 
     public void addArtist(View view)
@@ -231,7 +235,7 @@ public class MainActivity extends AppCompatActivity
         Button deleteButton = (Button)view.findViewById(R.id.deleteButton);
 
         new ArtistTask(db, "delete",0);
-        changeFragment(new ArtistsFragment());
+        changeFragment(new ArtistsFragment(), "artist");
     }
 
 

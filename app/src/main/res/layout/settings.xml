@@ -17,7 +17,7 @@
         android:textSize="24sp" />
 
     <RadioGroup
-        android:id="@+id/language"
+        android:id="@+id/langRadioGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -35,5 +35,12 @@
             android:layout_weight="1"
             android:text="@string/french" />
     </RadioGroup>
+
+    <Button
+        android:id="@+id/changeLangButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/changeLang" />
+
 
 </LinearLayout>
