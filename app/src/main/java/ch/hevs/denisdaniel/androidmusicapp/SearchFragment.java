@@ -34,7 +34,6 @@ public class SearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-
         final View view = inflater.inflate(R.layout.search, container, false);
 
         SearchView searchView = view.findViewById(R.id.searchView);
@@ -47,7 +46,7 @@ public class SearchFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String searchTerm) {
-                List<Artist> artists = search(searchTerm);
+                List<Artist> artists = searchArtists(searchTerm);
 
                     BindDictionary<Artist> dictionary = new BindDictionary<>();
 
@@ -67,16 +66,14 @@ public class SearchFragment extends Fragment {
                     FunDapter adapter = new FunDapter(SearchFragment.this.getActivity(), (ArrayList<Artist>) artists, R.layout.fragment_artists, dictionary);
                     ListView artist_listview = (ListView) view.findViewById(R.id.artist_listview);
                     artist_listview.setAdapter(adapter);
-
                 return false;
             }
         });
-
         return view;
     }
 
 
-    public List<Artist> search(String searchTerm) {
+    public List<Artist> searchArtists(String searchTerm) {
         List<Artist> artists = new ArrayList();
         db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
         if(!searchTerm.equals(""))
@@ -88,10 +85,7 @@ public class SearchFragment extends Fragment {
             } catch (ExecutionException e) {
                 e.printStackTrace();
             }
-
-
         }
-
         return artists;
     }
 

@@ -9,6 +9,8 @@ import ch.hevs.denisdaniel.androidmusicapp.Albums.Albums.Album;
 import ch.hevs.denisdaniel.androidmusicapp.Albums.Albums.AlbumDao;
 import ch.hevs.denisdaniel.androidmusicapp.Artists.Artist;
 import ch.hevs.denisdaniel.androidmusicapp.Artists.ArtistDao;
+import ch.hevs.denisdaniel.androidmusicapp.Tracks.TrackDao;
+
 // TODO Have add new Entities Album.class
 @Database(entities = {Artist.class, Album.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
@@ -20,6 +22,8 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract ArtistDao artistDao();
 
     public abstract AlbumDao albumDao();
+
+    public abstract TrackDao trackDao();
 
     public static AppDatabase getAppDatabase(Context context) {
         if (INSTANCE == null) {

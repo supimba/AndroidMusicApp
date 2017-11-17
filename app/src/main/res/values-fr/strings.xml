@@ -27,13 +27,11 @@
     <string name="english">English</string>
     <string name="language">Langue</string>
     <string name="add">Ajouter</string>
-
     <string name="artist_created">Artiste créé</string>
     <string name="fill_fields">Please fill all fields</string>
-=======
     <string name="changeLang">Modifier langue</string>
     <string name="settings_main">Langues</string>
     <string name="header_language">Choisir la langue</string>
     <string name="delete_all" />
->>>>>>> Stashed changes
+
 </resources>
