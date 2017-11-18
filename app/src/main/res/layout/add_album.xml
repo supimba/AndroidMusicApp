@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scroll"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,35 +15,28 @@
 
     <ImageView
         android:id="@+id/albumImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginRight="16dp"
         android:src="@drawable/musicapp_logo_black"/>
 
-    <ImageButton android:id="@+id/chgtImageButton"
+    <ImageButton
+        android:id="@+id/chgtImageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_edit_black_24dp"/>
-
-    <TextView
-        android:id="@+id/textViewAlbum"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/activity_horizontal_margin"
-        android:text="@string/album"
-        android:textColor="@color/colorPrimary"
-        android:textSize="24sp" />
+        android:src="@drawable/ic_edit_black_24dp" />
 
     <TextView
         android:id="@+id/albumTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:text="@string/albumTitle" />
 
     <EditText
-        android:id="@+id/editTextName"
+        android:id="@+id/editAlbumTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -50,7 +49,7 @@
         android:text="@string/release_date" />
 
     <EditText
-        android:id="@+id/editTextReleaseDate"
+        android:id="@+id/editAlbumReleaseDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -63,7 +62,7 @@
         android:text="@string/description" />
 
     <EditText
-        android:id="@+id/editTextDescription"
+        android:id="@+id/editAlbumDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -76,15 +75,16 @@
         android:text="@string/rate" />
 
     <RatingBar
-        android:id="@+id/ratingBar"
+        android:id="@+id/ratingBarAlbum"
         android:layout_width="339dp"
         android:layout_height="wrap_content" />
 
-
-    <FrameLayout
+    <Button
+        android:id="@+id/buttonAddAlbum"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-
+        android:layout_height="wrap_content"
+        android:text="@string/add"
+        android:onClick="addAlbum"/>
 
 </LinearLayout>
+</ScrollView>

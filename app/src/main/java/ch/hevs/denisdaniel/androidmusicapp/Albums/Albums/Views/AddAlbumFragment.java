@@ -19,35 +19,6 @@ public class AddAlbumFragment extends Fragment {
 
     }
 
-/*
-    public void addAlbum(View view)
-    {
-        EditText editTextname = (EditText)findViewById(R.id.albumTitle);
-
-
-        String albumTitle = editTextname.getText().toString();
-        EditText editTextDescription = (EditText)findViewById(R.id.editTextDescription);
-        String artistDescription = editTextDescription.getText().toString();
-        final Album newArtist = new Artist(artistName,artistDescription);
-        try
-        {
-            db = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME).build();
-            new AsyncTask<Void, Void, Integer>() {
-                @Override
-                protected Integer doInBackground(Void... voids) {
-                    db.artistDao().add(newArtist);
-                    return null;
-                }
-
-            }.execute();
-            Log.d("Artist added",newArtist.getName());
-        }
-        catch (Exception e)
-        {
-            Log.d("Exception found :",e.getMessage());
-        }
-    }*/
-
 
 }
 

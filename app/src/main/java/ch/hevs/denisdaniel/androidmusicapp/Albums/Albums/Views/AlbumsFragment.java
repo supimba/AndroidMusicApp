@@ -1,5 +1,6 @@
 package ch.hevs.denisdaniel.androidmusicapp.Albums.Albums.Views;
 
+import android.arch.persistence.room.Room;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,8 +14,11 @@ import com.amigold.fundapter.FunDapter;
 import com.amigold.fundapter.extractors.StringExtractor;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 import ch.hevs.denisdaniel.androidmusicapp.Albums.Albums.Album;
+import ch.hevs.denisdaniel.androidmusicapp.Albums.Albums.AlbumTask;
+import ch.hevs.denisdaniel.androidmusicapp.AppDatabase;
 import ch.hevs.denisdaniel.androidmusicapp.R;
 
 /**
@@ -22,6 +26,13 @@ import ch.hevs.denisdaniel.androidmusicapp.R;
  */
 
 public class AlbumsFragment extends Fragment {
+
+    private AppDatabase db;
+
+    void deleteArtist(int id)
+    {
+
+    }
 
     public AlbumsFragment(){
 
@@ -39,7 +50,9 @@ public class AlbumsFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_albums_list, container, false);
 
-        ArrayList<Album> data = new ArrayList<>();
+        db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
+        ArrayList<Album> data = null;
+    /*    ArrayList<Album> data = new ArrayList<>();
         Album a1 = new Album("Somewhere in Time");
         Album a2 = new Album("Evil Empire");
         Album a3 = new Album("Kill Em All");
@@ -47,15 +60,23 @@ public class AlbumsFragment extends Fragment {
         data.add(a1);
         data.add(a2);
         data.add(a3);
+*/
+        try {
+            data = (ArrayList) new AlbumTask(db, "getAll", 0).execute().get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
 
         BindDictionary<Album> dictionary = new BindDictionary<>();
-        dictionary.addStringField(R.id.textviewTitle, new StringExtractor<Album>() {
+        dictionary.addStringField(R.id.albumTitle, new StringExtractor<Album>() {
             @Override
             public String getStringValue(Album album, int position) {
                 return album.getTitle();
             }
         });
-        dictionary.addStringField(R.id.textviewRate, new StringExtractor<Album>() {
+        dictionary.addStringField(R.id.albumDescription, new StringExtractor<Album>() {
             @Override
             public String getStringValue(Album album, int position) {
                 return ""+ album.getRating();
@@ -65,8 +86,8 @@ public class AlbumsFragment extends Fragment {
         FunDapter adapter = new FunDapter(AlbumsFragment.this.getActivity(), data, R.layout.fragment_albums, dictionary) ;
 
 
-        ListView lvData = (ListView) view.findViewById(R.id.lvData);
-        lvData.setAdapter(adapter);
+        ListView album_listView = (ListView) view.findViewById(R.id.lvData);
+        album_listView.setAdapter(adapter);
 
         // Inflate the layout for this fragment
         return view;
