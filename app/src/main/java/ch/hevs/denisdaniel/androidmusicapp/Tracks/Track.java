@@ -17,7 +17,8 @@ import static android.arch.persistence.room.ForeignKey.CASCADE;
         foreignKeys = @ForeignKey(  entity = Album.class,
                                     parentColumns = "uid",
                                     childColumns = "uid",
-                                    onDelete = CASCADE)
+                                    onDelete = CASCADE,
+                                    onUpdate = CASCADE)
 )
 public class Track {
 
