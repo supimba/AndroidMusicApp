@@ -58,7 +58,7 @@ public class TracksFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        final View view = inflater.inflate(R.layout.fragment_tracks_list, container, false);
+        final View view = inflater.inflate(R.layout.tracks_list, container, false);
         db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
         ArrayList<Track> data = null;
 
@@ -92,7 +92,7 @@ public class TracksFragment extends Fragment {
             }
         });
 
-        FunDapter adapter = new FunDapter(TracksFragment.this.getActivity(), (ArrayList<Track>) data, R.layout.fragment_tracks, dictionary);
+        FunDapter adapter = new FunDapter(TracksFragment.this.getActivity(), (ArrayList<Track>) data, R.layout.tracks_list_item, dictionary);
         ListView tracks_listview = (ListView) view.findViewById(R.id.tracks_listview);
         tracks_listview.setAdapter(adapter);
 
@@ -117,7 +117,7 @@ public class TracksFragment extends Fragment {
                 }
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setView(R.layout.track_popup);
+                builder.setView(R.layout.tracks_list_popup);
                 final AlertDialog alertDialog = builder.create();
                 alertDialog.show();
 

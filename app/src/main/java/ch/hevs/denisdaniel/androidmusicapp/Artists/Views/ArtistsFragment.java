@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,6 @@ import android.widget.TextView;
 import com.amigold.fundapter.BindDictionary;
 import com.amigold.fundapter.FunDapter;
 import com.amigold.fundapter.extractors.StringExtractor;
-import com.amigold.fundapter.fields.StringField;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -27,7 +25,6 @@ import java.util.concurrent.ExecutionException;
 import ch.hevs.denisdaniel.androidmusicapp.AppDatabase;
 import ch.hevs.denisdaniel.androidmusicapp.Artists.Artist;
 import ch.hevs.denisdaniel.androidmusicapp.Artists.ArtistTask;
-import ch.hevs.denisdaniel.androidmusicapp.MainActivity;
 import ch.hevs.denisdaniel.androidmusicapp.R;
 
 /**
@@ -61,7 +58,7 @@ public class ArtistsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        final View view = inflater.inflate(R.layout.fragment_artists_list, container, false);
+        final View view = inflater.inflate(R.layout.artists_list, container, false);
         db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
         ArrayList<Artist> data = null;
 
@@ -88,7 +85,7 @@ public class ArtistsFragment extends Fragment {
             }
         });
 
-        FunDapter adapter = new FunDapter(ArtistsFragment.this.getActivity(), (ArrayList<Artist>) data, R.layout.fragment_artists, dictionary);
+        FunDapter adapter = new FunDapter(ArtistsFragment.this.getActivity(), (ArrayList<Artist>) data, R.layout.artists_list_item, dictionary);
         ListView artist_listview = (ListView) view.findViewById(R.id.artist_listview);
         artist_listview.setAdapter(adapter);
 
@@ -113,7 +110,7 @@ public class ArtistsFragment extends Fragment {
                 }
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setView(R.layout.artist_popup);
+                builder.setView(R.layout.artists_list_popup);
                 final AlertDialog alertDialog = builder.create();
                 alertDialog.show();
 

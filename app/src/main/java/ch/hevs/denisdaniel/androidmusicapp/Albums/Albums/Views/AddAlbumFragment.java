@@ -15,7 +15,7 @@ import ch.hevs.denisdaniel.androidmusicapp.R;
 public class AddAlbumFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.add_album, container, false);
+        return inflater.inflate(R.layout.album_add, container, false);
 
     }
 

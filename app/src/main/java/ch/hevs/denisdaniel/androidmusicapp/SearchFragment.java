@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +19,6 @@ import java.util.concurrent.ExecutionException;
 
 import ch.hevs.denisdaniel.androidmusicapp.Artists.Artist;
 import ch.hevs.denisdaniel.androidmusicapp.Artists.ArtistTask;
-import ch.hevs.denisdaniel.androidmusicapp.Artists.Views.ArtistsFragment;
 import ch.hevs.denisdaniel.androidmusicapp.Tracks.Track;
 import ch.hevs.denisdaniel.androidmusicapp.Tracks.TrackTask;
 
@@ -65,7 +63,7 @@ public class SearchFragment extends Fragment {
                     }
                 });
 
-                FunDapter adapter = new FunDapter(SearchFragment.this.getActivity(), (ArrayList<Artist>) artists, R.layout.fragment_artists, dictionary);
+                FunDapter adapter = new FunDapter(SearchFragment.this.getActivity(), (ArrayList<Artist>) artists, R.layout.artists_list_item, dictionary);
                 ListView artist_listview = (ListView) view.findViewById(R.id.artist_listview);
                 artist_listview.setAdapter(adapter);
 
@@ -93,7 +91,7 @@ public class SearchFragment extends Fragment {
                     }
                 });
 
-                FunDapter adapterTrack = new FunDapter(SearchFragment.this.getActivity(), (ArrayList<Artist>) artists, R.layout.fragment_artists, dictionary);
+                FunDapter adapterTrack = new FunDapter(SearchFragment.this.getActivity(), (ArrayList<Artist>) artists, R.layout.artists_list_item, dictionary);
                 ListView track_listview = (ListView) view.findViewById(R.id.tracks_listview);
                 artist_listview.setAdapter(adapter);
                 return false;

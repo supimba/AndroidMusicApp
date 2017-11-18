@@ -68,7 +68,7 @@ public class AlbumsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_albums_list, container, false);
+        View view = inflater.inflate(R.layout.albums_list, container, false);
 
         db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
         ArrayList<Album> data = null;
@@ -109,7 +109,7 @@ public class AlbumsFragment extends Fragment {
             }
         });
 
-        FunDapter adapter = new FunDapter(AlbumsFragment.this.getActivity(), data, R.layout.fragment_albums, dictionary) ;
+        FunDapter adapter = new FunDapter(AlbumsFragment.this.getActivity(), data, R.layout.albums_list_item, dictionary) ;
 
         ListView album_listView = (ListView) view.findViewById(R.id.lvData);
         album_listView.setAdapter(adapter);
@@ -134,7 +134,7 @@ public class AlbumsFragment extends Fragment {
                 }
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setView(R.layout.album_list_popup);
+                builder.setView(R.layout.albums_list_popup);
                 final AlertDialog alertDialog = builder.create();
                 alertDialog.show();
 

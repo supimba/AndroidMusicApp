@@ -15,7 +15,7 @@ import ch.hevs.denisdaniel.androidmusicapp.R;
 public class AddTrackFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.add_track, container, false);
+        return inflater.inflate(R.layout.track_add, container, false);
     }
 }
 
