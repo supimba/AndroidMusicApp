@@ -4,10 +4,16 @@ import android.arch.persistence.room.Room;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.amigold.fundapter.BindDictionary;
 import com.amigold.fundapter.FunDapter;
@@ -31,8 +37,22 @@ public class AlbumsFragment extends Fragment {
 
     void deleteArtist(int id)
     {
+        db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
+        new AlbumTask(db, "delete",id).execute();
+        changeFragment(new AlbumsFragment());
+
 
     }
+
+    public void changeFragment(Fragment fragment)
+    {
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction ft = fragmentManager.beginTransaction();
+        ft.replace(R.id.main_frame, fragment);
+        ft.addToBackStack(null);
+        ft.commit();
+    }
+
 
     public AlbumsFragment(){
 
@@ -82,12 +102,58 @@ public class AlbumsFragment extends Fragment {
                 return ""+ album.getRating();
             }
         });
+        dictionary.addStringField(R.id.albumID, new StringExtractor<Album>() {
+            @Override
+            public String getStringValue(Album album, int position) {
+                return String.valueOf(album.getUid());
+            }
+        });
 
         FunDapter adapter = new FunDapter(AlbumsFragment.this.getActivity(), data, R.layout.fragment_albums, dictionary) ;
 
-
         ListView album_listView = (ListView) view.findViewById(R.id.lvData);
         album_listView.setAdapter(adapter);
+
+        album_listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> arg0, View v,
+                                           int pos, long id) {
+
+                TextView albumIdTextView = (TextView) v.findViewById(R.id.albumID);
+
+                final int AlbumId = Integer.parseInt(albumIdTextView.getText().toString());
+
+                Album album = new Album("","",0, "" );
+
+                try {
+                    album = (Album) new AlbumTask(db, "get", AlbumId).execute().get();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setView(R.layout.album_popup);
+                final AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+
+                Button deleteButton = alertDialog.findViewById(R.id.deleteAlbumButton);
+
+                deleteButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        deleteArtist(AlbumId);
+                        alertDialog.hide();
+                    }
+                });
+
+
+                return true;
+            }
+
+            ;
+        });
 
         // Inflate the layout for this fragment
         return view;

@@ -28,10 +28,13 @@
     <string name="language">Language</string>
 
 
-    <string name="artist_created">Artiste créé</string>
+    <string name="artist_created">Artiste created</string>
+    <string name="album_created">Album created</string>
     <string name="fill_fields">Please fill all fields</string>
+    <string name="cancel">Cancel</string>
 
     <string name="add">Add</string>
+    <string name="delete">Delete</string>
     <string name="delete_all" />
     <string name="changeLang">Change Langage</string>
     <string name="settings_main">Language HERE</string>

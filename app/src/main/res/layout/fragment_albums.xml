@@ -4,20 +4,19 @@
     android:layout_height="match_parent">
 
 
+    <!--    <TextView
+            android:id="@+id/textviewTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Album Title" />
 
-<!--    <TextView
-        android:id="@+id/textviewTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Album Title" />
-
-    <TextView
-        android:id="@+id/textviewRate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Rate" />-->
+        <TextView
+            android:id="@+id/textviewRate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Rate" />-->
 
     <ImageView
         android:id="@+id/albumImage"
@@ -26,9 +25,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginRight="16dp"
-        android:src="@drawable/musicapp_logo_black"
-        />
-
+        android:src="@drawable/musicapp_logo_black" />
 
     <TextView
         android:id="@+id/albumTitle"
@@ -39,13 +36,18 @@
         android:text="Title Album"
         android:textSize="30sp" />
 
-          <TextView
-                android:id="@+id/albumDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/albumTitle"
-                android:layout_toRightOf="@+id/albumImage"
-                android:text="Description" />
+    <TextView
+        android:id="@+id/albumID"
+        android:layout_width="0dp"
+        android:layout_height="0dp" />
+
+    <TextView
+        android:id="@+id/albumDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/albumTitle"
+        android:layout_toRightOf="@+id/albumImage"
+        android:text="Description" />
 
 
 </LinearLayout>

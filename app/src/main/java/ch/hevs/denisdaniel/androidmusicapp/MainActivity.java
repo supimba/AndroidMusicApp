@@ -292,6 +292,54 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+    public void addImageCoverAlbum(View view){
+
+        Intent pickPhoto = new Intent(Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(pickPhoto , 1);//one can be replaced with any action code
+
+        /*
+        // Camera.
+        final List<Intent> cameraIntents = new ArrayList<Intent>();
+        final Intent captureIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        final PackageManager packageManager = getPackageManager();
+        final List<ResolveInfo> listCam = packageManager.queryIntentActivities(captureIntent, 0);
+        for(ResolveInfo res : listCam) {
+            final String packageName = res.activityInfo.packageName;
+            final Intent intent = new Intent(captureIntent);
+            intent.setComponent(new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
+            intent.setPackage(packageName);
+            intent.putExtra(MediaStore.MEDIA_IGNORE_FILENAME, ".nomedia");
+
+            cameraIntents.add(intent);
+        }
+
+        // Filesystem.
+        final Intent galleryIntent = new Intent();
+        galleryIntent.setType("image/*");
+        galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
+
+        // Chooser of filesystem options.
+       // final Intent chooserIntent = Intent.createChooser(galleryIntent, getString(R.string.add_new));
+
+        // Add the camera options.
+      //  chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, cameraIntents.toArray(new Parcelable[]{}));
+       // startActivityForResult(chooserIntent, YOUR_REQUEST_CODE);
+
+*/
+    }
+
+    public void addArtistToAlbum(View view){
+        Fragment fragment;
+        String fragmentTitle;
+
+        fragment = new AddArtistFragment();
+        fragmentTitle = "add artist";
+        changeFragment(fragment, fragmentTitle);
+
+    }
+
+
 
 
 }
