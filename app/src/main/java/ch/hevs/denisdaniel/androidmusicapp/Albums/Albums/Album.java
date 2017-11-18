@@ -31,38 +31,44 @@ public class Album {
 
 
     @PrimaryKey(autoGenerate = true)
-    private int uid;
+    private Long uid;
 
     @ColumnInfo(name = "title")
     private String title;
 
+    @ColumnInfo(name = "description")
+    private String description;
+
     @ColumnInfo(name = "releasedate")
     private String releasedate;
 
-    @ColumnInfo(name = "rating")
-    private int rating;
+    @ColumnInfo(name = "user_id")
+    private Long userId;
+    /*@ColumnInfo(name = "rating")
+    private int rating;*/
 
-    @ColumnInfo(name = "img_path")
-    private String img_path;
+    /*@ColumnInfo(name = "img_path")
+    private String img_path;*/
 
 
  /*   @Embedded
     private Track tracks;
     */
 
-    public Album(String title, String releasedate, int rating, String img_path) {
+    public Album(String title, String releasedate, String description /* int rating, String img_path*/) {
         this.uid = uid;
         this.title = title;
+        this.description = title;
         this.releasedate = releasedate;
-        this.rating = rating;
-        this.img_path = img_path;
+        /*this.rating = rating;*/
+        /*this.img_path = img_path;*/
     }
 
-    public int getUid() {
+    public Long getUid() {
         return uid;
     }
 
-    public void setUid(int uid) {
+    public void setUid(Long uid) {
         this.uid = uid;
     }
 
@@ -74,6 +80,14 @@ public class Album {
         this.title = title;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public String getReleasedate() {
         return releasedate;
     }
@@ -82,22 +96,22 @@ public class Album {
         this.releasedate = releasedate;
     }
 
-    public int getRating() {
-        return rating;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setRating(int rating) {
-        this.rating = rating;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public String getImg_path() {
-        return img_path;
+    @Override
+    public String toString() {
+        return "Album{" +
+                "uid=" + uid +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", releasedate='" + releasedate + '\'' +
+                ", userId=" + userId +
+                '}';
     }
-
-    public void setImg_path(String img_path) {
-        this.img_path = img_path;
-    }
-
-
-
 }

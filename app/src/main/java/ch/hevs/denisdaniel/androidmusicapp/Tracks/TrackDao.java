@@ -21,7 +21,7 @@ public interface TrackDao {
     Track get(int uid);
 
     @Insert
-    void add(Track artist);
+    Long add(Track artist);
 
     @Query("DELETE FROM tracks")
     void deleteAll();

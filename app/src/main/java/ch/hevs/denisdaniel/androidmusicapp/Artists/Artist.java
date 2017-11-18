@@ -1,13 +1,14 @@
 package ch.hevs.denisdaniel.androidmusicapp.Artists;
 
 import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
 /**
  * Created by Denis Woeffray on 03.11.2017.
  */
 
-
+@Entity
 public class Artist {
 
     public Artist(String name, String description)
@@ -17,7 +18,7 @@ public class Artist {
     }
 
     @PrimaryKey(autoGenerate = true)
-    private int uid;
+    private Long uid;
 
     @ColumnInfo(name = "name")
     private String name;
@@ -25,12 +26,11 @@ public class Artist {
     @ColumnInfo(name = "description")
     private String description;
 
-
-    public int getUid() {
+    public Long getUid() {
         return uid;
     }
 
-    public void setUid(int uid) {
+    public void setUid(Long uid) {
         this.uid = uid;
     }
 
@@ -48,5 +48,14 @@ public class Artist {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "Artist{" +
+                "uid=" + uid +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

@@ -120,7 +120,6 @@ public class TracksFragment extends Fragment {
                 builder.setView(R.layout.tracks_list_popup);
                 final AlertDialog alertDialog = builder.create();
                 alertDialog.show();
-
                 Button deleteButton = alertDialog.findViewById(R.id.deleteButton);
 
                 deleteButton.setOnClickListener(new View.OnClickListener() {

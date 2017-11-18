@@ -16,17 +16,13 @@ import ch.hevs.denisdaniel.androidmusicapp.Tracks.Track;
 import ch.hevs.denisdaniel.androidmusicapp.Tracks.TrackDao;
 
 // TODO Have add new Entities Album.class
-@Database(entities = {Artist.class, Album.class, Track.class}, version = 2)
+@Database(entities = {Artist.class, Album.class, Track.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
-
     private static AppDatabase INSTANCE;
-
-    public static final String DB_NAME = "app_db_2";
-
+    public static final String DB_NAME = "app_db_5";
     public abstract ArtistDao artistDao();
     public abstract AlbumDao albumDao();
     public abstract TrackDao trackDao();
-
     public static AppDatabase getAppDatabase(Context context) {
         if (INSTANCE == null) {
             INSTANCE =

@@ -60,6 +60,8 @@ public class AlbumsFragment extends Fragment {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
 
     }
@@ -67,20 +69,9 @@ public class AlbumsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.albums_list, container, false);
-
         db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
         ArrayList<Album> data = null;
-    /*    ArrayList<Album> data = new ArrayList<>();
-        Album a1 = new Album("Somewhere in Time");
-        Album a2 = new Album("Evil Empire");
-        Album a3 = new Album("Kill Em All");
-
-        data.add(a1);
-        data.add(a2);
-        data.add(a3);
-*/
         try {
             data = (ArrayList) new AlbumTask(db, "getAll", 0).execute().get();
         } catch (InterruptedException e) {
@@ -99,7 +90,7 @@ public class AlbumsFragment extends Fragment {
         dictionary.addStringField(R.id.albumDescription, new StringExtractor<Album>() {
             @Override
             public String getStringValue(Album album, int position) {
-                return ""+ album.getRating();
+                return ""+ album.getDescription();
             }
         });
         dictionary.addStringField(R.id.albumID, new StringExtractor<Album>() {
@@ -120,13 +111,9 @@ public class AlbumsFragment extends Fragment {
                                            int pos, long id) {
 
                 TextView albumIdTextView = (TextView) v.findViewById(R.id.albumID);
-
                 final int AlbumId = Integer.parseInt(albumIdTextView.getText().toString());
-
-                Album album = new Album("","",0, "" );
-
                 try {
-                    album = (Album) new AlbumTask(db, "get", AlbumId).execute().get();
+                    new AlbumTask(db, "get", AlbumId).execute().get();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {
@@ -147,16 +134,9 @@ public class AlbumsFragment extends Fragment {
                         alertDialog.hide();
                     }
                 });
-
-
                 return true;
             }
-
-            ;
         });
-
-        // Inflate the layout for this fragment
         return view;
-
     }
 }
