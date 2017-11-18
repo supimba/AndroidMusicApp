@@ -2,13 +2,23 @@ package ch.hevs.denisdaniel.androidmusicapp.Tracks;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
+
+import ch.hevs.denisdaniel.androidmusicapp.Albums.Albums.Album;
+
+import static android.arch.persistence.room.ForeignKey.CASCADE;
 
 /**
  * Created by Denis Woeffray on 03.11.2017.
  */
 
-@Entity(tableName = "tracks")
+@Entity(tableName = "tracks",
+        foreignKeys = @ForeignKey(  entity = Album.class,
+                                    parentColumns = "uid",
+                                    childColumns = "uid",
+                                    onDelete = CASCADE)
+)
 public class Track {
 
     public Track(String name, String duration)

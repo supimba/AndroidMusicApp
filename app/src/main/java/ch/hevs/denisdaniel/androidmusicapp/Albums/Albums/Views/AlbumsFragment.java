@@ -134,7 +134,7 @@ public class AlbumsFragment extends Fragment {
                 }
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setView(R.layout.album_popup);
+                builder.setView(R.layout.album_list_popup);
                 final AlertDialog alertDialog = builder.create();
                 alertDialog.show();
 
