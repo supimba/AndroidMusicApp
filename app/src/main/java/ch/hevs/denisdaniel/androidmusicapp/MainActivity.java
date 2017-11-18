@@ -28,6 +28,10 @@ import ch.hevs.denisdaniel.androidmusicapp.Artists.Artist;
 import ch.hevs.denisdaniel.androidmusicapp.Artists.ArtistTask;
 import ch.hevs.denisdaniel.androidmusicapp.Artists.Views.AddArtistFragment;
 import ch.hevs.denisdaniel.androidmusicapp.Artists.Views.ArtistsFragment;
+import ch.hevs.denisdaniel.androidmusicapp.Tracks.Track;
+import ch.hevs.denisdaniel.androidmusicapp.Tracks.TrackTask;
+import ch.hevs.denisdaniel.androidmusicapp.Tracks.Views.AddTrackFragment;
+import ch.hevs.denisdaniel.androidmusicapp.Tracks.Views.TracksFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -36,8 +40,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
@@ -143,11 +145,6 @@ public class MainActivity extends AppCompatActivity
                 fragmentTitle = "settings";
                 changeFragment(fragment, fragmentTitle);
                 break;
-//            case R.id.nav_gallery:
-//                //load fragment
-//                break;
-//            ...
-
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -168,7 +165,6 @@ public class MainActivity extends AppCompatActivity
 
     public void setActionBarTitle(String title){
         setTitle(title);
-
     }
 
     public void addArtist(View view)
@@ -184,7 +180,6 @@ public class MainActivity extends AppCompatActivity
             toast.show();
             return;
         }
-
         final Artist newArtist = new Artist(artistName,artistDescription);
         try
         {
@@ -203,32 +198,10 @@ public class MainActivity extends AppCompatActivity
         {
             Log.d("Exception found :",e.getMessage());
         }
-
         editTextname.setText("");
         editTextDescription.setText("");
-
         Toast toast = Toast.makeText(getApplicationContext(), R.string.artist_created+" : "+newArtist.getName(), Toast.LENGTH_SHORT);
         toast.show();
-    }
-
-    public void deleteAllArtists(View view)
-    {
-        try
-        {
-            db = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME).build();
-            new AsyncTask<Void, Void, Integer>() {
-                @Override
-                protected Integer doInBackground(Void... voids) {
-                    db.artistDao().deleteAll();
-                    return null;
-                }
-
-            }.execute();
-        }
-        catch (Exception e)
-        {
-            Log.d("Exception found :",e.getMessage());
-        }
     }
 
     public void deleteArtist(View view)
@@ -240,58 +213,49 @@ public class MainActivity extends AppCompatActivity
         changeFragment(new ArtistsFragment(), "artist");
     }
 
-
-    public void addAlbum(View view)
+    public void addTrack(View view)
     {
-        EditText editAlbumTitle = (EditText)findViewById(R.id.editAlbumTitle);
-        String albumTitle = editAlbumTitle.getText().toString();
+        EditText editTextname = (EditText)findViewById(R.id.editTextName);
+        String trackName = editTextname.getText().toString();
+        EditText editTextDuration = (EditText)findViewById(R.id.editTextDuration);
+        String trackDuration = editTextDuration.getText().toString();
 
-        EditText editAlbumReleaseDate =(EditText)findViewById(R.id.editAlbumReleaseDate);
-        String albumReleaseDate = editAlbumReleaseDate.findViewById(R.id.editAlbumReleaseDate).toString();
-
-        EditText editAlbumDescription = (EditText)findViewById(R.id.editAlbumDescription);
-        String artistDescription = editAlbumDescription.getText().toString();
-
-        RatingBar ratingBarAlbum = (RatingBar) findViewById(R.id.ratingBarAlbum);
-        int ratingAlbum =ratingBarAlbum.getNumStars();
-
-        String img_path = "drawable/musicapp_logo_black.png";
-
-        if(albumTitle.equals(""))
+        if(trackName.equals(""))
         {
-            Toast toast = Toast.makeText(getApplicationContext(), R.string.fill_field_album, Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(getApplicationContext(), R.string.fill_field_artist, Toast.LENGTH_SHORT);
             toast.show();
             return;
         }
-
-        final Album newAlbum = new Album(albumTitle,albumReleaseDate, ratingAlbum, img_path);
+        final Track newTrack = new Track(trackName,trackDuration);
         try
         {
             db = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME).build();
             new AsyncTask<Void, Void, Integer>() {
                 @Override
                 protected Integer doInBackground(Void... voids) {
-                    db.albumDao().add(newAlbum);
+                    db.trackDao().add(newTrack);
                     return null;
                 }
 
             }.execute();
-            Log.d("Artist added",newAlbum.getTitle());
+            Log.d("Track added",newTrack.getName());
         }
         catch (Exception e)
         {
             Log.d("Exception found :",e.getMessage());
         }
-
-        editAlbumTitle.setText("");
-        editAlbumDescription.setText("");
-
-
-        Toast toast = Toast.makeText(getApplicationContext(), R.string.artist_created+" : "+newAlbum.getTitle(), Toast.LENGTH_SHORT);
+        editTextname.setText("");
+        editTextDuration.setText("");
+        Toast toast = Toast.makeText(getApplicationContext(), R.string.artist_created+" : "+newTrack.getName(), Toast.LENGTH_SHORT);
         toast.show();
     }
 
+    public void deleteTrack(View view)
+    {
+        db = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME).build();
+        Button deleteButton = (Button)view.findViewById(R.id.deleteButton);
 
-
-
+        new TrackTask(db, "delete",0);
+        changeFragment(new ArtistsFragment(), "artist");
+    }
 }

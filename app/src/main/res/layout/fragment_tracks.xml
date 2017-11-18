@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/textViewName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:padding="@dimen/activity_vertical_margin"
+        android:text="No name"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
+
+    <TextView
+        android:id="@+id/textViewDuration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:padding="@dimen/activity_vertical_margin"
+        android:text="No duration"
+        android:textAlignment="textEnd"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
+    <TextView
+        android:id="@+id/textViewId"
+        android:visibility="invisible"
+        android:layout_height="0px"
+        android:layout_width="0px"/>
+
+</LinearLayout>

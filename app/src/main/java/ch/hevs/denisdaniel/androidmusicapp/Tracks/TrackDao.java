@@ -32,6 +32,6 @@ public interface TrackDao {
     @Update
     void update(Track track);
 
-    @Query("SELECT * FROM track WHERE name LIKE :searchTerm ORDER BY name")
+    @Query("SELECT * FROM tracks WHERE name LIKE :searchTerm ORDER BY name")
     List<Track> search(String searchTerm);
 }
