@@ -16,12 +16,11 @@ import static android.arch.persistence.room.ForeignKey.CASCADE;
 @Entity(tableName = "tracks",
         foreignKeys = @ForeignKey(  entity = Album.class,
                                     parentColumns = "uid",
-                                    childColumns = "uid",
+                                    childColumns = "album_id",
                                     onDelete = CASCADE,
                                     onUpdate = CASCADE)
 )
 public class Track {
-
     public Track(String name, String duration)
     {
         this.name = name;
@@ -29,7 +28,7 @@ public class Track {
     }
 
     @PrimaryKey(autoGenerate = true)
-    private int uid;
+    private Long uid;
 
     @ColumnInfo(name = "name")
     private String name;
@@ -37,12 +36,14 @@ public class Track {
     @ColumnInfo(name = "duration")
     private String duration;
 
+    @ColumnInfo(name = "album_id")
+    private Long albumId;
 
-    public int getUid() {
+    public Long getUid() {
         return uid;
     }
 
-    public void setUid(int uid) {
+    public void setUid(Long uid) {
         this.uid = uid;
     }
 
@@ -60,5 +61,23 @@ public class Track {
 
     public void setDuration(String duration) {
         this.duration = duration;
+    }
+
+    public Long getAlbumId() {
+        return albumId;
+    }
+
+    public void setAlbumId(Long album_id) {
+        this.albumId = album_id;
+    }
+
+    @Override
+    public String toString() {
+        return "Track{" +
+                "uid=" + uid +
+                ", name='" + name + '\'' +
+                ", duration='" + duration + '\'' +
+                ", album_id=" + albumId +
+                '}';
     }
 }

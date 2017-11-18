@@ -24,6 +24,8 @@ public class TrackTask extends AsyncTask<Void, Void, Object> {
 
     protected Object doInBackground(Void... params) {
         switch (task) {
+            case "add":
+                return db.trackDao().add((Track)id);
             case "getAll":
                 return db.trackDao().getAll();
             case "get":

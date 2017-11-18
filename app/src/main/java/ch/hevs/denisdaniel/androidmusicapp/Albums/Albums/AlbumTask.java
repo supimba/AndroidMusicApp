@@ -25,6 +25,8 @@ public class AlbumTask extends AsyncTask<Void, Void, Object> {
     @Override
     protected Object doInBackground(Void... voids) {
         switch (task) {
+            case "add":
+                return db.albumDao().add((Album)id);
             case "getAll":
                 return db.albumDao().getAll();
             case "get":

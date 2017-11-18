@@ -24,6 +24,8 @@ public class ArtistTask extends AsyncTask<Void, Void, Object> {
 
     protected Object doInBackground(Void... params) {
         switch (task) {
+            case "add":
+                return db.artistDao().add((Artist)id);
             case "getAll":
                 return db.artistDao().getAll();
             case "get":

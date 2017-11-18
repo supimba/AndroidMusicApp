@@ -24,7 +24,7 @@ public interface AlbumDao {
     Album get(int uid);
 
     @Insert
-    void add(Album album);
+    Long add(Album album);
 
     @Insert
     void add(Album album, Artist artist);

@@ -20,7 +20,7 @@ public interface ArtistDao {
     Artist get(int uid);
 
     @Insert
-    void add(Artist artist);
+    Long add(Artist artist);
 
     @Query("DELETE FROM artist")
     void deleteAll();

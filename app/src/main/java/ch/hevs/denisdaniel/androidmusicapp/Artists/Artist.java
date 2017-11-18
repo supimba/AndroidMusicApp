@@ -18,7 +18,7 @@ public class Artist {
     }
 
     @PrimaryKey(autoGenerate = true)
-    private int uid;
+    private Long uid;
 
     @ColumnInfo(name = "name")
     private String name;
@@ -26,12 +26,11 @@ public class Artist {
     @ColumnInfo(name = "description")
     private String description;
 
-
-    public int getUid() {
+    public Long getUid() {
         return uid;
     }
 
-    public void setUid(int uid) {
+    public void setUid(Long uid) {
         this.uid = uid;
     }
 
@@ -49,5 +48,14 @@ public class Artist {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "Artist{" +
+                "uid=" + uid +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }
