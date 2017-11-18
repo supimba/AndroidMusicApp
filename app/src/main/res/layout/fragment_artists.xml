@@ -14,7 +14,10 @@
         android:padding="@dimen/activity_vertical_margin"
         android:text="No name"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
-
+    <TextView
+        android:id="@+id/textViewDuration"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"/>
     <TextView
         android:id="@+id/textViewId"
         android:visibility="invisible"

@@ -44,6 +44,7 @@
 
     <string name="fill_field_artist">Please fill name field</string>
     <string name="fill_field_album">Please fill name field</string>
+    <string name="plus_icon" />
 
     <!-- TODO ajouter string preferences -->
 

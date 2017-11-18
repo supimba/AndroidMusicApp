@@ -31,12 +31,9 @@
     <string name="album_created">Album créé</string>
     <string name="artist_created">Artiste créé</string>
     <string name="fill_fields">Please fill all fields</string>
-
     <string name="changeLang">Modifier langue</string>
     <string name="settings_main">Langues</string>
     <string name="header_language">Choisir la langue</string>
     <string name="delete">Supprimer</string>
     <string name="delete_all" />
-    <string name="cancel">Annuler</string>
-
 </resources>

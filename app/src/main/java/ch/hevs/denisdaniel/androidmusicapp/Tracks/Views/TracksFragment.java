@@ -58,7 +58,7 @@ public class TracksFragment extends Fragment {
             }
         });
 
-        dictionary.addStringField(R.id.textViewId, new StringExtractor<Track>() {
+        dictionary.addStringField(R.id.textViewDuration, new StringExtractor<Track>() {
             @Override
             public String getStringValue(Track track, int position) {
                 return String.valueOf(track.getDuration());
@@ -75,9 +75,9 @@ public class TracksFragment extends Fragment {
             public boolean onItemLongClick(AdapterView<?> arg0, View v,
                                            int pos, long id) {
 
-                TextView editTextname = (TextView) v.findViewById(R.id.textViewId);
+                TextView editTextId = (TextView) v.findViewById(R.id.textViewId);
 
-                final int trackId = Integer.parseInt(editTextname.getText().toString());
+                final int trackId = Integer.parseInt(editTextId.getText().toString());
 
                 Track track = new Track("", "");
 
@@ -103,14 +103,11 @@ public class TracksFragment extends Fragment {
                         alertDialog.hide();
                     }
                 });
-
-
                 return true;
             }
 
             ;
         });
-
             return view;
         }
 }
