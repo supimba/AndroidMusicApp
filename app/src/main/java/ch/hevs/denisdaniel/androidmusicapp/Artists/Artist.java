@@ -1,13 +1,14 @@
 package ch.hevs.denisdaniel.androidmusicapp.Artists;
 
 import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
 /**
  * Created by Denis Woeffray on 03.11.2017.
  */
 
-
+@Entity
 public class Artist {
 
     public Artist(String name, String description)

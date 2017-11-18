@@ -12,6 +12,7 @@ public class AlbumTask extends AsyncTask<Void, Void, Object> {
     AppDatabase db;
     String task;
     Object id;
+    Album album;
 
     public AlbumTask(AppDatabase db, String task, Object id) {
         super();
@@ -29,9 +30,12 @@ public class AlbumTask extends AsyncTask<Void, Void, Object> {
             case "get":
                 return db.albumDao().get(Integer.parseInt((String.valueOf(id))));
             case "delete":
-                Album album = db.albumDao().get(Integer.parseInt((String.valueOf(id))));
+                album = db.albumDao().get(Integer.parseInt((String.valueOf(id))));
                 db.albumDao().delete(album);
                 return null;
+            case "update":
+                album = db.albumDao().get(Integer.parseInt((String.valueOf(id))));
+                db.albumDao().update(album);
         }
         return null;
 

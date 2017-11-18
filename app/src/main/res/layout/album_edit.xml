@@ -14,7 +14,7 @@
         android:padding="@dimen/activity_horizontal_margin">
 
         <ImageView
-            android:id="@+id/albumImage"
+            android:id="@+id/albumImageEdit"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_alignParentLeft="true"
@@ -31,78 +31,70 @@
             android:src="@drawable/ic_edit_black_24dp" />
 
         <TextView
-            android:id="@+id/albumTitle"
+            android:id="@+id/albumTitleEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
-            android:text="@string/albumTitle" />
+            />
 
         <EditText
-            android:id="@+id/editAlbumTitle1"
+            android:id="@+id/editAlbumTitleEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName" />
 
-        <TextView
+  <!--      <TextView
             android:id="@+id/albumArtist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
             android:text="@string/artist" />
-
-        <ImageButton
-            android:id="@+id/addArtistToAlbum"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="addArtistToAlbum"
-
-            android:src="@drawable/ic_action_add" />
-
+-->
         <TextView
-            android:id="@+id/textViewReleaseDate"
+            android:id="@+id/textViewReleaseDateEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/release_date" />
 
         <EditText
-            android:id="@+id/editAlbumReleaseDate"
+            android:id="@+id/editAlbumReleaseDateEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="date" />
 
-    <TextView
-        android:id="@+id/textViewDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/description" />
+        <TextView
+            android:id="@+id/textViewDescriptionEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/description" />
 
-    <EditText
-        android:id="@+id/editAlbumDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textMultiLine" />
+        <EditText
+            android:id="@+id/editAlbumDescriptionEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textMultiLine" />
 
-    <TextView
-        android:id="@+id/textViewNote"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/rate" />
+        <TextView
+            android:id="@+id/textViewNoteEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/rate" />
 
-    <RatingBar
-        android:id="@+id/ratingBarAlbum"
-        android:layout_width="339dp"
-        android:layout_height="wrap_content" />
+       <RatingBar
+            android:id="@+id/ratingBarAlbumEdit"
+            android:layout_width="339dp"
+            android:layout_height="wrap_content" />
 
-    <Button
-        android:id="@+id/buttonAddAlbum"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/add"
-        android:onClick="addAlbum"/>
 
-</LinearLayout>
+        <Button
+            android:id="@+id/buttonUpdateAlbum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add"
+            android:onClick="udpateAlbum"/>
+
+    </LinearLayout>
 
 </ScrollView>

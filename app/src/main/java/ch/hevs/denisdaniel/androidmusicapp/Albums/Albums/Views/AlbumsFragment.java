@@ -35,11 +35,24 @@ public class AlbumsFragment extends Fragment {
 
     private AppDatabase db;
 
-    void deleteArtist(int id)
+    void deleteAlbum(int id)
     {
         db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
         new AlbumTask(db, "delete",id).execute();
         changeFragment(new AlbumsFragment());
+
+
+    }
+
+    void editAlbum(int id)
+    {
+        Fragment fragment =  new EditAlbumFragment();
+
+        Bundle args = new Bundle();
+        args.putInt("albumId", id);
+        fragment.setArguments(args);
+
+        changeFragment(fragment);
 
 
     }
@@ -138,16 +151,26 @@ public class AlbumsFragment extends Fragment {
                 final AlertDialog alertDialog = builder.create();
                 alertDialog.show();
 
+
                 Button deleteButton = alertDialog.findViewById(R.id.deleteAlbumButton);
 
                 deleteButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        deleteArtist(AlbumId);
+                        deleteAlbum(AlbumId);
                         alertDialog.hide();
                     }
                 });
 
+                Button editButton = alertDialog.findViewById(R.id.editAlbumButton);
+
+                editButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        editAlbum(AlbumId);
+                        alertDialog.hide();
+                    }
+                });
 
                 return true;
             }
