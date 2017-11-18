@@ -1,31 +1,57 @@
 package ch.hevs.denisdaniel.androidmusicapp.Albums.Albums;
 
+import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
-
-import java.util.Date;
+import android.arch.persistence.room.PrimaryKey;
 
 /**
  * Created by dnlro on 02/11/2017.
  */
 
-@Entity
+/*
+@Entity(foreignKeys = @ForeignKey(onDelete = CASCADE,
+        entity = Artist.class, parentColumns = "uid",
+        childColumns = "uid"))
+
+*/
+@Entity(tableName="album")
 public class Album {
-    private int id;
+
+
+    @PrimaryKey(autoGenerate = true)
+    private int uid;
+
+    @ColumnInfo(name = "title")
     private String title;
-    private Date releasedate;
+
+    @ColumnInfo(name = "releasedate")
+    private String releasedate;
+
+    @ColumnInfo(name = "rating")
     private int rating;
+
+    @ColumnInfo(name = "img_path")
     private String img_path;
 
-    public Album(String title) {
-        this.title = title;
-    }
 
-    public Album(int id, String title, Date releasedate, int rating, String img_path) {
-        this.id = id;
+ /*   @Embedded
+    private Track tracks;
+    */
+
+    public Album(String title, String releasedate, int rating, String img_path) {
+        this.uid = uid;
         this.title = title;
         this.releasedate = releasedate;
         this.rating = rating;
         this.img_path = img_path;
+    }
+
+    public int getUid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
     }
 
     public String getTitle() {
@@ -36,11 +62,11 @@ public class Album {
         this.title = title;
     }
 
-    public Date getReleasedate() {
+    public String getReleasedate() {
         return releasedate;
     }
 
-    public void setReleasedate(Date releasedate) {
+    public void setReleasedate(String releasedate) {
         this.releasedate = releasedate;
     }
 
@@ -59,4 +85,7 @@ public class Album {
     public void setImg_path(String img_path) {
         this.img_path = img_path;
     }
+
+
+
 }

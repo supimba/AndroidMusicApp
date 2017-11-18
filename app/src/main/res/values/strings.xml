@@ -10,6 +10,7 @@
     <string name="fill_field_artist">Please fill name field</string>
 
 
+
     <string-array name="language_names">
         <item>English</item>
         <item>French</item>

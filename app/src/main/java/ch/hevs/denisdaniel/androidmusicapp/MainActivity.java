@@ -18,8 +18,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RatingBar;
 import android.widget.Toast;
 
+import ch.hevs.denisdaniel.androidmusicapp.Albums.Albums.Album;
 import ch.hevs.denisdaniel.androidmusicapp.Albums.Albums.Views.AddAlbumFragment;
 import ch.hevs.denisdaniel.androidmusicapp.Albums.Albums.Views.AlbumsFragment;
 import ch.hevs.denisdaniel.androidmusicapp.Artists.Artist;
@@ -236,6 +238,57 @@ public class MainActivity extends AppCompatActivity
 
         new ArtistTask(db, "delete",0);
         changeFragment(new ArtistsFragment(), "artist");
+    }
+
+
+    public void addAlbum(View view)
+    {
+        EditText editAlbumTitle = (EditText)findViewById(R.id.editAlbumTitle);
+        String albumTitle = editAlbumTitle.getText().toString();
+
+        EditText editAlbumReleaseDate =(EditText)findViewById(R.id.editAlbumReleaseDate);
+        String albumReleaseDate = editAlbumReleaseDate.findViewById(R.id.editAlbumReleaseDate).toString();
+
+        EditText editAlbumDescription = (EditText)findViewById(R.id.editAlbumDescription);
+        String artistDescription = editAlbumDescription.getText().toString();
+
+        RatingBar ratingBarAlbum = (RatingBar) findViewById(R.id.ratingBarAlbum);
+        int ratingAlbum =ratingBarAlbum.getNumStars();
+
+        String img_path = "drawable/musicapp_logo_black.png";
+
+        if(albumTitle.equals(""))
+        {
+            Toast toast = Toast.makeText(getApplicationContext(), R.string.fill_field_album, Toast.LENGTH_SHORT);
+            toast.show();
+            return;
+        }
+
+        final Album newAlbum = new Album(albumTitle,albumReleaseDate, ratingAlbum, img_path);
+        try
+        {
+            db = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME).build();
+            new AsyncTask<Void, Void, Integer>() {
+                @Override
+                protected Integer doInBackground(Void... voids) {
+                    db.albumDao().add(newAlbum);
+                    return null;
+                }
+
+            }.execute();
+            Log.d("Artist added",newAlbum.getTitle());
+        }
+        catch (Exception e)
+        {
+            Log.d("Exception found :",e.getMessage());
+        }
+
+        editAlbumTitle.setText("");
+        editAlbumDescription.setText("");
+
+
+        Toast toast = Toast.makeText(getApplicationContext(), R.string.artist_created+" : "+newAlbum.getTitle(), Toast.LENGTH_SHORT);
+        toast.show();
     }
 
 
