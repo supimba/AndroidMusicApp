@@ -1,5 +1,32 @@
 package ch.hevs.denisdaniel.androidmusicapp.Tracks.Views;
 
+import android.arch.persistence.room.Room;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.amigold.fundapter.BindDictionary;
+import com.amigold.fundapter.FunDapter;
+import com.amigold.fundapter.extractors.StringExtractor;
+
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+
+import ch.hevs.denisdaniel.androidmusicapp.AppDatabase;
+import ch.hevs.denisdaniel.androidmusicapp.R;
+import ch.hevs.denisdaniel.androidmusicapp.Tracks.Track;
+import ch.hevs.denisdaniel.androidmusicapp.Tracks.TrackTask;
+
 /**
  * Created by Denis Woeffray on 30.10.2017.
  */

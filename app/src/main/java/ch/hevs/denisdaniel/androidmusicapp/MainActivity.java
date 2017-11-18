@@ -1,6 +1,7 @@
 package ch.hevs.denisdaniel.androidmusicapp;
 
 import android.arch.persistence.room.Room;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -264,22 +265,19 @@ public class MainActivity extends AppCompatActivity
         toast.show();
     }
 
-    public void addTrack(View view)
-    {
-        EditText editTextname = (EditText)findViewById(R.id.editTextName);
+    public void addTrack(View view) {
+        EditText editTextname = (EditText) findViewById(R.id.editTextName);
         String trackName = editTextname.getText().toString();
-        EditText editTextDuration = (EditText)findViewById(R.id.editTextDuration);
+        EditText editTextDuration = (EditText) findViewById(R.id.editTextDuration);
         String trackDuration = editTextDuration.getText().toString();
 
-        if(trackName.equals(""))
-        {
+        if (trackName.equals("")) {
             Toast toast = Toast.makeText(getApplicationContext(), R.string.fill_field_artist, Toast.LENGTH_SHORT);
             toast.show();
             return;
         }
-        final Track newTrack = new Track(trackName,trackDuration);
-        try
-        {
+        final Track newTrack = new Track(trackName, trackDuration);
+        try {
             db = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME).build();
             new AsyncTask<Void, Void, Integer>() {
                 @Override
@@ -289,16 +287,17 @@ public class MainActivity extends AppCompatActivity
                 }
 
             }.execute();
-            Log.d("Track added",newTrack.getName());
-        }
-        catch (Exception e)
-        {
-            Log.d("Exception found :",e.getMessage());
+            Log.d("Track added", newTrack.getName());
+        } catch (Exception e) {
+            Log.d("Exception found :", e.getMessage());
         }
         editTextname.setText("");
         editTextDuration.setText("");
-        Toast toast = Toast.makeText(getApplicationContext(), R.string.artist_created+" : "+newTrack.getName(), Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(getApplicationContext(), R.string.artist_created + " : " + newTrack.getName(), Toast.LENGTH_SHORT);
         toast.show();
+    }
+
+
     public void deleteTrack(View view)
     {
         db = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME).build();
