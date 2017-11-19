@@ -189,6 +189,7 @@ public class AlbumsFragment extends Fragment {
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 }
+
                 showAlbum(selectedAlbum);
 
             }
