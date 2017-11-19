@@ -49,15 +49,13 @@ public class SearchFragment extends Fragment {
             public boolean onQueryTextChange(String searchTerm) {
 
                 List<Artist> artists = searchArtists(searchTerm);
-
                 if(artists.size()>0)
                 {
                     BindDictionary<Artist> dictionaryArtist = new BindDictionary<Artist>();
-
                     dictionaryArtist.addStringField(R.id.textViewName, new StringExtractor<Artist>() {
                         @Override
                         public String getStringValue(Artist artist, int position) {
-                            return artist.getName();
+                            return artist.getName().toString();
                         }
                     });
                     FunDapter adapterArtists = new FunDapter(getActivity(), (ArrayList<Artist>) artists, R.layout.artists_list_item, dictionaryArtist);
@@ -72,10 +70,10 @@ public class SearchFragment extends Fragment {
                     dictionaryTracks.addStringField(R.id.textViewName, new StringExtractor<Track>() {
                         @Override
                         public String getStringValue(Track track, int position) {
-                            return track.getName();
+                            return track.getName().toString();
                         }
-                    }).visibilityIfNull(View.GONE);
-                    FunDapter adapterTrack = new FunDapter(getActivity(), (ArrayList<Track>) tracks, R.layout.artists_list_item, dictionaryTracks);
+                    });
+                    FunDapter adapterTrack = new FunDapter(getActivity(), (ArrayList<Track>) tracks, R.layout.tracks_list_item, dictionaryTracks);
                     ListView track_listview = (ListView) view.findViewById(R.id.tracks_listview);
                     track_listview.setAdapter(adapterTrack);
                 }
@@ -84,10 +82,10 @@ public class SearchFragment extends Fragment {
                 if(albums.size()>0)
                 {
                     BindDictionary<Album> dictionaryAlbums= new BindDictionary<Album>();
-                    dictionaryAlbums.addStringField(R.id.textViewName, new StringExtractor<Album>() {
+                    dictionaryAlbums.addStringField(R.id.albumTitle, new StringExtractor<Album>() {
                         @Override
                         public String getStringValue(Album album, int position) {
-                            return album.getTitle();
+                            return album.getTitle().toString();
                         }
                     });
                     FunDapter adapterAlbums = new FunDapter(getActivity(), (ArrayList<Album>) albums, R.layout.albums_list_item, dictionaryAlbums);
