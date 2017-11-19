@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,9 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import ch.hevs.denisdaniel.androidmusicapp.AppDatabase;
+import ch.hevs.denisdaniel.androidmusicapp.Artists.Artist;
+import ch.hevs.denisdaniel.androidmusicapp.Artists.Views.ArtistEditionFragment;
+import ch.hevs.denisdaniel.androidmusicapp.MainActivity;
 import ch.hevs.denisdaniel.androidmusicapp.R;
 import ch.hevs.denisdaniel.androidmusicapp.Tracks.Track;
 import ch.hevs.denisdaniel.androidmusicapp.Tracks.TrackTask;
@@ -33,6 +37,10 @@ import ch.hevs.denisdaniel.androidmusicapp.Tracks.TrackTask;
 
 public class TracksFragment extends Fragment {
     private AppDatabase db;
+    private ArrayList<Track> data = null;
+    private Track selectedTrack ;
+
+
     void deleteTrack(int id)
     {
         db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
@@ -106,10 +114,8 @@ public class TracksFragment extends Fragment {
 
                 final int trackId = Integer.parseInt(editTextId.getText().toString());
 
-                Track track = new Track("", "");
-
                 try {
-                    track = (Track) new TrackTask(db, "get", trackId).execute().get();
+                    selectedTrack = (Track) new TrackTask(db, "get", trackId).execute().get();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {
@@ -121,6 +127,7 @@ public class TracksFragment extends Fragment {
                 final AlertDialog alertDialog = builder.create();
                 alertDialog.show();
                 Button deleteButton = alertDialog.findViewById(R.id.deleteButton);
+                Button editButton = alertDialog.findViewById(R.id.editButton);
 
                 deleteButton.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -129,6 +136,17 @@ public class TracksFragment extends Fragment {
                         alertDialog.hide();
                     }
                 });
+
+                editButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        editTrack(selectedTrack);
+                        alertDialog.hide();
+
+                    }
+
+                });
+
                 return true;
             }
 
@@ -136,4 +154,12 @@ public class TracksFragment extends Fragment {
         });
             return view;
         }
+    public void editTrack(Track track)
+    {
+        Log.d("", "editTrack: "+track);
+        TrackEditionFragment fragment = TrackEditionFragment.newInstance(track);
+        ((MainActivity) getActivity()).setDataObject(selectedTrack);
+        fragment.setTrack(track);
+        changeFragment(fragment);
+    }
 }

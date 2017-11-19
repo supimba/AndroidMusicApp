@@ -18,10 +18,10 @@ public interface TrackDao {
     List<Track> getAll();
 
     @Query("SELECT * FROM tracks WHERE tracks.album_id = :album_id")
-    List<Track> getAlbumTracks(int album_id);
+    List<Track> getAlbumTracks(Long album_id);
 
     @Query("SELECT * FROM tracks WHERE tracks.uid = :uid")
-    Track get(int uid);
+    Track get(Long uid);
 
     @Insert
     Long add(Track artist);

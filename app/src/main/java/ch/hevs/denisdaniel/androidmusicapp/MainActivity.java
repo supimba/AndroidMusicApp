@@ -136,16 +136,6 @@ public class MainActivity extends AppCompatActivity
                 fragmentTitle = "add album";
                 changeFragment(fragment, fragmentTitle);
                 break;
-            case R.id.add_artists:
-                fragment = new AddArtistFragment();
-                fragmentTitle = "add artist";
-                changeFragment(fragment, fragmentTitle);
-                break;
-            case R.id.add_tracks:
-                fragment = new AddTrackFragment();
-                fragmentTitle = "track";
-                changeFragment(fragment, fragmentTitle);
-                break;
             case R.id.settings:
                 fragment = new SettingsFragment();
                 fragmentTitle = "settings";
@@ -228,17 +218,11 @@ public class MainActivity extends AppCompatActivity
             toast.show();
             return;
         }
-
         Artist artist = new Artist(artistName, artistDescription);
         Album album = new Album(albumTitle,albumReleaseDate, albumReleaseDate);
-
         Long artistId = (Long)new ArtistTask(db, "add", artist).execute().get();
-        album.setUserId(artistId);
-        Log.i("SetUserIDNow", ""+album.toString());
-        Log.i("SetUserIDNow", ""+album.getUserid());
-
+        album.setArtistId(artistId);
         Long albumId = (Long)new AlbumTask(db,"add",album).execute().get();
-
         if(mainLayout!=null)
         {
             for (int i = 0;i<mainLayout.getChildCount();i++)
@@ -280,10 +264,8 @@ public class MainActivity extends AppCompatActivity
         Log.i("MainActivity", "updateAlbum");
         String img_path = "drawable/musicapp_logo_black.png";
 
-//        final TextView albumId = (TextView) view.findViewById(R.id.albumID);
 
         final  Album album;
-//        album = (Album) getIntent().getSerializableExtra("SelectedAlbum");
 
         album = (Album) getDataObject();
         album.setTitle(albumTitle);
@@ -315,15 +297,44 @@ public class MainActivity extends AppCompatActivity
             Log.d("Exception found :",e.getMessage());
         }
 
-        //editAlbumTitle.setText("");
         editAlbumDescription.setText("");
         changeFragment(new AlbumsFragment(), "Album");
+    }
 
-/*
-        Toast toast = Toast.makeText(getApplicationContext(), R.string.artist_created+" : "+album.getTitle(), Toast.LENGTH_SHORT);
-        toast.show();
-*/
+    public void updateArtist(View view) throws ExecutionException, InterruptedException {
+        db = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME).build();
 
+        EditText editArtistId = (EditText) findViewById(R.id.editArtistId);
+        String artistId = editArtistId.getText().toString();
+        EditText editArtistName = (EditText) findViewById(R.id.editArtistName);
+        String artistName = editArtistName.getText().toString();
+        EditText editArtistDescription = (EditText) findViewById(R.id.editArtistId);
+        String artistDescription = editArtistDescription.getText().toString();
+
+        Artist artist = (Artist)new ArtistTask(db, "get", artistId).execute().get();
+
+        artist.setName(artistName);
+        artist.setDescription(artistDescription);
+
+        new ArtistTask(db,"update",artist).execute().get();
+    }
+
+    public void updateTrack(View view) throws ExecutionException, InterruptedException {
+        db = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME).build();
+
+        EditText editTrackId = (EditText) findViewById(R.id.editTrackId);
+        String trackId = editTrackId.getText().toString();
+        EditText editTrackName = (EditText) findViewById(R.id.editTrackName);
+        String trackName = editTrackName.getText().toString();
+        EditText editTrackDuration = (EditText) findViewById(R.id.editTrackDuration);
+        String trackDuration = editTrackDuration.getText().toString();
+
+        Track track = (Track) new TrackTask(db, "get", trackId).execute().get();
+
+        track.setName(trackName);
+        track.setDuration(trackDuration);
+
+        new TrackTask(db,"update",track).execute().get();
     }
 
 

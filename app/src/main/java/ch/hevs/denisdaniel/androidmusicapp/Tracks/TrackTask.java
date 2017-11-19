@@ -13,31 +13,34 @@ public class TrackTask extends AsyncTask<Void, Void, Object> {
 
     AppDatabase db;
     String task;
-    Object id;
+    Object o;
 
-    public TrackTask(AppDatabase db, String task, Object id) {
+    public TrackTask(AppDatabase db, String task, Object o) {
         super();
         this.db = db;
         this.task = task;
-        this.id = id;
+        this.o = o;
     }
 
     protected Object doInBackground(Void... params) {
         switch (task) {
             case "add":
-                return db.trackDao().add((Track)id);
+                return db.trackDao().add((Track)o);
             case "getAll":
                 return db.trackDao().getAll();
             case "get":
-                return db.trackDao().get(Integer.parseInt((String.valueOf(id))));
+                return db.trackDao().get(Long.parseLong((String.valueOf(o))));
             case "getAlbumTracks":
-                return db.trackDao().getAlbumTracks(Integer.parseInt((String.valueOf(id))));
+                return db.trackDao().getAlbumTracks(Long.parseLong((String.valueOf(o))));
             case "delete":
-                Track track = db.trackDao().get(Integer.parseInt((String.valueOf(id))));
+                Track track = db.trackDao().get(Long.parseLong((String.valueOf(o))));
                 db.trackDao().delete(track);
                 return null;
+            case "update":
+                db.trackDao().update((Track) o);
+                break;
             case "search":
-                return db.trackDao().search((String) id);
+                return db.trackDao().search((String) o);
         }
         return null;
     }

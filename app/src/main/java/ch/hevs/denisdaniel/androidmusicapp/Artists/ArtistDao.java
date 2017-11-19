@@ -17,7 +17,7 @@ public interface ArtistDao {
     List<Artist> getAll();
 
     @Query("SELECT * FROM artist WHERE artist.uid = :uid")
-    Artist get(int uid);
+    Artist get(Long uid);
 
     @Insert
     Long add(Artist artist);

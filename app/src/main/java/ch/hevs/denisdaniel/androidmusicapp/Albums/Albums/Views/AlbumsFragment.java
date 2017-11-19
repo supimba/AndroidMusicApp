@@ -39,7 +39,7 @@ public class AlbumsFragment extends Fragment {
     private ArrayList<Album> data = null;
     private Album selectedAlbum ;
 
-    public void deleteAlbum(int id)
+    public void deleteAlbum(Long id)
     {
         db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
         new AlbumTask(db, "delete",id).execute();
@@ -135,7 +135,7 @@ public class AlbumsFragment extends Fragment {
                                            final int pos, long id) {
 
                 TextView albumIdTextView = (TextView) v.findViewById(R.id.albumID);
-                final int AlbumId = Integer.parseInt(albumIdTextView.getText().toString());
+                final Long AlbumId = Long.parseLong(albumIdTextView.getText().toString());
                 try {
                    selectedAlbum = (Album) new AlbumTask(db, "get", AlbumId).execute().get();
 
@@ -184,7 +184,6 @@ public class AlbumsFragment extends Fragment {
                 final int AlbumId = Integer.parseInt(albumIdTextView.getText().toString());
                 try {
                     selectedAlbum = (Album) new AlbumTask(db, "get", AlbumId).execute().get();
-
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {

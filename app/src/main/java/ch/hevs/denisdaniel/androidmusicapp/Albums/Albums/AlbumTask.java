@@ -11,14 +11,14 @@ import ch.hevs.denisdaniel.androidmusicapp.AppDatabase;
 public class AlbumTask extends AsyncTask<Void, Void, Object> {
     AppDatabase db;
     String task;
-    Object id;
+    Object o;
     Album album;
 
-    public AlbumTask(AppDatabase db, String task, Object id) {
+    public AlbumTask(AppDatabase db, String task, Object o) {
         super();
         this.db = db;
         this.task = task;
-        this.id = id;
+        this.o = o;
     }
 
 
@@ -26,18 +26,20 @@ public class AlbumTask extends AsyncTask<Void, Void, Object> {
     protected Object doInBackground(Void... voids) {
         switch (task) {
             case "add":
-                return db.albumDao().add((Album)id);
+                return db.albumDao().add((Album)o);
             case "getAll":
                 return db.albumDao().getAll();
             case "get":
-                return db.albumDao().get(Integer.parseInt((String.valueOf(id))));
+                return db.albumDao().get(Long.parseLong((String.valueOf(o))));
             case "delete":
-                album = db.albumDao().get(Integer.parseInt((String.valueOf(id))));
+                album = db.albumDao().get(Long.parseLong((String.valueOf(o))));
                 db.albumDao().delete(album);
                 return null;
             case "update":
-                album = db.albumDao().get(Integer.parseInt((String.valueOf(id))));
+                album = db.albumDao().get(Long.parseLong((String.valueOf(o))));
                 db.albumDao().update(album);
+            case "search":
+                return db.artistDao().search((String) o);
         }
         return null;
 

@@ -31,16 +31,6 @@
                 android:id="@+id/add_albums"
                 android:icon="@drawable/ic_action_add"
                 android:title="@string/add_albums" />
-            <item
-                android:id="@+id/add_artists"
-                android:icon="@drawable/ic_action_add"
-                android:title="@string/add_artists" />
-            <item
-                android:id="@+id/add_tracks"
-                android:icon="@drawable/ic_action_add"
-                android:title="@string/add_tracks" />
-
-
         </group>
         <group
             android:checkableBehavior="single">

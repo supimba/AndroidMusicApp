@@ -8,6 +8,7 @@ import android.arch.persistence.room.PrimaryKey;
 import ch.hevs.denisdaniel.androidmusicapp.Albums.Albums.Album;
 
 import static android.arch.persistence.room.ForeignKey.CASCADE;
+import static android.arch.persistence.room.ForeignKey.SET_NULL;
 
 /**
  * Created by Denis Woeffray on 03.11.2017.
@@ -17,8 +18,7 @@ import static android.arch.persistence.room.ForeignKey.CASCADE;
         foreignKeys = @ForeignKey(  entity = Album.class,
                                     parentColumns = "uid",
                                     childColumns = "album_id",
-                                    onDelete = CASCADE,
-                                    onUpdate = CASCADE)
+                                    onDelete = SET_NULL)
 )
 public class Track {
     public Track(String name, String duration)
@@ -67,8 +67,8 @@ public class Track {
         return albumId;
     }
 
-    public void setAlbumId(Long album_id) {
-        this.albumId = album_id;
+    public void setAlbumId(Long albumId) {
+        this.albumId = albumId;
     }
 
     @Override

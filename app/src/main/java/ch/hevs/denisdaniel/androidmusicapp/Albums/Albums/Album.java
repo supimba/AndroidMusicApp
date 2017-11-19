@@ -8,32 +8,18 @@ import android.arch.persistence.room.PrimaryKey;
 import ch.hevs.denisdaniel.androidmusicapp.Artists.Artist;
 
 import static android.arch.persistence.room.ForeignKey.CASCADE;
+import static android.arch.persistence.room.ForeignKey.SET_DEFAULT;
+import static android.arch.persistence.room.ForeignKey.SET_NULL;
 
 /**
  * Created by dnlro on 02/11/2017.
  */
 
-/*
-@Entity(foreignKeys = @ForeignKey(onDelete = CASCADE,
-        entity = Artist.class, parentColumns = "uid",
-        childColumns = "uid"))
-
-*/
-
-
-/*,
-        foreignKeys = @Fo
-        reignKey(  entity = Artist.class,
-                parentColumns = "uid",
-                childColumns = "userid",
-                onDelete = SET_NULL,
-                onUpdate = CASCADE)
-)*/
 
 
 @Entity(foreignKeys = @ForeignKey(  entity = Artist.class,
                                     parentColumns = "uid",
-                                    childColumns = "uid",
+                                    childColumns = "artist_id",
                                     onDelete = CASCADE
     ))
 public class Album {
@@ -41,17 +27,6 @@ public class Album {
 
     @PrimaryKey(autoGenerate = true)
     private Long uid;
-
-    @ColumnInfo(name = "userid")
-    private int userid;
-
-    public int getUserid() {
-        return userid;
-    }
-
-    public void setUserid(int userid) {
-        this.userid = userid;
-    }
 
     @ColumnInfo(name = "title")
     private String title;
@@ -62,26 +37,13 @@ public class Album {
     @ColumnInfo(name = "releasedate")
     private String releasedate;
 
-    @ColumnInfo(name = "user_id")
-    private Long userId;
-    /*@ColumnInfo(name = "rating")
-    private int rating;*/
+    @ColumnInfo(name = "artist_id")
+    private Long artistId;
 
-    /*@ColumnInfo(name = "img_path")
-    private String img_path;*/
-
-
- /*   @Embedded
-    private Track tracks;
-    */
-
-    public Album(String title, String releasedate, String description /* int rating, String img_path*/) {
+    public Album(String title, String releasedate, String description) {
         this.uid = uid;
         this.title = title;
-        this.description = title;
-        this.releasedate = releasedate;
-        /*this.rating = rating;*/
-        /*this.img_path = img_path;*/
+        this.description = description;
     }
 
     public Long getUid() {
@@ -116,12 +78,12 @@ public class Album {
         this.releasedate = releasedate;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Long getArtistId() {
+        return artistId;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setArtistId(Long artistId) {
+        this.artistId = artistId;
     }
 
     @Override
@@ -131,7 +93,7 @@ public class Album {
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", releasedate='" + releasedate + '\'' +
-                ", userId=" + userId +
+                ", artistId=" + artistId +
                 '}';
     }
 }

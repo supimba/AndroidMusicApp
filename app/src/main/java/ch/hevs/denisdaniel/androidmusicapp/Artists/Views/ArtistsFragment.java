@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,9 +23,12 @@ import com.amigold.fundapter.extractors.StringExtractor;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
+import ch.hevs.denisdaniel.androidmusicapp.Albums.Albums.Album;
+import ch.hevs.denisdaniel.androidmusicapp.Albums.Albums.Views.AlbumEditionFragment;
 import ch.hevs.denisdaniel.androidmusicapp.AppDatabase;
 import ch.hevs.denisdaniel.androidmusicapp.Artists.Artist;
 import ch.hevs.denisdaniel.androidmusicapp.Artists.ArtistTask;
+import ch.hevs.denisdaniel.androidmusicapp.MainActivity;
 import ch.hevs.denisdaniel.androidmusicapp.R;
 
 /**
@@ -33,6 +37,9 @@ import ch.hevs.denisdaniel.androidmusicapp.R;
 
 public class ArtistsFragment extends Fragment {
     private AppDatabase db;
+    private ArrayList<Artist> data = null;
+    private Artist selectedArtist ;
+
     void deleteArtist(int id)
     {
         db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
@@ -99,10 +106,8 @@ public class ArtistsFragment extends Fragment {
 
                 final int ArtistId = Integer.parseInt(editTextname.getText().toString());
 
-                Artist artist = new Artist("", "");
-
                 try {
-                    artist = (Artist) new ArtistTask(db, "get", ArtistId).execute().get();
+                    selectedArtist = (Artist) new ArtistTask(db, "get", ArtistId).execute().get();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {
@@ -115,6 +120,7 @@ public class ArtistsFragment extends Fragment {
                 alertDialog.show();
 
                 Button deleteButton = alertDialog.findViewById(R.id.deleteButton);
+                Button editButton = alertDialog.findViewById(R.id.editButton);
 
                 deleteButton.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -124,13 +130,28 @@ public class ArtistsFragment extends Fragment {
                     }
                 });
 
+                editButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                                editArtist(selectedArtist);
+                                alertDialog.hide();
+                            }
+
+                    });
 
                 return true;
-            }
-
-            ;
+            };
         });
-
             return view;
         }
+
+    public void editArtist(Artist artist)
+    {
+        ArtistEditionFragment fragment = ArtistEditionFragment.newInstance(artist);
+
+        // save the selectedalbum in main
+        ((MainActivity) getActivity()).setDataObject(selectedArtist);
+        fragment.setArtist(artist);
+        changeFragment(fragment);
+    }
 }

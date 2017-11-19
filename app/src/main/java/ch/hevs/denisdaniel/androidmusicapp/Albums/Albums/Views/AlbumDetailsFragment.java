@@ -28,24 +28,11 @@ import ch.hevs.denisdaniel.androidmusicapp.Tracks.TrackTask;
 
 public class AlbumDetailsFragment extends Fragment {
     private static final String ALBUM_ID = "albumId";
-    private int albumId ;
+    private Long albumId ;
     private Album album;
     private Artist artist;
 
     private AppDatabase db;
-
-
-    public AlbumDetailsFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param album Get album ID.
-     * @return A new instance of fragment AlbumDetailsFragment.
-     */
 
     public static AlbumDetailsFragment newInstance(Album album) {
         AlbumDetailsFragment fragment = new AlbumDetailsFragment();
@@ -59,7 +46,6 @@ public class AlbumDetailsFragment extends Fragment {
 
     public void setAlbum(Album album){
         this.album = album;
-
     }
 
     @Override
@@ -67,7 +53,7 @@ public class AlbumDetailsFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            albumId = getArguments().getInt(ALBUM_ID);
+            albumId = getArguments().getLong(ALBUM_ID);
 
 
         }
@@ -84,7 +70,7 @@ public class AlbumDetailsFragment extends Fragment {
 
         db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
 
-        int artistId = album.getUserid();
+        Long artistId = album.getArtistId();
         Log.i("AlbumDetailsFragment", ""+artistId);
         ArrayList<Track> data = null;
         try {
@@ -96,16 +82,11 @@ public class AlbumDetailsFragment extends Fragment {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-
         // Add artist name
-      /*  if(artist.getName() != null){
+        if(artist.getName() != null){
             TextView artistName = view.findViewById(R.id.detailsArtistName);
             artistName.setText(artist.getName());
         }
-        */
-
-
-        // Add album tracks
         BindDictionary<Track> dictionary = new BindDictionary<>();
 
         dictionary.addStringField(R.id.textViewName, new StringExtractor<Track>() {
@@ -120,22 +101,15 @@ public class AlbumDetailsFragment extends Fragment {
                 return String.valueOf(track.getUid());
             }
         });
-
         dictionary.addStringField(R.id.textViewDuration, new StringExtractor<Track>() {
             @Override
             public String getStringValue(Track track, int position) {
                 return String.valueOf(track.getDuration());
             }
         });
-
-
         FunDapter adapter = new FunDapter(AlbumDetailsFragment.this.getActivity(), (ArrayList<Track>) data, R.layout.tracks_list_item, dictionary);
         ListView tracks_listview = (ListView) view.findViewById(R.id.tracks_listview);
         tracks_listview.setAdapter(adapter);
-
-
         return view;
     }
-
-
 }
