@@ -18,12 +18,17 @@ public class AlbumTask extends AsyncTask<Void, Void, Object> {
         super();
         this.db = db;
         this.task = task;
+        /* Object pour permettre de manipuler plus de fonctions du DAO différentes*/
         this.o = o;
     }
 
 
     @Override
     protected Object doInBackground(Void... voids) {
+        /*
+        Recherche sur la clé de la fonction afin de savoir quelle requete effectuer
+        Casting dans les "cases" afin de passer le bon type en paramètre
+         */
         switch (task) {
             case "add":
                 return db.albumDao().add((Album)o);

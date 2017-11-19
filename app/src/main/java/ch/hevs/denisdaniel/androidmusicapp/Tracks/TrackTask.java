@@ -29,7 +29,6 @@ public class TrackTask extends AsyncTask<Void, Void, Object> {
         Recherche sur la clé de la fonction afin de savoir quelle requete effectuer
         Casting dans les "cases" afin de passer le bon type en paramètre
          */
-
         switch (task) {
             case "add":
                 return db.trackDao().add((Track)o);

@@ -13,6 +13,7 @@ public class ArtistTask extends AsyncTask<Void, Void, Object> {
 
     AppDatabase db;
     String task;
+    /* Object pour permettre de manipuler plus de fonctions du DAO différentes*/
     Object o;
 
     public ArtistTask(AppDatabase db, String task, Object o) {
@@ -23,6 +24,10 @@ public class ArtistTask extends AsyncTask<Void, Void, Object> {
     }
 
     protected Object doInBackground(Void... params) {
+        /*
+        Recherche sur la clé de la fonction afin de savoir quelle requete effectuer
+        Casting dans les "cases" afin de passer le bon type en paramètre
+         */
         switch (task) {
             case "add":
                 return db.artistDao().add((Artist)o);

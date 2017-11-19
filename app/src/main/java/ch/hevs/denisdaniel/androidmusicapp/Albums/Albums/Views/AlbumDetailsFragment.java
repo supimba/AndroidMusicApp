@@ -71,8 +71,8 @@ public class AlbumDetailsFragment extends Fragment {
         db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
 
         Long artistId = album.getArtistId();
-        Log.i("AlbumDetailsFragment", ""+artistId);
         ArrayList<Track> data = null;
+        /* récupération des tracks*/
         try {
             data = (ArrayList) new TrackTask(db, "getAlbumTracks", album.getUid()).execute().get();
             artist = (Artist) new ArtistTask(db, "get", artistId).execute().get();
@@ -82,12 +82,14 @@ public class AlbumDetailsFragment extends Fragment {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        // Add artist name
         if(artist.getName() != null){
             TextView artistName = view.findViewById(R.id.detailsArtistName);
             artistName.setText(artist.getName());
         }
+
+        /* creation des listviews*/
         BindDictionary<Track> dictionary = new BindDictionary<>();
+
 
         dictionary.addStringField(R.id.textViewName, new StringExtractor<Track>() {
             @Override
@@ -107,9 +109,12 @@ public class AlbumDetailsFragment extends Fragment {
                 return String.valueOf(track.getDuration());
             }
         });
+
+
         FunDapter adapter = new FunDapter(AlbumDetailsFragment.this.getActivity(), (ArrayList<Track>) data, R.layout.tracks_list_item, dictionary);
         ListView tracks_listview = (ListView) view.findViewById(R.id.tracks_listview);
         tracks_listview.setAdapter(adapter);
+        /* fin creation des listviews*/
         return view;
     }
 }

@@ -32,8 +32,6 @@ public class AlbumEditionFragment extends android.support.v4.app.Fragment {
         return fragment;
     }
 
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
