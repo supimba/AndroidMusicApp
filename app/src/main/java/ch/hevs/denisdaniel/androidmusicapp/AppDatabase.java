@@ -19,7 +19,7 @@ import ch.hevs.denisdaniel.androidmusicapp.Utils.DateConverter;
 @TypeConverters({DateConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase INSTANCE;
-    public static final String DB_NAME = "app_db_11";
+    public static final String DB_NAME = "appdatabase";
     public abstract ArtistDao artistDao();
     public abstract AlbumDao albumDao();
     public abstract TrackDao trackDao();

@@ -113,7 +113,7 @@ public class AlbumDetailsFragment extends Fragment {
 
 
         FunDapter adapter = new FunDapter(AlbumDetailsFragment.this.getActivity(), (ArrayList<Track>) data, R.layout.tracks_list_item, dictionary);
-        ListView tracks_listview = (ListView) view.findViewById(R.id.tracks_listview);
+        ListView tracks_listview = (ListView) view.findViewById(R.id.track_listview);
         tracks_listview.setAdapter(adapter);
         /* fin creation des listviews*/
         return view;
