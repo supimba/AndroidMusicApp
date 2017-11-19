@@ -72,8 +72,8 @@ public class AlbumDetailsFragment extends Fragment {
         db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
 
         Long artistId = album.getArtistId();
-        Log.i("AlbumDetailsFragment", ""+artistId);
         ArrayList<Track> data = null;
+        /* récupération des tracks*/
         try {
             data = (ArrayList) new TrackTask(db, "getAlbumTracks", album.getUid()).execute().get();
             artist = (Artist) new ArtistTask(db, "get", artistId).execute().get();
@@ -83,26 +83,16 @@ public class AlbumDetailsFragment extends Fragment {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-
-        // get album infos
-        TextView albumTitle = view.findViewById(R.id.detailsAlbumTitle);
-        albumTitle.setText(album.getTitle());
-
-        TextView releaseDate = view.findViewById(R.id.detailsReleaseDate);
-        releaseDate.setText(album.getReleasedate());
-
-
-        TextView description = view.findViewById(R.id.detailsAlbumDesc);
-        description.setText(album.getReleasedate());
-
-        // get artist name
+        // Add artist name
         if(artist.getName() != null){
             TextView artistName = view.findViewById(R.id.detailsArtistName);
             artistName.setText(artist.getName());
         }
 
-        // get all tracks from album
+        /* creation des listviews*/
         BindDictionary<Track> dictionary = new BindDictionary<>();
+
+
         dictionary.addStringField(R.id.textViewName, new StringExtractor<Track>() {
             @Override
             public String getStringValue(Track track, int position) {
@@ -121,9 +111,12 @@ public class AlbumDetailsFragment extends Fragment {
                 return String.valueOf(track.getDuration());
             }
         });
+
+
         FunDapter adapter = new FunDapter(AlbumDetailsFragment.this.getActivity(), (ArrayList<Track>) data, R.layout.tracks_list_item, dictionary);
         ListView tracks_listview = (ListView) view.findViewById(R.id.tracks_listview);
         tracks_listview.setAdapter(adapter);
+        /* fin creation des listviews*/
         return view;
     }
 }

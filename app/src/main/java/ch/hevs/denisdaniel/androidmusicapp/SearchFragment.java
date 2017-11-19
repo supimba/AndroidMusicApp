@@ -3,6 +3,7 @@ package ch.hevs.denisdaniel.androidmusicapp;
 import android.arch.persistence.room.Room;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.view.LayoutInflater;
@@ -49,10 +50,9 @@ public class SearchFragment extends Fragment {
             @Override
             public boolean onQueryTextChange(String searchTerm) {
 
-
                 List<Artist> artists = searchArtists(searchTerm);
 
-                BindDictionary<Artist> dictionaryArtist = new BindDictionary<>();
+                BindDictionary<Artist> dictionaryArtist = new BindDictionary<Artist>();
 
                 dictionaryArtist.addStringField(R.id.textViewName, new StringExtractor<Artist>() {
                     @Override
@@ -73,51 +73,40 @@ public class SearchFragment extends Fragment {
                     }
                 });
 
-                FunDapter adapterArtists = new FunDapter(SearchFragment.this.getActivity(), (ArrayList<Artist>) artists, R.layout.artists_list_item, dictionaryArtist);
+                FunDapter adapterArtists = new FunDapter(getActivity(), (ArrayList<Artist>) artists, R.layout.artists_list_item, dictionaryArtist);
                 ListView artist_listview = (ListView) view.findViewById(R.id.artists_listview);
                 artist_listview.setAdapter(adapterArtists);
 
 
+
                 List<Track> tracks = searchTracks(searchTerm);
 
-                BindDictionary<Track> dictionaryTracks = new BindDictionary<>();
+                BindDictionary<Track> dictionaryTracks = new BindDictionary<Track>();
+
 
                 dictionaryTracks.addStringField(R.id.textViewName, new StringExtractor<Track>() {
                     @Override
                     public String getStringValue(Track track, int position) {
                         return track.getName();
-                    }
-                });
-                dictionaryTracks.addStringField(R.id.textViewId, new StringExtractor<Track>() {
-                    @Override
-                    public String getStringValue(Track track, int position) {
-                        return String.valueOf(track.getUid());
+
                     }
                 });
 
-                dictionaryTracks.addStringField(R.id.textViewDuration, new StringExtractor<Track>() {
-                    @Override
-                    public String getStringValue(Track track, int position) {
-                        return String.valueOf(track.getDuration());
-                    }
-                });
-
-                FunDapter adapterTrack = new FunDapter(SearchFragment.this.getActivity(), (ArrayList<Artist>) artists, R.layout.artists_list_item, dictionaryTracks);
+                FunDapter adapterTrack = new FunDapter(getActivity(), (ArrayList<Track>) tracks, R.layout.artists_list_item, dictionaryTracks);
                 ListView track_listview = (ListView) view.findViewById(R.id.tracks_listview);
                 track_listview.setAdapter(adapterTrack);
 
-
-
                 List<Album> albums = searchAlbums(searchTerm);
 
-                BindDictionary<Album> dictionaryAlbums= new BindDictionary<>();
+                BindDictionary<Album> dictionaryAlbums= new BindDictionary<Album>();
 
                 dictionaryAlbums.addStringField(R.id.textViewName, new StringExtractor<Album>() {
-                    @Override
+                        @Override
                     public String getStringValue(Album album, int position) {
                         return album.getTitle();
                     }
                 });
+
                 dictionaryAlbums.addStringField(R.id.textViewId, new StringExtractor<Album>() {
                     @Override
                     public String getStringValue(Album album, int position) {
@@ -132,11 +121,11 @@ public class SearchFragment extends Fragment {
                     }
                 });
 
-                FunDapter adapterAlbums = new FunDapter(SearchFragment.this.getActivity(), (ArrayList<Album>) albums, R.layout.albums_list_item, dictionaryAlbums);
+                FunDapter adapterAlbums = new FunDapter(getActivity(), (ArrayList<Album>) albums, R.layout.albums_list_item, dictionaryAlbums);
                 ListView albums_listview = (ListView) view.findViewById(R.id.albums_listview);
                 albums_listview.setAdapter(adapterAlbums);
 
-                return true;
+                return false;
             }
         });
         return view;
