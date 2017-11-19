@@ -215,8 +215,6 @@ public class MainActivity extends AppCompatActivity
         LinearLayout mainLayout = (LinearLayout)findViewById(R.id.album_tracks);
 
 
-
-
         if(albumTitle.equals(""))
         {
             Toast toast = Toast.makeText(getApplicationContext(), R.string.fill_field_album, Toast.LENGTH_SHORT);
@@ -236,6 +234,8 @@ public class MainActivity extends AppCompatActivity
 
         Long artistId = (Long)new ArtistTask(db, "add", artist).execute().get();
         album.setUserId(artistId);
+        Log.i("SetUserIDNow", ""+album.toString());
+        Log.i("SetUserIDNow", ""+album.getUserid());
 
         Long albumId = (Long)new AlbumTask(db,"add",album).execute().get();
 

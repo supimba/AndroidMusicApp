@@ -77,15 +77,15 @@ public class AlbumDetailsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.album_details, container, false);
-        Log.i("AlbumDetailsFragment", album.getTitle());
+
         TextView albumTitle = view.findViewById(R.id.detailsAlbumTitle);
         albumTitle.setText(album.getTitle());
 
 
         db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
 
-        final int artistId = album.getUserid();
-        //Log.i("AlbumDetailsFragment", ""+artistId);
+        int artistId = album.getUserid();
+        Log.i("AlbumDetailsFragment", ""+artistId);
         ArrayList<Track> data = null;
         try {
             data = (ArrayList) new TrackTask(db, "getAlbumTracks", album.getUid()).execute().get();
