@@ -28,32 +28,6 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
 
     }
 
-  /*  @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.settings, container, false);
-        //    Toast.makeText(getContext(), ""+selectedRadioButton, Toast.LENGTH_SHORT).show();
-        langChangeButton.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        String lang  = rButton.getText().toString();
-                        if(lang.equals("radioButtonFR")) {
-                           Locale localeEN = new Locale("fr_FR");
-                          //  setLocale(localeEN);
-                            Toast.makeText(getContext(), lang, Toast.LENGTH_SHORT).show();
-                        }else{
-                            Locale localeEN = new Locale("en_EN");
-                           // setLocale(localeEN);
-                            Toast.makeText(getContext(), lang, Toast.LENGTH_SHORT).show();
-                        }
-                        Toast.makeText(getContext(), lang, Toast.LENGTH_SHORT).show();
-                    }
-                }
-        );
-        return view;
-
-    }*/
-
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         // Recover preferences
