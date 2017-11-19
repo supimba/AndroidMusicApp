@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ import java.util.concurrent.ExecutionException;
 import ch.hevs.denisdaniel.androidmusicapp.Albums.Albums.Album;
 import ch.hevs.denisdaniel.androidmusicapp.Albums.Albums.AlbumTask;
 import ch.hevs.denisdaniel.androidmusicapp.AppDatabase;
+import ch.hevs.denisdaniel.androidmusicapp.MainActivity;
 import ch.hevs.denisdaniel.androidmusicapp.R;
 
 /**
@@ -34,26 +36,32 @@ import ch.hevs.denisdaniel.androidmusicapp.R;
 public class AlbumsFragment extends Fragment {
 
     private AppDatabase db;
+    private ArrayList<Album> data = null;
+    private Album selectedAlbum ;
 
-    void deleteAlbum(int id)
+    public void deleteAlbum(int id)
     {
         db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
         new AlbumTask(db, "delete",id).execute();
+
+
         changeFragment(new AlbumsFragment());
-
-
     }
 
-    void editAlbum(int id)
+    public void editAlbum(Album album)
     {
-        Fragment fragment =  new EditAlbumFragment();
+        AlbumEditionFragment fragment = AlbumEditionFragment.newInstance(album);
 
-        Bundle args = new Bundle();
-        args.putInt("albumId", id);
-        fragment.setArguments(args);
-
+        // save the selectedalbum in main
+        ((MainActivity) getActivity()).setDataObject(selectedAlbum);
+        fragment.setAlbum(album);
         changeFragment(fragment);
+    }
 
+    public void showAlbum(Album album){
+        AlbumDetailsFragment fragment = AlbumDetailsFragment.newInstance(album);
+        fragment.setAlbum(album);
+        changeFragment(fragment);
 
     }
 
@@ -84,7 +92,7 @@ public class AlbumsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.albums_list, container, false);
         db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
-        ArrayList<Album> data = null;
+
         try {
             data = (ArrayList) new AlbumTask(db, "getAll", 0).execute().get();
         } catch (InterruptedException e) {
@@ -118,15 +126,19 @@ public class AlbumsFragment extends Fragment {
         ListView album_listView = (ListView) view.findViewById(R.id.lvData);
         album_listView.setAdapter(adapter);
 
+
+
         album_listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
             @Override
             public boolean onItemLongClick(AdapterView<?> arg0, View v,
-                                           int pos, long id) {
+                                           final int pos, long id) {
 
                 TextView albumIdTextView = (TextView) v.findViewById(R.id.albumID);
                 final int AlbumId = Integer.parseInt(albumIdTextView.getText().toString());
                 try {
-                    new AlbumTask(db, "get", AlbumId).execute().get();
+                   selectedAlbum = (Album) new AlbumTask(db, "get", AlbumId).execute().get();
+
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {
@@ -154,13 +166,38 @@ public class AlbumsFragment extends Fragment {
                 editButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        editAlbum(AlbumId);
+
+                        Log.i("Position1", selectedAlbum.getTitle());
+                        editAlbum(selectedAlbum);
                         alertDialog.hide();
                     }
                 });
                 return true;
             }
         });
+
+        album_listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View v, int i, long l) {
+
+                TextView albumIdTextView = (TextView) v.findViewById(R.id.albumID);
+                final int AlbumId = Integer.parseInt(albumIdTextView.getText().toString());
+                try {
+                    selectedAlbum = (Album) new AlbumTask(db, "get", AlbumId).execute().get();
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+                showAlbum(selectedAlbum);
+
+            }
+        });
+
+
+
+
         return view;
     }
 }

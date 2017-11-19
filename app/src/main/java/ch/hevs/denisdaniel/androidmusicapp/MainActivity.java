@@ -1,7 +1,6 @@
 package ch.hevs.denisdaniel.androidmusicapp;
 
 import android.arch.persistence.room.Room;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -11,14 +10,12 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -43,6 +40,7 @@ import ch.hevs.denisdaniel.androidmusicapp.Tracks.Views.TracksFragment;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private AppDatabase db;
+    private Object object;
 
 
 
@@ -265,10 +263,10 @@ public class MainActivity extends AppCompatActivity
         ((EditText)findViewById(R.id.artistDescription)).setText("");
     }
 
-    public void udpateAlbum(View view, final Album updateAlbum){
+    public void udpateAlbum(View view){
 
-        EditText editAlbumTitle = (EditText)findViewById(R.id.editAlbumTitleEdit);
-        String albumTitle = editAlbumTitle.getText().toString();
+        EditText albumTitleEdit = (EditText)findViewById(R.id.editAlbumTitle);
+        String albumTitle = albumTitleEdit.getText().toString();
 
         EditText editAlbumReleaseDate =(EditText)findViewById(R.id.editAlbumReleaseDateEdit);
         String albumReleaseDate = editAlbumReleaseDate.findViewById(R.id.editAlbumReleaseDateEdit).toString();
@@ -280,9 +278,15 @@ public class MainActivity extends AppCompatActivity
         int ratingAlbum =ratingBarAlbum.getNumStars();
 
         Log.i("MainActivity", "updateAlbum");
-
-
         String img_path = "drawable/musicapp_logo_black.png";
+
+//        final TextView albumId = (TextView) view.findViewById(R.id.albumID);
+
+        final  Album album;
+//        album = (Album) getIntent().getSerializableExtra("SelectedAlbum");
+
+        album = (Album) getDataObject();
+        album.setTitle(albumTitle);
 
         if(albumTitle.equals(""))
         {
@@ -293,28 +297,30 @@ public class MainActivity extends AppCompatActivity
 
         try
         {
+
             db = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME).build();
             new AsyncTask<Void, Void, Integer>() {
                 @Override
                 protected Integer doInBackground(Void... voids) {
-                    db.albumDao().update(updateAlbum);
+
+                    db.albumDao().update(album);
                     return null;
                 }
 
             }.execute();
-            Log.d("Update proceed",updateAlbum.getTitle());
+            Log.d("Update proceed",album.getTitle());
         }
         catch (Exception e)
         {
             Log.d("Exception found :",e.getMessage());
         }
 
-        editAlbumTitle.setText("");
+        //editAlbumTitle.setText("");
         editAlbumDescription.setText("");
-
+        changeFragment(new AlbumsFragment(), "Album");
 
 /*
-        Toast toast = Toast.makeText(getApplicationContext(), R.string.artist_created+" : "+updateAlbum.getTitle(), Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(getApplicationContext(), R.string.artist_created+" : "+album.getTitle(), Toast.LENGTH_SHORT);
         toast.show();
 */
 
@@ -400,6 +406,14 @@ public class MainActivity extends AppCompatActivity
 
     }
     */
+
+   public void setDataObject(Object o ){
+        this.object = o ;
+   }
+
+    public Object getDataObject(){
+        return this.object;
+    }
 
 
     public void addArtistToAlbum(View view){

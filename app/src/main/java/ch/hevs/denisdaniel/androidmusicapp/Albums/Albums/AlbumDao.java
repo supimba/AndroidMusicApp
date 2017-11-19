@@ -38,6 +38,4 @@ public interface AlbumDao {
     @Update
     void update(Album album);
 
-
-
 }

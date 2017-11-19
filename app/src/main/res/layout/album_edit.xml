@@ -31,13 +31,17 @@
             android:src="@drawable/ic_edit_black_24dp" />
 
         <TextView
-            android:id="@+id/albumTitleEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             />
 
+        <TextView
+            android:id="@+id/albumID"
+            android:layout_width="0dp"
+            android:layout_height="0dp" />
+
         <EditText
-            android:id="@+id/editAlbumTitleEdit"
+            android:id="@+id/editAlbumTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
