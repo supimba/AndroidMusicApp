@@ -113,7 +113,6 @@ public class SearchFragment extends Fragment {
         return artists;
     }
 
-
     public List<Track> searchTracks(String searchTerm) {
         List<Track> tracks = new ArrayList();
         db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
