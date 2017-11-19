@@ -2,7 +2,12 @@ package ch.hevs.denisdaniel.androidmusicapp.Albums.Albums;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
+
+import ch.hevs.denisdaniel.androidmusicapp.Artists.Artist;
+
+import static android.arch.persistence.room.ForeignKey.CASCADE;
 
 /**
  * Created by dnlro on 02/11/2017.
@@ -24,7 +29,13 @@ import android.arch.persistence.room.PrimaryKey;
                 onDelete = SET_NULL,
                 onUpdate = CASCADE)
 )*/
-@Entity
+
+
+@Entity(foreignKeys = @ForeignKey(  entity = Artist.class,
+                                    parentColumns = "uid",
+                                    childColumns = "uid",
+                                    onDelete = CASCADE
+    ))
 public class Album {
 
 

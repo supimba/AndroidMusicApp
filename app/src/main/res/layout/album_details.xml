@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/scroll"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -18,7 +14,13 @@
             android:id="@+id/detailsAlbumTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Titre de l'album"
+            android:text="@string/noAlbumTitle"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+        <TextView
+            android:id="@+id/detailsArtistName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/noArtistName"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
         <ImageView
@@ -28,6 +30,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginRight="16dp"
+            android:padding="1dp"
             android:src="@drawable/musicapp_logo_black"/>
 
         <TextView
@@ -35,66 +38,29 @@
             android:layout_height="wrap_content"
             android:text="@string/description" />
 
-        <EditText
-            android:id="@+id/albumDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textMultiLine" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/release_date" />
 
-        <EditText
-            android:id="@+id/albumReleaseDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="date" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/artist"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:text="@string/name" />
-
-        <EditText
-            android:id="@+id/artistName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName" />
-
-        <TextView
-            android:layout_width="match_parent"
-
-            android:layout_height="wrap_content"
-            android:text="@string/description" />
-
-        <EditText
-            android:id="@+id/artistDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/tracks"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
-
-        <!-- TODO Change le include du content-main -->
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/relative"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent" >
         <include layout="@layout/tracks_list" />
+        </RelativeLayout>
 
     </LinearLayout>
 
-</ScrollView>
+
+
+

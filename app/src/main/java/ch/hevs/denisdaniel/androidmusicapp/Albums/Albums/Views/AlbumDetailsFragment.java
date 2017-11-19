@@ -19,6 +19,8 @@ import java.util.concurrent.ExecutionException;
 
 import ch.hevs.denisdaniel.androidmusicapp.Albums.Albums.Album;
 import ch.hevs.denisdaniel.androidmusicapp.AppDatabase;
+import ch.hevs.denisdaniel.androidmusicapp.Artists.Artist;
+import ch.hevs.denisdaniel.androidmusicapp.Artists.ArtistTask;
 import ch.hevs.denisdaniel.androidmusicapp.R;
 import ch.hevs.denisdaniel.androidmusicapp.Tracks.Track;
 import ch.hevs.denisdaniel.androidmusicapp.Tracks.TrackTask;
@@ -26,8 +28,10 @@ import ch.hevs.denisdaniel.androidmusicapp.Tracks.TrackTask;
 
 public class AlbumDetailsFragment extends Fragment {
     private static final String ALBUM_ID = "albumId";
-    private String albumId ;
+    private int albumId ;
     private Album album;
+    private Artist artist;
+
     private AppDatabase db;
 
 
@@ -63,7 +67,8 @@ public class AlbumDetailsFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            albumId = getArguments().getString(ALBUM_ID);
+            albumId = getArguments().getInt(ALBUM_ID);
+
 
         }
     }
@@ -76,17 +81,31 @@ public class AlbumDetailsFragment extends Fragment {
         TextView albumTitle = view.findViewById(R.id.detailsAlbumTitle);
         albumTitle.setText(album.getTitle());
 
-        db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
-        ArrayList<Track> data = null;
 
+        db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
+
+        final int artistId = album.getUserid();
+        //Log.i("AlbumDetailsFragment", ""+artistId);
+        ArrayList<Track> data = null;
         try {
-            data = (ArrayList) new TrackTask(db, "getAll", 0).execute().get();
+            data = (ArrayList) new TrackTask(db, "getAlbumTracks", album.getUid()).execute().get();
+            artist = (Artist) new ArtistTask(db, "get", artistId).execute().get();
+
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
 
+        // Add artist name
+      /*  if(artist.getName() != null){
+            TextView artistName = view.findViewById(R.id.detailsArtistName);
+            artistName.setText(artist.getName());
+        }
+        */
+
+
+        // Add album tracks
         BindDictionary<Track> dictionary = new BindDictionary<>();
 
         dictionary.addStringField(R.id.textViewName, new StringExtractor<Track>() {

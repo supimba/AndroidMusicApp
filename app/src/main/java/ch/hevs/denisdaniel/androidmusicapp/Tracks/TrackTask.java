@@ -30,6 +30,8 @@ public class TrackTask extends AsyncTask<Void, Void, Object> {
                 return db.trackDao().getAll();
             case "get":
                 return db.trackDao().get(Integer.parseInt((String.valueOf(id))));
+            case "getAlbumTracks":
+                return db.trackDao().getAlbumTracks(Integer.parseInt((String.valueOf(id))));
             case "delete":
                 Track track = db.trackDao().get(Integer.parseInt((String.valueOf(id))));
                 db.trackDao().delete(track);

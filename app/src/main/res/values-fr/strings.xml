@@ -36,4 +36,7 @@
     <string name="header_language">Choisir la langue</string>
     <string name="delete">Supprimer</string>
     <string name="delete_all" />
+
+    <string name="noAlbumTitle">Album sans titre</string>
+    <string name="noArtistName">Artiste inconnu</string>
 </resources>

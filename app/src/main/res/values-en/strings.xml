@@ -40,6 +40,8 @@
     <string name="settings_main">Language HERE</string>
     <string name="header_language">Choose Language</string>
     <string name="albumImage"></string>
+    <string name="noAlbumTitle">No album title</string>
+    <string name="noArtistName">Unknow artist</string>
 
 
     <string name="fill_field_artist">Please fill name field</string>

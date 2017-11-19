@@ -17,6 +17,9 @@ public interface TrackDao {
     @Query("SELECT * FROM tracks ORDER BY name")
     List<Track> getAll();
 
+    @Query("SELECT * FROM tracks WHERE tracks.album_id = :album_id")
+    List<Track> getAlbumTracks(int album_id);
+
     @Query("SELECT * FROM tracks WHERE tracks.uid = :uid")
     Track get(int uid);
 
