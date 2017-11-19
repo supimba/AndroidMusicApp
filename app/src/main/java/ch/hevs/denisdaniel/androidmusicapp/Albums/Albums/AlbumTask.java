@@ -39,7 +39,7 @@ public class AlbumTask extends AsyncTask<Void, Void, Object> {
                 album = db.albumDao().get(Long.parseLong((String.valueOf(o))));
                 db.albumDao().update(album);
             case "search":
-                return db.artistDao().search((String) o);
+                return db.albumDao().search((String) o);
         }
         return null;
 

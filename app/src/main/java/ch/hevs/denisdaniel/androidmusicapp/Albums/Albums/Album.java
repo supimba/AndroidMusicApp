@@ -55,6 +55,11 @@ public class Album {
     }
 
     public String getTitle() {
+
+        if(this.title==null)
+        {
+            return "";
+        }
         return title;
     }
 
