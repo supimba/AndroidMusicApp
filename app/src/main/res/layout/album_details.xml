@@ -15,14 +15,11 @@
         android:padding="@dimen/activity_horizontal_margin">
 
         <TextView
+            android:id="@+id/detailsAlbumTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Titre de l'album"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/albumTitle" />
 
         <ImageView
             android:id="@+id/albumImage"
@@ -95,28 +92,9 @@
             android:text="@string/tracks"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
-        <LinearLayout
-            android:id="@+id/album_tracks"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+        <!-- TODO Change le include du content-main -->
+        <include layout="@layout/tracks_list" />
 
-        </LinearLayout>
-
-        <ImageButton
-            android:id="@+id/addTrack"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="addAlbum"
-            android:src="@drawable/ic_action_add"
-            android:text="@string/add" />
-
-        <Button
-            android:id="@+id/buttonAddAlbum"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/add"
-            android:onClick="addAlbum"/>
     </LinearLayout>
 
 </ScrollView>
