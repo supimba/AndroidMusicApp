@@ -60,7 +60,7 @@ public class AlbumEditionFragment extends android.support.v4.app.Fragment {
 
 
 
-    // Take care from the date format
+    /* Prend en charge la saisie utilisateur de la date*/
     private TextWatcher mDateEntryWatcher = new TextWatcher() {
 
         @Override

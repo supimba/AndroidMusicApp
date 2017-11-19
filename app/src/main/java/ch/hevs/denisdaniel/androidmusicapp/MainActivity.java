@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private AppDatabase db;
     private Object object;
+    public static String PREFS_LANGUAGE = "Language";
 
 
 

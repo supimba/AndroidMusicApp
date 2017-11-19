@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">AndroidMusicApp</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="app_name">Niu musicapp</string>
+    <string name="title_activity_main">Main</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -23,12 +23,16 @@
     <string name="name">Name</string>
     <string name="track">Track</string>
     <string name="duration">Duration</string>
-    <string name="french">Français</string>
+    <string name="french">French</string>
     <string name="english">English</string>
     <string name="language">Language</string>
+    <string-array name="language_names">
+        <item>English</item>
+        <item>French</item>
+    </string-array>
 
 
-    <string name="artist_created">Artiste created</string>
+    <string name="artist_created">Artist created</string>
     <string name="album_created">Album created</string>
     <string name="fill_fields">Please fill all fields</string>
     <string name="cancel">Cancel</string>
@@ -37,7 +41,7 @@
     <string name="delete">Delete</string>
     <string name="delete_all" />
     <string name="changeLang">Change Langage</string>
-    <string name="settings_main">Language HERE</string>
+    <string name="settings_main">"Language "</string>
     <string name="header_language">Choose Language</string>
     <string name="albumImage"></string>
     <string name="noAlbumTitle">No album title</string>
@@ -47,6 +51,7 @@
     <string name="fill_field_artist">Please fill name field</string>
     <string name="fill_field_album">Please fill name field</string>
     <string name="plus_icon" />
+    <string name="edit">Edit</string>
 
     <!-- TODO ajouter string preferences -->
 

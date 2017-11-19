@@ -7,7 +7,10 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.preference.PreferenceFragmentCompat;
+import android.support.v7.preference.PreferenceManager;
+import android.view.View;
 
 import java.util.Locale;
 
@@ -18,15 +21,17 @@ import java.util.Locale;
 public class SettingsFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     SharedPreferences sharedPreferences;
-    public static String PREFS_LANGUAGE = "Language";
-
 
     @Override
-    public void onAttach(Context context) {
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-        super.onAttach(LocaleHelper.onAttach(context, "en"));
-
+        // Register the change preference listener
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        prefs.registerOnSharedPreferenceChangeListener(this);
     }
+
+
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -54,15 +59,15 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
 
         if (key.equals("Language")) {
             // Get default language
-            String lang = sharedPreferences.getString(SettingsFragment.PREFS_LANGUAGE, "en");
+            String lang = sharedPreferences.getString(MainActivity.PREFS_LANGUAGE, "en");
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 //setLocale(getContext(), new Locale(lang));
                 setLocale(getContext(), lang);
 
             } else {
                //setLocale(getActivity().getBaseContext(), new Locale(lang));
-                setLocale(getActivity(), lang);
+                setLocale(getActivity().getBaseContext(), lang);
             }
         }
 
@@ -86,11 +91,13 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
             Configuration conf = res.getConfiguration();
             conf.locale = locale;
             res.updateConfiguration(conf, dm);*/
-            context.getResources().updateConfiguration(conf, getResources().getDisplayMetrics());
+            context.getResources().updateConfiguration(conf, context.getResources().getDisplayMetrics());
 
             // recover intent from MainActivity and restart activity
             Intent refresh = getActivity().getIntent();
+            getActivity().finish();
             startActivity(refresh);
+
         }
 
 

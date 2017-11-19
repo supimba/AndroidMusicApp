@@ -6,6 +6,7 @@
             android:id="@+id/search"
             android:icon="@drawable/ic_search"
             android:title="@string/search" />
+    </group>
         <group
             android:id="@+id/music"
             android:checkableBehavior="single">
@@ -25,8 +26,6 @@
         <group
             android:id="@+id/add"
             android:checkableBehavior="single">
-
-
             <item
                 android:id="@+id/add_albums"
                 android:icon="@drawable/ic_action_add"
@@ -41,7 +40,4 @@
 
 
         </group>
-    </group>
-
-
 </menu>

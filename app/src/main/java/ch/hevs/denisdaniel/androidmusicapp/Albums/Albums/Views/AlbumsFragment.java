@@ -64,7 +64,7 @@ public class AlbumsFragment extends Fragment {
         changeFragment(fragment);
 
     }
-
+    /* permet de modifier les fragments*/
     public void changeFragment(Fragment fragment)
     {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -74,10 +74,6 @@ public class AlbumsFragment extends Fragment {
         ft.commit();
     }
 
-
-    public AlbumsFragment(){
-
-    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -101,6 +97,7 @@ public class AlbumsFragment extends Fragment {
             e.printStackTrace();
         }
 
+        // ajoute les données dans la listView
         BindDictionary<Album> dictionary = new BindDictionary<>();
         dictionary.addStringField(R.id.albumTitle, new StringExtractor<Album>() {
             @Override
@@ -120,6 +117,12 @@ public class AlbumsFragment extends Fragment {
                 return String.valueOf(album.getUid());
             }
         });
+        dictionary.addStringField(R.id.albumReleaseDate, new StringExtractor<Album>() {
+            @Override
+            public String getStringValue(Album album, int position) {
+                return String.valueOf(album.getReleasedate());
+            }
+        });
 
         FunDapter adapter = new FunDapter(AlbumsFragment.this.getActivity(), data, R.layout.albums_list_item, dictionary) ;
 
@@ -127,7 +130,7 @@ public class AlbumsFragment extends Fragment {
         album_listView.setAdapter(adapter);
 
 
-
+        /*récupère les actions sur la ListView d'alum*/
         album_listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 
             @Override
@@ -153,6 +156,7 @@ public class AlbumsFragment extends Fragment {
 
                 Button deleteButton = alertDialog.findViewById(R.id.deleteAlbumButton);
 
+                // action choisi
                 deleteButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

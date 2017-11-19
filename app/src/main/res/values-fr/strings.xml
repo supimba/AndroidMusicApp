@@ -1,18 +1,18 @@
 <resources>
-    <string name="app_name">AndroidMusicApp</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="app_name">Niu musicapp</string>
+    <string name="title_activity_main">Main</string>
 
     <string name="navigation_drawer_open">Ouvrir la navigation</string>
     <string name="navigation_drawer_close">Fermer la navigation</string>
+
+
 
     <string name="action_settings">Paramètres</string>
     <string name="search">Rechercher</string>
     <string name="albums">Albums</string>
     <string name="artists">Artistes</string>
     <string name="tracks">Titres</string>
-    <string name="add_albums">Ajouter album</string>
-    <string name="add_artists">Ajouter artiste</string>
-    <string name="add_tracks">Ajouter titre</string>
+
     <string name="settings">Paramètres</string>
     <string name="albumTitle">Titre</string>
     <string name="description">Description</string>
@@ -20,23 +20,35 @@
     <string name="rate">Note</string>
     <string name="album">Album</string>
     <string name="artist">Artiste</string>
-    <string name="name">Name</string>
+    <string name="name">Nom</string>
     <string name="track">Titre</string>
     <string name="duration">Durée</string>
     <string name="french">Français</string>
-    <string name="english">English</string>
+    <string name="english">Anglais</string>
     <string name="language">Langue</string>
     <string name="add">Ajouter</string>
 
     <string name="album_created">Album créé</string>
     <string name="artist_created">Artiste créé</string>
-    <string name="fill_fields">Please fill all fields</string>
+    <string name="fill_fields">Veuillez remplir tous les champs</string>
     <string name="changeLang">Modifier langue</string>
     <string name="settings_main">Langues</string>
     <string name="header_language">Choisir la langue</string>
     <string name="delete">Supprimer</string>
-    <string name="delete_all" />
+    <string name="delete_all" >Tout supprimer</string>
 
     <string name="noAlbumTitle">Album sans titre</string>
     <string name="noArtistName">Artiste inconnu</string>
+
+    <string-array name="language_names">
+        <item>Anglais</item>
+        <item>Français</item>
+    </string-array>
+    <string name="add_albums">Ajout album</string>
+    <string name="add_artists">Ajout artiste</string>
+    <string name="add_tracks">Ajout morceau</string>
+    <string name="edit">Modifier</string>
+    <string name="fill_field_artist">Veuillez remplir le champ nom</string>
+    <string name="cancel">Annuler</string>
+    <string name="fill_field_album">Veuillez remplir le nom</string>
 </resources>
