@@ -19,7 +19,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RatingBar;
 import android.widget.Toast;
 
 import java.util.concurrent.ExecutionException;
@@ -34,7 +33,6 @@ import ch.hevs.denisdaniel.androidmusicapp.Artists.Views.AddArtistFragment;
 import ch.hevs.denisdaniel.androidmusicapp.Artists.Views.ArtistsFragment;
 import ch.hevs.denisdaniel.androidmusicapp.Tracks.Track;
 import ch.hevs.denisdaniel.androidmusicapp.Tracks.TrackTask;
-import ch.hevs.denisdaniel.androidmusicapp.Tracks.Views.AddTrackFragment;
 import ch.hevs.denisdaniel.androidmusicapp.Tracks.Views.TracksFragment;
 
 public class MainActivity extends AppCompatActivity
@@ -194,16 +192,21 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void addAlbum(View view) throws ExecutionException, InterruptedException {
+
+        // initiate database
         db = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME).build();
+
+        // get album's data
         String albumTitle = ((EditText)findViewById(R.id.albumTitle)).getText().toString();
         String albumDescription = ((EditText)findViewById(R.id.albumDescription)).getText().toString();
         String albumReleaseDate = ((EditText)findViewById(R.id.albumReleaseDate)).getText().toString();
+
+        // get artist's data
         String artistName = ((EditText)findViewById(R.id.artistName)).getText().toString();
         String artistDescription = ((EditText)findViewById(R.id.artistDescription)).getText().toString();
 
-
+        // get tracks layout
         LinearLayout mainLayout = (LinearLayout)findViewById(R.id.album_tracks);
-
 
         if(albumTitle.equals(""))
         {
@@ -240,6 +243,7 @@ public class MainActivity extends AppCompatActivity
         Toast toast = Toast.makeText(getApplicationContext(), R.string.album_created+" : "+album.getTitle(), Toast.LENGTH_SHORT);
         toast.show();
 
+        // reset form fields
         ((EditText)findViewById(R.id.albumTitle)).setText("");
         ((EditText)findViewById(R.id.albumDescription)).setText("");
         ((EditText)findViewById(R.id.albumReleaseDate)).setText("");
@@ -258,17 +262,18 @@ public class MainActivity extends AppCompatActivity
         EditText editAlbumDescription = (EditText)findViewById(R.id.editAlbumDescriptionEdit);
         String artistDescription = editAlbumDescription.getText().toString();
 
-        RatingBar ratingBarAlbum = (RatingBar) findViewById(R.id.ratingBarAlbumEdit);
-        int ratingAlbum =ratingBarAlbum.getNumStars();
 
         Log.i("MainActivity", "updateAlbum");
         String img_path = "drawable/musicapp_logo_black.png";
 
-
         final  Album album;
+        final Artist artist;
 
         album = (Album) getDataObject();
         album.setTitle(albumTitle);
+        album.setReleasedate(albumReleaseDate);
+        album.setDescription(artistDescription);
+
 
         if(albumTitle.equals(""))
         {
@@ -279,7 +284,6 @@ public class MainActivity extends AppCompatActivity
 
         try
         {
-
             db = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME).build();
             new AsyncTask<Void, Void, Integer>() {
                 @Override
@@ -297,7 +301,11 @@ public class MainActivity extends AppCompatActivity
             Log.d("Exception found :",e.getMessage());
         }
 
+        albumTitleEdit.setText("");
+        editAlbumReleaseDate.setText("");
         editAlbumDescription.setText("");
+
+
         changeFragment(new AlbumsFragment(), "Album");
     }
 
@@ -378,45 +386,6 @@ public class MainActivity extends AppCompatActivity
         new TrackTask(db, "delete",0);
         changeFragment(new ArtistsFragment(), "artist");
     }
-
-   /*
-   public void addImageCoverAlbum(View view){
-
-        Intent pickPhoto = new Intent(Intent.ACTION_PICK,
-                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(pickPhoto , 1);//one can be replaced with any action code
-
-
-        // Camera.
-        final List<Intent> cameraIntents = new ArrayList<Intent>();
-        final Intent captureIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-        final PackageManager packageManager = getPackageManager();
-        final List<ResolveInfo> listCam = packageManager.queryIntentActivities(captureIntent, 0);
-        for(ResolveInfo res : listCam) {
-            final String packageName = res.activityInfo.packageName;
-            final Intent intent = new Intent(captureIntent);
-            intent.setComponent(new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
-            intent.setPackage(packageName);
-            intent.putExtra(MediaStore.MEDIA_IGNORE_FILENAME, ".nomedia");
-
-            cameraIntents.add(intent);
-        }
-
-        // Filesystem.
-        final Intent galleryIntent = new Intent();
-        galleryIntent.setType("image/*");
-        galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
-
-        // Chooser of filesystem options.
-       // final Intent chooserIntent = Intent.createChooser(galleryIntent, getString(R.string.add_new));
-
-        // Add the camera options.
-      //  chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, cameraIntents.toArray(new Parcelable[]{}));
-       // startActivityForResult(chooserIntent, YOUR_REQUEST_CODE);
-
-
-    }
-    */
 
    public void setDataObject(Object o ){
         this.object = o ;

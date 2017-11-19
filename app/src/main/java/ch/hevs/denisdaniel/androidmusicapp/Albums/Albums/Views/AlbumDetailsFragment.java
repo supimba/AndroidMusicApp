@@ -64,8 +64,9 @@ public class AlbumDetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.album_details, container, false);
 
-        TextView albumTitle = view.findViewById(R.id.detailsAlbumTitle);
-        albumTitle.setText(album.getTitle());
+
+
+
 
 
         db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
@@ -82,13 +83,26 @@ public class AlbumDetailsFragment extends Fragment {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        // Add artist name
+
+        // get album infos
+        TextView albumTitle = view.findViewById(R.id.detailsAlbumTitle);
+        albumTitle.setText(album.getTitle());
+
+        TextView releaseDate = view.findViewById(R.id.detailsReleaseDate);
+        releaseDate.setText(album.getReleasedate());
+
+
+        TextView description = view.findViewById(R.id.detailsAlbumDesc);
+        description.setText(album.getReleasedate());
+
+        // get artist name
         if(artist.getName() != null){
             TextView artistName = view.findViewById(R.id.detailsArtistName);
             artistName.setText(artist.getName());
         }
-        BindDictionary<Track> dictionary = new BindDictionary<>();
 
+        // get all tracks from album
+        BindDictionary<Track> dictionary = new BindDictionary<>();
         dictionary.addStringField(R.id.textViewName, new StringExtractor<Track>() {
             @Override
             public String getStringValue(Track track, int position) {

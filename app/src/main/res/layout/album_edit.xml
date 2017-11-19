@@ -13,32 +13,16 @@
         android:orientation="vertical"
         android:padding="@dimen/activity_horizontal_margin">
 
-        <ImageView
-            android:id="@+id/albumImageEdit"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginRight="16dp"
-            android:src="@drawable/musicapp_logo_black"/>
-
-        <ImageButton
-            android:id="@+id/chgtImageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="addImageCoverAlbum"
-
-            android:src="@drawable/ic_edit_black_24dp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
 
         <TextView
             android:id="@+id/albumID"
             android:layout_width="0dp"
             android:layout_height="0dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/albumTitle" />
 
         <EditText
             android:id="@+id/editAlbumTitle"
@@ -79,17 +63,6 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textMultiLine" />
-
-        <TextView
-            android:id="@+id/textViewNoteEdit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/rate" />
-
-       <RatingBar
-            android:id="@+id/ratingBarAlbumEdit"
-            android:layout_width="339dp"
-            android:layout_height="wrap_content" />
 
 
         <Button
