@@ -48,9 +48,10 @@ public class SearchFragment extends Fragment {
             @Override
             public boolean onQueryTextChange(String searchTerm) {
 
+                /* ajout des listview selon resultat de la recherche*/
+                /* artistes*/
                 List<Artist> artists = searchArtists(searchTerm);
-                if(artists.size()>0)
-                {
+                if (artists.size() > 0) {
                     BindDictionary<Artist> dictionaryArtist = new BindDictionary<Artist>();
                     dictionaryArtist.addStringField(R.id.textViewName, new StringExtractor<Artist>() {
                         @Override
@@ -62,10 +63,9 @@ public class SearchFragment extends Fragment {
                     ListView artist_listview = (ListView) view.findViewById(R.id.artists_listview);
                     artist_listview.setAdapter(adapterArtists);
                 }
-
+                /* tracks*/
                 List<Track> tracks = searchTracks(searchTerm);
-                if(tracks.size()>0)
-                {
+                if (tracks.size() > 0) {
                     BindDictionary<Track> dictionaryTracks = new BindDictionary<Track>();
                     dictionaryTracks.addStringField(R.id.textViewName, new StringExtractor<Track>() {
                         @Override
@@ -77,11 +77,10 @@ public class SearchFragment extends Fragment {
                     ListView track_listview = (ListView) view.findViewById(R.id.tracks_listview);
                     track_listview.setAdapter(adapterTrack);
                 }
-
+                /* albums*/
                 List<Album> albums = searchAlbums(searchTerm);
-                if(albums.size()>0)
-                {
-                    BindDictionary<Album> dictionaryAlbums= new BindDictionary<Album>();
+                if (albums.size() > 0) {
+                    BindDictionary<Album> dictionaryAlbums = new BindDictionary<Album>();
                     dictionaryAlbums.addStringField(R.id.albumTitle, new StringExtractor<Album>() {
                         @Override
                         public String getStringValue(Album album, int position) {
@@ -98,7 +97,7 @@ public class SearchFragment extends Fragment {
         return view;
     }
 
-
+    /* classes de recherche, la même logique chaque fois*/
     public List<Artist> searchArtists(String searchTerm) {
         List<Artist> artists = new ArrayList();
         db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
