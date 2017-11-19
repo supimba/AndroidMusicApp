@@ -24,8 +24,6 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import ch.hevs.denisdaniel.androidmusicapp.AppDatabase;
-import ch.hevs.denisdaniel.androidmusicapp.Artists.Artist;
-import ch.hevs.denisdaniel.androidmusicapp.Artists.Views.ArtistEditionFragment;
 import ch.hevs.denisdaniel.androidmusicapp.MainActivity;
 import ch.hevs.denisdaniel.androidmusicapp.R;
 import ch.hevs.denisdaniel.androidmusicapp.Tracks.Track;

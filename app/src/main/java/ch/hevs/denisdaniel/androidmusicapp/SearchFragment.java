@@ -3,12 +3,11 @@ package ch.hevs.denisdaniel.androidmusicapp;
 import android.arch.persistence.room.Room;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
-import android.widget.ListView;
-import android.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.SearchView;
 
 import com.amigold.fundapter.BindDictionary;
 import com.amigold.fundapter.FunDapter;
