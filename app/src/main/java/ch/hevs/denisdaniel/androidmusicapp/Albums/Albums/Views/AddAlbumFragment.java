@@ -36,8 +36,6 @@ public class AddAlbumFragment extends Fragment {
 
         ImageButton addTrack = view.findViewById(R.id.addTrack);
         Button addAlbum = view.findViewById(R.id.buttonAddAlbum);
-
-        /*onclick envoi d'un nouveau layout addtrack pour ajouter de multiples pistes*/
         final LinearLayout mainLayout = view.findViewById(R.id.album_tracks);
         addTrack.setOnClickListener(new AdapterView.OnClickListener(){
 
