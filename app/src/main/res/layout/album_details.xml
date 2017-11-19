@@ -23,9 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/albumTitle" />
-        <RelativeLayout
-            android:layout_width=""
-            android:layout_height="">
+
         <ImageView
             android:id="@+id/albumImage"
             android:layout_width="120dp"
@@ -45,8 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textMultiLine"
-            android:gravity="r"/>
+            android:inputType="textMultiLine" />
 
         <TextView
             android:layout_width="match_parent"
