@@ -8,8 +8,6 @@ import android.arch.persistence.room.PrimaryKey;
 import ch.hevs.denisdaniel.androidmusicapp.Artists.Artist;
 
 import static android.arch.persistence.room.ForeignKey.CASCADE;
-import static android.arch.persistence.room.ForeignKey.SET_DEFAULT;
-import static android.arch.persistence.room.ForeignKey.SET_NULL;
 
 /**
  * Created by dnlro on 02/11/2017.
@@ -43,6 +41,7 @@ public class Album {
     public Album(String title, String releasedate, String description) {
         this.uid = uid;
         this.title = title;
+        this.releasedate=releasedate;
         this.description = description;
     }
 

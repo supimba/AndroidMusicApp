@@ -24,8 +24,8 @@ import ch.hevs.denisdaniel.androidmusicapp.R;
 
 public class AddAlbumFragment extends Fragment {
     private AppDatabase db;
-    private EditText releaseDate;
 
+private EditText releaseDate;
 
 
     @Override
@@ -47,7 +47,6 @@ public class AddAlbumFragment extends Fragment {
                 mainLayout.addView(newLL);
             }
         });
-
         releaseDate = view.findViewById(R.id.albumReleaseDate);
         releaseDate.addTextChangedListener(mDateEntryWatcher);
 

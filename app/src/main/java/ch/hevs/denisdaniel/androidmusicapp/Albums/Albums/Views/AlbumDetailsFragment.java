@@ -63,11 +63,6 @@ public class AlbumDetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.album_details, container, false);
 
-
-
-
-
-
         db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
 
         Long artistId = album.getArtistId();

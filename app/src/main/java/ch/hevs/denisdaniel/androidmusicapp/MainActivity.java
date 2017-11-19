@@ -223,7 +223,7 @@ public class MainActivity extends AppCompatActivity
             return;
         }
         Artist artist = new Artist(artistName, artistDescription);
-        Album album = new Album(albumTitle,albumReleaseDate, albumReleaseDate);
+        Album album = new Album(albumTitle,albumReleaseDate, albumDescription);
         Long artistId = (Long)new ArtistTask(db, "add", artist).execute().get();
         album.setArtistId(artistId);
         Long albumId = (Long)new AlbumTask(db,"add",album).execute().get();
@@ -252,25 +252,26 @@ public class MainActivity extends AppCompatActivity
         ((EditText)findViewById(R.id.artistDescription)).setText("");
     }
 
-    public void udpateAlbum(View view){
+    public void udpateAlbum(View view) throws ExecutionException, InterruptedException {
+
+        db = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME).build();
+
+        EditText editAlbumId = (EditText)findViewById(R.id.albumID);
+        String albumId = editAlbumId.getText().toString();
 
         EditText albumTitleEdit = (EditText)findViewById(R.id.editAlbumTitle);
         String albumTitle = albumTitleEdit.getText().toString();
 
         EditText editAlbumReleaseDate =(EditText)findViewById(R.id.editAlbumReleaseDateEdit);
-        String albumReleaseDate = editAlbumReleaseDate.findViewById(R.id.editAlbumReleaseDateEdit).toString();
+        String albumReleaseDate = editAlbumReleaseDate.getText().toString();
 
         EditText editAlbumDescription = (EditText)findViewById(R.id.editAlbumDescriptionEdit);
         String artistDescription = editAlbumDescription.getText().toString();
 
-
-        Log.i("MainActivity", "updateAlbum");
-        String img_path = "drawable/musicapp_logo_black.png";
-
-        final  Album album;
-        final Artist artist;
-
-        album = (Album) getDataObject();
+        Album album = (Album)new AlbumTask(db, "get", albumId).execute().get();
+/*        final  Album album;
+*/
+        //album = (Album) getDataObject();
         album.setTitle(albumTitle);
         album.setReleasedate(albumReleaseDate);
         album.setDescription(artistDescription);
@@ -283,31 +284,10 @@ public class MainActivity extends AppCompatActivity
             return;
         }
 
-        try
-        {
-            db = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME).build();
-            new AsyncTask<Void, Void, Integer>() {
-                @Override
-                protected Integer doInBackground(Void... voids) {
-
-                    db.albumDao().update(album);
-                    return null;
-                }
-
-            }.execute();
-            Log.d("Update proceed",album.getTitle());
-        }
-        catch (Exception e)
-        {
-            Log.d("Exception found :",e.getMessage());
-        }
-
-        albumTitleEdit.setText("");
-        editAlbumReleaseDate.setText("");
-        editAlbumDescription.setText("");
+        new AlbumTask(db,"update",album).execute().get();
 
 
-        changeFragment(new AlbumsFragment(), "Album");
+changeFragment(new AlbumsFragment(), "Album");
     }
 
     public void updateArtist(View view) throws ExecutionException, InterruptedException {
@@ -317,7 +297,8 @@ public class MainActivity extends AppCompatActivity
         String artistId = editArtistId.getText().toString();
         EditText editArtistName = (EditText) findViewById(R.id.editArtistName);
         String artistName = editArtistName.getText().toString();
-        EditText editArtistDescription = (EditText) findViewById(R.id.editArtistId);
+
+        EditText editArtistDescription = (EditText) findViewById(R.id.editArtistDescription);
         String artistDescription = editArtistDescription.getText().toString();
 
         Artist artist = (Artist)new ArtistTask(db, "get", artistId).execute().get();
@@ -326,6 +307,7 @@ public class MainActivity extends AppCompatActivity
         artist.setDescription(artistDescription);
 
         new ArtistTask(db,"update",artist).execute().get();
+
     }
 
     public void updateTrack(View view) throws ExecutionException, InterruptedException {

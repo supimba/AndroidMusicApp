@@ -14,7 +14,7 @@
         android:padding="@dimen/activity_horizontal_margin">
 
 
-        <TextView
+        <EditText
             android:id="@+id/albumID"
             android:layout_width="0dp"
             android:layout_height="0dp" />
@@ -49,7 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="date" />
+            android:inputType="text|date" />
 
         <TextView
             android:id="@+id/textViewDescriptionEdit"

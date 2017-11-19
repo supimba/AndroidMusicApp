@@ -19,10 +19,12 @@ import ch.hevs.denisdaniel.androidmusicapp.R;
  */
 
 public class AlbumEditionFragment extends android.support.v4.app.Fragment {
-    private EditText releaseDate;
+
     private Album album;
     private AppDatabase db;
     private String newAlbumTitle;
+    private EditText releaseDate;
+
     public void setAlbum(Album album){
         this.album = album;
     }
@@ -45,12 +47,15 @@ public class AlbumEditionFragment extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.album_edit, container, false);
 
+        EditText albumId = view.findViewById(R.id.albumID);
+        albumId.setText(album.getUid().toString());
+
         EditText albumTitle = view.findViewById(R.id.editAlbumTitle);
         albumTitle.setText(album.getTitle());
 
         releaseDate = view.findViewById(R.id.editAlbumReleaseDateEdit);
-        releaseDate.setText(album.getReleasedate());
         releaseDate.addTextChangedListener(mDateEntryWatcher);
+        releaseDate.setText(album.getReleasedate());
 
         EditText albumDescription = view.findViewById(R.id.editAlbumDescriptionEdit);
         albumDescription.setText(album.getDescription());
@@ -61,6 +66,7 @@ public class AlbumEditionFragment extends android.support.v4.app.Fragment {
 
 
     /* Prend en charge la saisie utilisateur de la date*/
+
     private TextWatcher mDateEntryWatcher = new TextWatcher() {
 
         @Override
