@@ -35,6 +35,9 @@ public class Artist {
     }
 
     public String getName() {
+
+        if(name==null)
+            return "";
         return name;
     }
 

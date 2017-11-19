@@ -48,6 +48,8 @@ public class Track {
     }
 
     public String getName() {
+        if(name==null)
+            return "";
         return name;
     }
 
