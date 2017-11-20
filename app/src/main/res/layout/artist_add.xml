@@ -15,12 +15,14 @@
         android:paddingBottom="@dimen/activity_horizontal_margin"
         android:text="@string/artist"
         android:textColor="@color/colorPrimary"
+
         android:textSize="24sp" />
 
     <TextView
         android:id="@+id/textViewName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:theme="@style/EditTextTheme"
         android:text="@string/name" />
 
     <EditText
@@ -34,6 +36,7 @@
         android:id="@+id/textViewDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:theme="@style/EditTextTheme"
         android:text="@string/description" />
 
     <EditText

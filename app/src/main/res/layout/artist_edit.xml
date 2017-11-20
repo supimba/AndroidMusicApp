@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/scroll"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -11,39 +6,52 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="@dimen/activity_horizontal_margin">
+        android:padding="@dimen/activity_horizontal_margin"
+    android:background="@color/orange">
         <EditText
             android:id="@+id/editArtistId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="invisible"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/description" />
 
-        <EditText
-            android:id="@+id/editArtistName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/description" />
-        <EditText
-            android:id="@+id/editArtistDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textMultiLine" />
-        <Button
-            android:id="@+id/buttonUpdateArtist"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="updateArtist"
-            android:text="@string/add" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/artist"
+        android:textColor="@android:color/white"
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/editArtistName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textColor="@android:color/white"
+        android:theme="@style/EditTextTheme" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/description"
+        android:textColor="@android:color/white"
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/editArtistDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:textColor="@android:color/white"
+        android:theme="@style/EditTextTheme" />
+
+    <Button
+        android:id="@+id/buttonUpdateArtist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/black"
+        android:onClick="updateArtist"
+        android:text="@string/add"
+        android:textColor="@android:color/white" />
     </LinearLayout>
-
-</ScrollView>

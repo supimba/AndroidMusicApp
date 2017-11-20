@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/scroll"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/orange">
 
 
 
@@ -20,20 +21,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:theme="@style/EditTextTheme"
+            android:textColor="@android:color/white" />
 
         <EditText
             android:id="@+id/editTrackDuration"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="time" />
+            android:inputType="time"
+            android:theme="@style/EditTextTheme"
+            android:textColor="@android:color/white" />
+
         <Button
             android:id="@+id/buttonUpdateArtist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@android:color/black"
             android:onClick="updateTrack"
-            android:text="@string/add" />
+            android:text="@string/add"
+            android:textColor="@android:color/white" />
 
         <EditText
             android:id="@+id/editTrackId"

@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+android:background="@color/violet"
     android:orientation="vertical">
 
     <TextView
@@ -16,21 +16,38 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:text="Title Album"
+        android:textColor="@android:color/white"
         android:textSize="30sp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/albumDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        <TextView
+            android:id="@+id/albumReleaseDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
-        android:text="Description" />
+            android:text="No release date"
+            android:textColor="@android:color/white"
+            android:textSize="8sp" />
 
-    <TextView
-        android:id="@+id/albumReleaseDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/albumTitle"
-        android:text="No release date" />
+        <TextView
+            android:id="@+id/albumDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="89dp"
+            android:layout_toEndOf="@+id/albumReleaseDate"
+            android:text="Description"
+            android:textColor="@android:color/white" />
+
+
+
+    </RelativeLayout>
+
+
+
 
 
 </LinearLayout>

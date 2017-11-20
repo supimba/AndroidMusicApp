@@ -77,11 +77,21 @@ public class AlbumDetailsFragment extends Fragment {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        // Add artist name
+
         if(artist.getName() != null){
             TextView artistName = view.findViewById(R.id.detailsArtistName);
             artistName.setText(artist.getName());
         }
+
+        /* creation des textview*/
+        TextView albumTitle = view.findViewById(R.id.detailsAlbumTitle);
+        albumTitle.setText(album.getTitle());
+
+        TextView albumDescription = view.findViewById(R.id.detailsAlbumDesc);
+        albumDescription.setText(album.getDescription());
+
+        TextView releaseDate = view.findViewById(R.id.detailsReleaseDate);
+        releaseDate.setText(album.getReleasedate());
 
         /* creation des listviews*/
         BindDictionary<Track> dictionary = new BindDictionary<>();

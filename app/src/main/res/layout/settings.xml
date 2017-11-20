@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="@dimen/activity_horizontal_margin">
+    android:padding="@dimen/activity_horizontal_margin"
+    android:background="@color/orange">
 
     <TextView
         android:id="@+id/textViewArtist"
@@ -13,7 +14,7 @@
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/activity_horizontal_margin"
         android:text="@string/language"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@android:color/white"
         android:textSize="24sp" />
 
     <RadioGroup
@@ -26,25 +27,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/english" />
+            android:buttonTint="@android:color/white"
+            android:text="@string/english"
+            android:textColor="@android:color/white" />
 
         <RadioButton
             android:id="@+id/radioButtonFR"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/french" />
+            android:buttonTint="@android:color/white"
+            android:text="@string/french"
+            android:textColor="@android:color/white" />
     </RadioGroup>
 
     <Button
         android:id="@+id/changeLangButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/changeLang" />
-
-    <TextureView
-        android:id="@+id/Trucquiexistepas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:background="@android:color/black"
+        android:text="@string/changeLang"
+        android:textColor="@android:color/white" />
 
 </LinearLayout>

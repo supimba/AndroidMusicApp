@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/scroll"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -11,7 +6,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="@dimen/activity_horizontal_margin">
+        android:padding="@dimen/activity_horizontal_margin"
+        android:background="@color/orange">
 
 
         <EditText
@@ -22,14 +18,18 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/albumTitle" />
+            android:text="@string/albumTitle"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/editAlbumTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName" />
+            android:theme="@style/EditTextTheme"
+            android:inputType="textPersonName"
+            android:textColor="@android:color/white" />
 
   <!--      <TextView
             android:id="@+id/albumArtist"
@@ -42,36 +42,44 @@
             android:id="@+id/textViewReleaseDateEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/release_date" />
+            android:text="@string/release_date"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/editAlbumReleaseDateEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="text|date" />
+            android:inputType="text|date"
+            android:textColor="@android:color/white"
+            android:theme="@style/EditTextTheme"/>
 
         <TextView
             android:id="@+id/textViewDescriptionEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/description" />
+            android:text="@string/description"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/editAlbumDescriptionEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:textColor="@android:color/white"
+            android:theme="@style/EditTextTheme"/>
 
 
         <Button
             android:id="@+id/buttonUpdateAlbum"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@android:color/black"
+            android:onClick="udpateAlbum"
             android:text="@string/add"
-            android:onClick="udpateAlbum"/>
+            android:textColor="@android:color/white" />
 
     </LinearLayout>
-
-</ScrollView>

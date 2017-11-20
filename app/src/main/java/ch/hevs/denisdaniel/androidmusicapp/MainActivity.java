@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity
             ft.replace(R.id.main_frame, fragment);
             ft.addToBackStack(null);
             ft.commit();
-            getSupportActionBar().setTitle(fragmentTitle);
+            //getSupportActionBar().setTitle(fragmentTitle);
         }
     }
 

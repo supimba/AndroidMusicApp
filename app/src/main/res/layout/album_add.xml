@@ -3,7 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/scroll"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/orange"
+    >
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -18,81 +20,104 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/album"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:textColor="@android:color/white" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/albumTitle" />
+            android:text="@string/albumTitle"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/albumTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:singleLine="true"
+            android:theme="@style/EditTextTheme"
+            android:textColor="@android:color/white" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/description" />
+            android:text="@string/description"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/albumDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:theme="@style/EditTextTheme"
+            android:textColor="@android:color/white" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/release_date" />
+            android:text="@string/release_date"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/albumReleaseDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="date" />
+            android:inputType="date"
+            android:theme="@style/EditTextTheme"
+            android:textColor="@android:color/white" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/artist"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:textColor="@android:color/white" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:text="@string/name" />
+            android:text="@string/name"
+            android:textColor="@android:color/white" />
 
         <EditText
             android:id="@+id/artistName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:theme="@style/EditTextTheme"
+            android:textColor="@android:color/white" />
 
         <TextView
             android:layout_width="match_parent"
 
             android:layout_height="wrap_content"
-            android:text="@string/description" />
+            android:text="@string/description"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/artistDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:theme="@style/EditTextTheme"
+            android:textColor="@android:color/white" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/tracks"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:textColor="@android:color/white" />
 
         <LinearLayout
             android:id="@+id/album_tracks"
@@ -106,16 +131,28 @@
             android:id="@+id/addTrack"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
+            android:background="@android:color/black"
             android:onClick="addAlbum"
             android:src="@drawable/ic_action_add"
-            android:text="@string/add" />
+            android:text="@string/add"
+            android:tint="@android:color/white" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@color/orange"/>
 
         <Button
-        android:id="@+id/buttonAddAlbum"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/add"
-            android:onClick="addAlbum"/>
+            android:id="@+id/buttonAddAlbum"
+            style="@android:style/Widget.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/black"
+
+            android:onClick="addAlbum"
+            android:text="@string/add"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
 </LinearLayout>
 
 </ScrollView>

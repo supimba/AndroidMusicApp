@@ -4,19 +4,23 @@ android:layout_width="match_parent"
 android:layout_height="wrap_content"
 android:orientation="vertical">
 
-<Button
-    android:id="@+id/deleteButton"
-    style="@style/Widget.AppCompat.Button.Borderless"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="@string/delete"
-    android:onClick="deleteArtist"/>
+    <Button
+        android:id="@+id/deleteButton"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/black"
+        android:onClick="deleteArtist"
+        android:text="@string/delete"
+        android:textColor="@android:color/white" />
 
-<Button
-    android:id="@+id/editButton"
-    style="@style/Widget.AppCompat.Button.Borderless"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="@string/edit" />
+    <Button
+        android:id="@+id/editButton"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/black"
+        android:text="@string/edit"
+        android:textColor="@android:color/white" />
 
 </LinearLayout>
