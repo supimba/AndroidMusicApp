@@ -29,6 +29,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
         // Register the change preference listener
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         prefs.registerOnSharedPreferenceChangeListener(this);
+
     }
 
 

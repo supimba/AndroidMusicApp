@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,8 +22,6 @@ import com.amigold.fundapter.extractors.StringExtractor;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
-import ch.hevs.denisdaniel.androidmusicapp.Albums.Albums.Album;
-import ch.hevs.denisdaniel.androidmusicapp.Albums.Albums.Views.AlbumEditionFragment;
 import ch.hevs.denisdaniel.androidmusicapp.AppDatabase;
 import ch.hevs.denisdaniel.androidmusicapp.Artists.Artist;
 import ch.hevs.denisdaniel.androidmusicapp.Artists.ArtistTask;
@@ -51,7 +48,7 @@ public class ArtistsFragment extends Fragment {
     {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction ft = fragmentManager.beginTransaction();
-        ft.replace(R.id.main_frame, fragment);
+        ft.replace(R.id.content_main, fragment);
         ft.addToBackStack(null);
         ft.commit();
     }

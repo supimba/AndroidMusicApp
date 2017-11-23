@@ -10,7 +10,8 @@
             android:summary="%s"
             android:defaultValue="true"
             android:entryValues="@array/language_keys"
-            android:entries="@array/language_names"/>
+            android:entries="@array/language_names"
+            />
 
     </PreferenceCategory>
 </PreferenceScreen>

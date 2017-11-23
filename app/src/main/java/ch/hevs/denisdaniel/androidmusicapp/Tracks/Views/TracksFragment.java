@@ -50,7 +50,7 @@ public class TracksFragment extends Fragment {
     {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction ft = fragmentManager.beginTransaction();
-        ft.replace(R.id.main_frame, fragment);
+        ft.replace(R.id.content_main, fragment);
         ft.addToBackStack(null);
         ft.commit();
     }

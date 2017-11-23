@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         android:theme="@style/EditTextTheme" />
 
     <TextView
@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textMultiLine"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         android:theme="@style/EditTextTheme" />
 
     <Button

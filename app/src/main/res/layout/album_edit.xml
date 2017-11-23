@@ -22,14 +22,14 @@
             android:textColor="@android:color/white"
             android:textSize="20sp" />
 
-        <EditText
-            android:id="@+id/editAlbumTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:theme="@style/EditTextTheme"
-            android:inputType="textPersonName"
-            android:textColor="@android:color/white" />
+    <EditText
+        android:id="@+id/editAlbumTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textColor="@android:color/black"
+        android:theme="@style/EditTextTheme" />
 
   <!--      <TextView
             android:id="@+id/albumArtist"
@@ -46,14 +46,14 @@
             android:textColor="@android:color/white"
             android:textSize="20sp" />
 
-        <EditText
-            android:id="@+id/editAlbumReleaseDateEdit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="text|date"
-            android:textColor="@android:color/white"
-            android:theme="@style/EditTextTheme"/>
+    <EditText
+        android:id="@+id/editAlbumReleaseDateEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text|date"
+        android:textColor="@android:color/black"
+        android:theme="@style/EditTextTheme" />
 
         <TextView
             android:id="@+id/textViewDescriptionEdit"
@@ -63,14 +63,14 @@
             android:textColor="@android:color/white"
             android:textSize="20sp" />
 
-        <EditText
-            android:id="@+id/editAlbumDescriptionEdit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textMultiLine"
-            android:textColor="@android:color/white"
-            android:theme="@style/EditTextTheme"/>
+    <EditText
+        android:id="@+id/editAlbumDescriptionEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:textColor="@android:color/black"
+        android:theme="@style/EditTextTheme" />
 
 
         <Button

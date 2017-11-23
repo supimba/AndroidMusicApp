@@ -38,6 +38,7 @@ public class AlbumsFragment extends Fragment {
     private AppDatabase db;
     private ArrayList<Album> data = null;
     private Album selectedAlbum ;
+    private final String TAG = "ALbumsFragment";
 
     public void deleteAlbum(Long id)
     {
@@ -69,7 +70,7 @@ public class AlbumsFragment extends Fragment {
     {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction ft = fragmentManager.beginTransaction();
-        ft.replace(R.id.main_frame, fragment);
+        ft.replace(R.id.content_main, fragment);
         ft.addToBackStack(null);
         ft.commit();
     }

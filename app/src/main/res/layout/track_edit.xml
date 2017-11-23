@@ -22,8 +22,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:theme="@style/EditTextTheme"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/black"
+            android:theme="@style/EditTextTheme" />
 
         <EditText
             android:id="@+id/editTrackDuration"
@@ -31,8 +31,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="time"
-            android:theme="@style/EditTextTheme"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/black"
+            android:theme="@style/EditTextTheme" />
 
         <Button
             android:id="@+id/buttonUpdateArtist"

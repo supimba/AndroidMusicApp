@@ -40,7 +40,8 @@ public class MainActivity extends AppCompatActivity
     private AppDatabase db;
     private Object object;
     public static String PREFS_LANGUAGE = "Language";
-
+    private final String BACK_STACK_ROOT_TAG = "SEARCHFRAGMENT";
+    private final String TAG = "MainActivity";
 
 
     @Override
@@ -61,9 +62,14 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        Fragment fragment = new SearchFragment();
-        changeFragment(fragment, "Search");
+        FragmentManager fragmentManager = getSupportFragmentManager();
 
+/*
+        Fragment fragment = new SearchFragment();
+        String fragmentTag = "SearchFragment";
+        changeFragment(fragment, fragmentTag);
+        fragmentManager.beginTransaction().replace(R.id.content_main, fragment, BACK_STACK_ROOT_TAG).commit();
+        */
     }
 
     @Override
@@ -107,38 +113,42 @@ public class MainActivity extends AppCompatActivity
 
         Fragment fragment = null;
         String fragmentTitle = null;
+        String fragmentTag  = null;
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.popBackStack(BACK_STACK_ROOT_TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
 
         switch(id)
         {
             case R.id.search:
                 fragment = new SearchFragment();
-                fragmentTitle = "search";
-                changeFragment(fragment, fragmentTitle);
+                fragmentTag = "SearchFragment";
+                changeFragment(fragment, fragmentTag);
                 break;
             case R.id.albums:
                 fragment = new AlbumsFragment();
-                fragmentTitle = "albums";
-                changeFragment(fragment, fragmentTitle);
+                fragmentTag = "AlbumsFragment";
+                changeFragment(fragment, fragmentTag);
                 break;
             case R.id.artists:
                 fragment = new ArtistsFragment();
-                fragmentTitle = "artists";
-                changeFragment(new ArtistsFragment(), fragmentTitle);
+                fragmentTag = "ArtistsFragment";
+                changeFragment(new ArtistsFragment(), fragmentTag);
                 break;
             case R.id.tracks:
                 fragment = new TracksFragment();
-                fragmentTitle = "tracks";
-                changeFragment(fragment, fragmentTitle);
+                fragmentTag = "TracksFragment";
+                changeFragment(fragment, fragmentTag);
                 break;
             case R.id.add_albums:
                 fragment = new AddAlbumFragment();
-                fragmentTitle = "add album";
-                changeFragment(fragment, fragmentTitle);
+                fragmentTag = "AddAlbumFragment";
+                changeFragment(fragment, fragmentTag);
                 break;
             case R.id.settings:
                 fragment = new SettingsFragment();
-                fragmentTitle = "settings";
-                changeFragment(fragment, fragmentTitle);
+                fragmentTag = "SettingsFragment";
+                changeFragment(fragment, fragmentTag);
                 break;
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -146,15 +156,15 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    public void changeFragment(Fragment fragment, String fragmentTitle)
+    public void changeFragment(Fragment fragment, String fragmentTag)
     {
         if(fragment!=null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction ft = fragmentManager.beginTransaction();
-            ft.replace(R.id.main_frame, fragment);
-            ft.addToBackStack(null);
+            ft.replace(R.id.content_main, fragment);
+            ft.addToBackStack(BACK_STACK_ROOT_TAG);
             ft.commit();
-            //getSupportActionBar().setTitle(fragmentTitle);
+
         }
     }
 
@@ -164,6 +174,9 @@ public class MainActivity extends AppCompatActivity
 
     public void addArtist(View view)
     {
+
+
+
         db = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME).build();
         EditText editTextname = (EditText)findViewById(R.id.editTextName);
         String artistName = editTextname.getText().toString();
@@ -250,6 +263,11 @@ public class MainActivity extends AppCompatActivity
         ((EditText)findViewById(R.id.albumReleaseDate)).setText("");
         ((EditText)findViewById(R.id.artistName)).setText("");
         ((EditText)findViewById(R.id.artistDescription)).setText("");
+
+        Fragment fragment = new AlbumsFragment();
+        String fragmentTag  = "AddAlbumFragment";
+        changeFragment(fragment, fragmentTag);
+
     }
 
     public void udpateAlbum(View view) throws ExecutionException, InterruptedException {
