@@ -1,6 +1,5 @@
 package ch.hevs.denisdaniel.androidmusicapp.Albums.Albums.Views;
 
-import android.arch.persistence.room.Room;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -14,15 +13,11 @@ import com.amigold.fundapter.FunDapter;
 import com.amigold.fundapter.extractors.StringExtractor;
 
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 import ch.hevs.denisdaniel.androidmusicapp.Albums.Albums.Album;
-import ch.hevs.denisdaniel.androidmusicapp.AppDatabase;
 import ch.hevs.denisdaniel.androidmusicapp.Artists.Artist;
-import ch.hevs.denisdaniel.androidmusicapp.Artists.ArtistTask;
 import ch.hevs.denisdaniel.androidmusicapp.R;
 import ch.hevs.denisdaniel.androidmusicapp.Tracks.Track;
-import ch.hevs.denisdaniel.androidmusicapp.Tracks.TrackTask;
 
 
 public class AlbumDetailsFragment extends Fragment {
@@ -31,13 +26,13 @@ public class AlbumDetailsFragment extends Fragment {
     private Album album;
     private Artist artist;
 
-    private AppDatabase db;
 
     public static AlbumDetailsFragment newInstance(Album album) {
         AlbumDetailsFragment fragment = new AlbumDetailsFragment();
 
         Bundle args = new Bundle();
-        args.putLong(ALBUM_ID, album.getUid());
+       //TODO change
+        // args.putLong(ALBUM_ID, album.getUid());
 
         fragment.setArguments(args);
         return fragment;
@@ -63,11 +58,14 @@ public class AlbumDetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.album_details, container, false);
 
-        db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
-
-        Long artistId = album.getArtistId();
+        //todo replace
+        //db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
+//TODO change
+      //  Long artistId = album.getArtistId();
         ArrayList<Track> data = null;
         /* récupération des tracks*/
+       //TODO replace
+        /*
         try {
             data = (ArrayList) new TrackTask(db, "getAlbumTracks", album.getUid()).execute().get();
             artist = (Artist) new ArtistTask(db, "get", artistId).execute().get();
@@ -76,7 +74,7 @@ public class AlbumDetailsFragment extends Fragment {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
-        }
+        }*/
 
         if(artist.getName() != null){
             TextView artistName = view.findViewById(R.id.detailsArtistName);

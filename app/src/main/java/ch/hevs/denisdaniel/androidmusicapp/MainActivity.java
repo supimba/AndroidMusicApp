@@ -1,7 +1,5 @@
 package ch.hevs.denisdaniel.androidmusicapp;
 
-import android.arch.persistence.room.Room;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -16,29 +14,29 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
 import ch.hevs.denisdaniel.androidmusicapp.Albums.Albums.Album;
-import ch.hevs.denisdaniel.androidmusicapp.Albums.Albums.AlbumTask;
 import ch.hevs.denisdaniel.androidmusicapp.Albums.Albums.Views.AddAlbumFragment;
 import ch.hevs.denisdaniel.androidmusicapp.Albums.Albums.Views.AlbumsFragment;
 import ch.hevs.denisdaniel.androidmusicapp.Artists.Artist;
-import ch.hevs.denisdaniel.androidmusicapp.Artists.ArtistTask;
-import ch.hevs.denisdaniel.androidmusicapp.Artists.Views.AddArtistFragment;
 import ch.hevs.denisdaniel.androidmusicapp.Artists.Views.ArtistsFragment;
 import ch.hevs.denisdaniel.androidmusicapp.Tracks.Track;
-import ch.hevs.denisdaniel.androidmusicapp.Tracks.TrackTask;
 import ch.hevs.denisdaniel.androidmusicapp.Tracks.Views.TracksFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private AppDatabase db;
-    private Object object;
+    //TODO delete
+    //private AppDatabase db;
+    private FirebaseDatabase database;
+    private DatabaseReference ref;
     public static String PREFS_LANGUAGE = "Language";
     private final String BACK_STACK_ROOT_TAG = "SEARCHFRAGMENT";
     private final String TAG = "MainActivity";
@@ -63,6 +61,10 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
+        //database.getInstance();
+        ref = database.getInstance().getReference();
+
+       addData();
 
 /*
         Fragment fragment = new SearchFragment();
@@ -172,12 +174,11 @@ public class MainActivity extends AppCompatActivity
         setTitle(title);
     }
 
+    //TODO Replace with firebase
     public void addArtist(View view)
     {
-
-
-
-        db = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME).build();
+/*
+       db = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME).build();
         EditText editTextname = (EditText)findViewById(R.id.editTextName);
         String artistName = editTextname.getText().toString();
         EditText editTextDescription = (EditText)findViewById(R.id.editTextDescription);
@@ -195,18 +196,22 @@ public class MainActivity extends AppCompatActivity
         editTextDescription.setText("");
         Toast toast = Toast.makeText(getApplicationContext(), R.string.artist_created+" : "+artist.getName(), Toast.LENGTH_SHORT);
         toast.show();
+        */
     }
 
+//TODO Replace with firebase
     public void deleteArtist(View view)
     {
+        /*
         db = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME).build();
         Button deleteButton = (Button)view.findViewById(R.id.deleteButton);
         new ArtistTask(db, "delete",0);
         changeFragment(new ArtistsFragment(), "artist");
+        */
     }
-
+    //TODO Replace with firebase
     public void addAlbum(View view) throws ExecutionException, InterruptedException {
-
+/*
         // initiate database
         db = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME).build();
 
@@ -267,11 +272,11 @@ public class MainActivity extends AppCompatActivity
         Fragment fragment = new AlbumsFragment();
         String fragmentTag  = "AddAlbumFragment";
         changeFragment(fragment, fragmentTag);
-
+*/
     }
-
+    //TODO Replace with firebase
     public void udpateAlbum(View view) throws ExecutionException, InterruptedException {
-
+/*
         db = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME).build();
 
         EditText editAlbumId = (EditText)findViewById(R.id.albumID);
@@ -286,10 +291,11 @@ public class MainActivity extends AppCompatActivity
         EditText editAlbumDescription = (EditText)findViewById(R.id.editAlbumDescriptionEdit);
         String artistDescription = editAlbumDescription.getText().toString();
 
-        Album album = (Album)new AlbumTask(db, "get", albumId).execute().get();
+        Album album = (Album)new AlbumTask(db, "get", albumId).execute().get();*/
 /*        final  Album album;
 */
         //album = (Album) getDataObject();
+        /*
         album.setTitle(albumTitle);
         album.setReleasedate(albumReleaseDate);
         album.setDescription(artistDescription);
@@ -305,10 +311,11 @@ public class MainActivity extends AppCompatActivity
         new AlbumTask(db,"update",album).execute().get();
 
 
-changeFragment(new AlbumsFragment(), "Album");
-    }
+changeFragment(new AlbumsFragment(), "Album");*/
 
-    public void updateArtist(View view) throws ExecutionException, InterruptedException {
+    }
+    //TODO Replace with firebase
+    public void updateArtist(View view) throws ExecutionException, InterruptedException {/*
         db = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME).build();
 
         EditText editArtistId = (EditText) findViewById(R.id.editArtistId);
@@ -325,10 +332,12 @@ changeFragment(new AlbumsFragment(), "Album");
         artist.setDescription(artistDescription);
 
         new ArtistTask(db,"update",artist).execute().get();
+        */
 
     }
 
     public void updateTrack(View view) throws ExecutionException, InterruptedException {
+        /*
         db = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME).build();
 
         EditText editTrackId = (EditText) findViewById(R.id.editTrackId);
@@ -344,10 +353,12 @@ changeFragment(new AlbumsFragment(), "Album");
         track.setDuration(trackDuration);
 
         new TrackTask(db,"update",track).execute().get();
+        */
     }
 
-
+    //TODO Replace with firebase
     public void addTrack(View view) {
+        /*
         EditText editTextname = (EditText) findViewById(R.id.trackName);
         String trackName = editTextname.getText().toString();
         EditText editTextDuration = (EditText) findViewById(R.id.trackDuration);
@@ -377,11 +388,13 @@ changeFragment(new AlbumsFragment(), "Album");
         editTextDuration.setText("");
         Toast toast = Toast.makeText(getApplicationContext(), R.string.artist_created + " : " + newTrack.getName(), Toast.LENGTH_SHORT);
         toast.show();
+        */
     }
 
-
+    //TODO Replace with firebase
     public void deleteTrack(View view)
     {
+        /*
         db = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME).build();
         Button deleteButton = (Button)view.findViewById(R.id.deleteButton);
         new TrackTask(db, "delete",0);
@@ -403,9 +416,85 @@ changeFragment(new AlbumsFragment(), "Album");
         fragment = new AddArtistFragment();
         fragmentTitle = "add artist";
         changeFragment(fragment, fragmentTitle);
-
+*/
     }
 
+    private void addData() {
+        List<Album> albums = new ArrayList<>();
+        List<Artist> artists = new ArrayList<>();
+        List<Track> tracksAlbum1 = new ArrayList<>();
+        List<Track> tracksAlbum2 = new ArrayList<>();
+
+        Album album1 = new Album();
+        Album album2 = new Album();
+
+        Artist artist1 = new Artist();
+        Artist artist2 = new Artist();
+
+        Track track1Album1 = new Track();
+        Track track1Album2 = new Track();
+
+        String artist1UID = UUID.randomUUID().toString();
+        artist1.setName("Red hot chili pepers");
+        artist1.setDescription("Artist 1");
+        artist1.setUid(artist1UID);
+
+        artists.add(artist1);
+
+        String artist2UID = UUID.randomUUID().toString();
+        artist1.setUid(artist2UID);
+        artist2.setName("Rage against the machine");
+        artist1.setDescription("Artist 2");
+
+        artists.add(artist2);
+
+        String track1UID = UUID.randomUUID().toString();
+        track1Album1.setName("Bombtrack");
+        track1Album1.setDuration("4:05");
+        track1Album1.setUid(track1UID);
+        tracksAlbum1.add(track1Album1);
+
+        String track2UID = UUID.randomUUID().toString();
+        track1Album2.setName("Arround the world");
+        track1Album2.setDuration("3:59");
+        track1Album2.setUid(track2UID);
+        tracksAlbum2.add(track1Album2);
+
+        String album1UID = UUID.randomUUID().toString();
+        album1.setUid(album1UID);
+        album1.setArtistId(artist2UID);
+        album1.setTitle("Californication");
+        album1.setDescription("Cool Album");
+        album1.setReleasedate("10.10.2017");
+        albums.add(album1);
+
+        String album2UID = UUID.randomUUID().toString();
+        album2.setUid(album2UID);
+        album2.setArtistId(artist2UID);
+        album2.setTitle("Kiling in the name");
+        album2.setDescription("Very cool Album");
+        album2.setReleasedate("10.10.2018");
+        albums.add(album2);
+
+
+        for(Album album: albums) {
+            ref.child("albums").child(album.getUid()).setValue(album);
+            Log.i("albums", album.toString());
+
+            for(Track track:tracksAlbum1)
+                ref.child("albums").child(album.getUid()).child("tracks").child(track.getUid()).setValue(true);
+
+        }
+        for(Artist artist:artists)
+            ref.child("artists").child(artist.getUid()).setValue(artist);
+
+
+
+        for(Track track:tracksAlbum1)
+            ref.child("tracks").child(track.getUid()).setValue(track);
+
+
+    }
 
 
 

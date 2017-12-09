@@ -1,13 +1,11 @@
 package ch.hevs.denisdaniel.androidmusicapp.Albums.Albums;
 
-import android.os.AsyncTask;
-
-import ch.hevs.denisdaniel.androidmusicapp.AppDatabase;
-
 /**
  * Created by dnlro on 17/11/2017.
  */
 
+
+/*
 public class AlbumTask extends AsyncTask<Void, Void, Object> {
     AppDatabase db;
     String task;
@@ -18,17 +16,18 @@ public class AlbumTask extends AsyncTask<Void, Void, Object> {
         super();
         this.db = db;
         this.task = task;
-        /* Object pour permettre de manipuler plus de fonctions du DAO différentes*/
+        Object pour permettre de manipuler plus de fonctions du DAO différentes
         this.o = o;
     }
+*/
 
-
+/*
     @Override
     protected Object doInBackground(Void... voids) {
         /*
         Recherche sur la clé de la fonction afin de savoir quelle requete effectuer
         Casting dans les "cases" afin de passer le bon type en paramètre
-         */
+
         switch (task) {
             case "add":
                 return db.albumDao().add((Album)o);
@@ -52,3 +51,4 @@ public class AlbumTask extends AsyncTask<Void, Void, Object> {
 
     }
 }
+*/

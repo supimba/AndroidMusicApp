@@ -1,6 +1,5 @@
 package ch.hevs.denisdaniel.androidmusicapp;
 
-import android.arch.persistence.room.Room;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -15,21 +14,17 @@ import com.amigold.fundapter.extractors.StringExtractor;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 import ch.hevs.denisdaniel.androidmusicapp.Albums.Albums.Album;
-import ch.hevs.denisdaniel.androidmusicapp.Albums.Albums.AlbumTask;
 import ch.hevs.denisdaniel.androidmusicapp.Artists.Artist;
-import ch.hevs.denisdaniel.androidmusicapp.Artists.ArtistTask;
 import ch.hevs.denisdaniel.androidmusicapp.Tracks.Track;
-import ch.hevs.denisdaniel.androidmusicapp.Tracks.TrackTask;
 
 /**
  * Created by Denis Woeffray on 27.10.2017.
  */
 
 public class SearchFragment extends Fragment {
-    private AppDatabase db;
+    //private AppDatabase db;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -99,7 +94,10 @@ public class SearchFragment extends Fragment {
     /* classes de recherche, la même logique chaque fois*/
     public List<Artist> searchArtists(String searchTerm) {
         List<Artist> artists = new ArrayList();
-        db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
+
+        //TODO replace
+       //db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
+       /*
         if (!searchTerm.equals("")) {
             try {
                 artists = (List<Artist>) new ArtistTask(db, "search", "%" + searchTerm + "%").execute().get();
@@ -109,12 +107,15 @@ public class SearchFragment extends Fragment {
                 e.printStackTrace();
             }
         }
+        */
         return artists;
     }
 
     public List<Track> searchTracks(String searchTerm) {
         List<Track> tracks = new ArrayList();
-        db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
+        //TODO replace
+        //db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
+        /*
         if (!searchTerm.equals("")) {
             try {
                 tracks = (List<Track>) new TrackTask(db, "search", "%" + searchTerm + "%").execute().get();
@@ -124,12 +125,16 @@ public class SearchFragment extends Fragment {
                 e.printStackTrace();
             }
         }
+        */
         return tracks;
     }
 
     public List<Album> searchAlbums(String searchTerm) {
         List<Album> albums = new ArrayList();
-        db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
+
+       //todo replace
+        //db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
+        /*
         if (!searchTerm.equals("")) {
             try {
                 albums = (List<Album>) new AlbumTask(db, "search", "%" + searchTerm + "%").execute().get();
@@ -139,6 +144,7 @@ public class SearchFragment extends Fragment {
                 e.printStackTrace();
             }
         }
+        */
         return albums;
     }
 

@@ -15,7 +15,6 @@ import android.widget.LinearLayout;
 
 import java.util.Calendar;
 
-import ch.hevs.denisdaniel.androidmusicapp.AppDatabase;
 import ch.hevs.denisdaniel.androidmusicapp.R;
 
 /**
@@ -23,7 +22,7 @@ import ch.hevs.denisdaniel.androidmusicapp.R;
  */
 
 public class AddAlbumFragment extends Fragment {
-    private AppDatabase db;
+
 
 private EditText releaseDate;
 

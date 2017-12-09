@@ -1,6 +1,5 @@
 package ch.hevs.denisdaniel.androidmusicapp.Artists.Views;
 
-import android.arch.persistence.room.Room;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -20,12 +19,8 @@ import com.amigold.fundapter.FunDapter;
 import com.amigold.fundapter.extractors.StringExtractor;
 
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
-import ch.hevs.denisdaniel.androidmusicapp.AppDatabase;
 import ch.hevs.denisdaniel.androidmusicapp.Artists.Artist;
-import ch.hevs.denisdaniel.androidmusicapp.Artists.ArtistTask;
-import ch.hevs.denisdaniel.androidmusicapp.MainActivity;
 import ch.hevs.denisdaniel.androidmusicapp.R;
 
 /**
@@ -33,14 +28,15 @@ import ch.hevs.denisdaniel.androidmusicapp.R;
  */
 
 public class ArtistsFragment extends Fragment {
-    private AppDatabase db;
+   // private AppDatabase db;
     private ArrayList<Artist> data = null;
     private Artist selectedArtist ;
 
     void deleteArtist(int id)
     {
-        db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
-        new ArtistTask(db, "delete",id).execute();
+        //Replace
+    //    db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
+     //   new ArtistTask(db, "delete",id).execute();
         changeFragment(new ArtistsFragment());
     }
 
@@ -63,9 +59,12 @@ public class ArtistsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         final View view = inflater.inflate(R.layout.artists_list, container, false);
-        db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
+       // db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
         ArrayList<Artist> data = null;
 
+
+        //TODO replace
+        /*
         try {
             data = (ArrayList) new ArtistTask(db, "getAll", 0).execute().get();
         } catch (InterruptedException e) {
@@ -73,6 +72,7 @@ public class ArtistsFragment extends Fragment {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+        */
 
         BindDictionary<Artist> dictionary = new BindDictionary<>();
 
@@ -103,6 +103,8 @@ public class ArtistsFragment extends Fragment {
 
                 final int ArtistId = Integer.parseInt(editTextname.getText().toString());
 
+                //TODO Replace
+                /*
                 try {
                     selectedArtist = (Artist) new ArtistTask(db, "get", ArtistId).execute().get();
                 } catch (InterruptedException e) {
@@ -110,6 +112,7 @@ public class ArtistsFragment extends Fragment {
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 }
+                */
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setView(R.layout.artists_list_popup);
@@ -147,7 +150,9 @@ public class ArtistsFragment extends Fragment {
         ArtistEditionFragment fragment = ArtistEditionFragment.newInstance(artist);
 
         // save the selectedalbum in main
-        ((MainActivity) getActivity()).setDataObject(selectedArtist);
+        //TODO replace
+
+        //((MainActivity) getActivity()).setDataObject(selectedArtist);
         fragment.setArtist(artist);
         changeFragment(fragment);
     }

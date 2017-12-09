@@ -1,20 +1,16 @@
 package ch.hevs.denisdaniel.androidmusicapp.Tracks;
 
-import android.os.AsyncTask;
-
-import ch.hevs.denisdaniel.androidmusicapp.AppDatabase;
-
 /**
  * Created by Denis Woeffray on 11.11.2017.
  */
 
 
-
+ /*
 public class TrackTask extends AsyncTask<Void, Void, Object> {
 
-    AppDatabase db;
+  AppDatabase db;
     String task;
-    /* Object pour permettre de manipuler plus de fonctions du DAO différentes*/
+    Object pour permettre de manipuler plus de fonctions du DAO différentes
     Object o;
 
     public TrackTask(AppDatabase db, String task, Object o) {
@@ -24,11 +20,11 @@ public class TrackTask extends AsyncTask<Void, Void, Object> {
         this.o = o;
     }
 
+
     protected Object doInBackground(Void... params) {
-        /*
-        Recherche sur la clé de la fonction afin de savoir quelle requete effectuer
+      Recherche sur la clé de la fonction afin de savoir quelle requete effectuer
         Casting dans les "cases" afin de passer le bon type en paramètre
-         */
+
         switch (task) {
             case "add":
                 return db.trackDao().add((Track)o);
@@ -49,9 +45,11 @@ public class TrackTask extends AsyncTask<Void, Void, Object> {
                 return db.trackDao().search((String) o);
         }
         return null;
+
     }
 
     protected void onPostExecute(Void result) {
     }
-}
+
+}*/
 

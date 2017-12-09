@@ -1,6 +1,5 @@
 package ch.hevs.denisdaniel.androidmusicapp.Tracks.Views;
 
-import android.arch.persistence.room.Room;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -21,29 +20,26 @@ import com.amigold.fundapter.FunDapter;
 import com.amigold.fundapter.extractors.StringExtractor;
 
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
-import ch.hevs.denisdaniel.androidmusicapp.AppDatabase;
-import ch.hevs.denisdaniel.androidmusicapp.MainActivity;
 import ch.hevs.denisdaniel.androidmusicapp.R;
 import ch.hevs.denisdaniel.androidmusicapp.Tracks.Track;
-import ch.hevs.denisdaniel.androidmusicapp.Tracks.TrackTask;
 
 /**
  * Created by Denis Woeffray on 30.10.2017.
  */
 
 public class TracksFragment extends Fragment {
-    private AppDatabase db;
+//    private AppDatabase db;
     private ArrayList<Track> data = null;
     private Track selectedTrack ;
 
 
     void deleteTrack(int id)
-    {
+    {/*
         db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
         new TrackTask(db, "delete",id).execute();
         changeFragment(new TracksFragment());
+        */
     }
 
     public void changeFragment(Fragment fragment)
@@ -65,9 +61,11 @@ public class TracksFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         final View view = inflater.inflate(R.layout.tracks_list, container, false);
-        db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
+        //TODO replace
+      //  db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
         ArrayList<Track> data = null;
 
+        /*
         try {
             data = (ArrayList) new TrackTask(db, "getAll", 0).execute().get();
         } catch (InterruptedException e) {
@@ -75,6 +73,7 @@ public class TracksFragment extends Fragment {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+        */
 
         BindDictionary<Track> dictionary = new BindDictionary<>();
 
@@ -111,14 +110,15 @@ public class TracksFragment extends Fragment {
                 TextView editTextId = (TextView) v.findViewById(R.id.textViewId);
 
                 final int trackId = Integer.parseInt(editTextId.getText().toString());
-
+/*
                 try {
                     selectedTrack = (Track) new TrackTask(db, "get", trackId).execute().get();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {
                     e.printStackTrace();
-                }
+                }*/
+
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setView(R.layout.tracks_list_popup);
@@ -155,8 +155,10 @@ public class TracksFragment extends Fragment {
     public void editTrack(Track track)
     {
         Log.d("", "editTrack: "+track);
+        //TODO replace
+
         TrackEditionFragment fragment = TrackEditionFragment.newInstance(track);
-        ((MainActivity) getActivity()).setDataObject(selectedTrack);
+        //((MainActivity) getActivity()).setDataObject(selectedTrack);
         fragment.setTrack(track);
         changeFragment(fragment);
     }

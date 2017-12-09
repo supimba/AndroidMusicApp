@@ -1,13 +1,11 @@
 package ch.hevs.denisdaniel.androidmusicapp.Albums.Albums;
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.ForeignKey;
-import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 
-import ch.hevs.denisdaniel.androidmusicapp.Artists.Artist;
+import com.google.firebase.database.Exclude;
 
-import static android.arch.persistence.room.ForeignKey.CASCADE;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by dnlro on 02/11/2017.
@@ -15,28 +13,16 @@ import static android.arch.persistence.room.ForeignKey.CASCADE;
 
 
 
-@Entity(foreignKeys = @ForeignKey(  entity = Artist.class,
-                                    parentColumns = "uid",
-                                    childColumns = "artist_id",
-                                    onDelete = CASCADE
-    ))
+
 public class Album {
 
 
-    @PrimaryKey(autoGenerate = true)
-    private Long uid;
-
-    @ColumnInfo(name = "title")
+    @NonNull
+    private String uid;
     private String title;
-
-    @ColumnInfo(name = "description")
     private String description;
-
-    @ColumnInfo(name = "releasedate")
     private String releasedate;
-
-    @ColumnInfo(name = "artist_id")
-    private Long artistId;
+    private String artistId;
 
     public Album(String title, String releasedate, String description) {
         this.uid = uid;
@@ -45,11 +31,19 @@ public class Album {
         this.description = description;
     }
 
-    public Long getUid() {
+    public Album() {
+        this.uid = uid;
+        this.title = title;
+        this.releasedate=releasedate;
+        this.description = description;
+    }
+
+    @Exclude
+    public String getUid() {
         return uid;
     }
 
-    public void setUid(Long uid) {
+    public void setUid(String uid) {
         this.uid = uid;
     }
 
@@ -82,13 +76,25 @@ public class Album {
         this.releasedate = releasedate;
     }
 
-    public Long getArtistId() {
+    public String getArtistId() {
         return artistId;
     }
 
-    public void setArtistId(Long artistId) {
+    public void setArtistId(String artistId) {
         this.artistId = artistId;
     }
+
+    @Exclude
+    public Map<String, Object> toMap(){
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("artistUID", artistId);
+        result.put("albumTitle", title);
+        result.put("albumDescription", description);
+        result.put("releaseDate", releasedate);
+
+        return result;
+    }
+
 
     @Override
     public String toString() {

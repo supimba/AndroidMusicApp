@@ -1,18 +1,10 @@
 package ch.hevs.denisdaniel.androidmusicapp.Albums.Albums;
 
-import android.arch.persistence.room.Dao;
-import android.arch.persistence.room.Delete;
-import android.arch.persistence.room.Insert;
-import android.arch.persistence.room.Query;
-import android.arch.persistence.room.Update;
-
-import java.util.List;
-
-import ch.hevs.denisdaniel.androidmusicapp.Artists.Artist;
-
 /**
  * Created by dnlro on 14/11/2017.
  */
+
+/*
 
 @Dao
 public interface AlbumDao {
@@ -38,3 +30,6 @@ public interface AlbumDao {
     List<Album> search(String searchTerm);
 
 }
+
+
+*/

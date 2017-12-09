@@ -1,21 +1,17 @@
 package ch.hevs.denisdaniel.androidmusicapp.Artists;
 
-import android.os.AsyncTask;
-
-import ch.hevs.denisdaniel.androidmusicapp.AppDatabase;
-
 /**
  * Created by Denis Woeffray on 11.11.2017.
  */
-
+/*
 
 public class ArtistTask extends AsyncTask<Void, Void, Object> {
 
-    AppDatabase db;
+    //AppDatabase db;
     String task;
     /* Object pour permettre de manipuler plus de fonctions du DAO différentes*/
-    Object o;
-
+    //Object o;
+    /*
     public ArtistTask(AppDatabase db, String task, Object o) {
         super();
         this.db = db;
@@ -23,11 +19,12 @@ public class ArtistTask extends AsyncTask<Void, Void, Object> {
         this.o = o;
     }
 
+
     protected Object doInBackground(Void... params) {
-        /*
+
         Recherche sur la clé de la fonction afin de savoir quelle requete effectuer
         Casting dans les "cases" afin de passer le bon type en paramètre
-         */
+
         switch (task) {
             case "add":
                 return db.artistDao().add((Artist)o);
@@ -51,4 +48,4 @@ public class ArtistTask extends AsyncTask<Void, Void, Object> {
     protected void onPostExecute(Void result) {
     }
 }
-
+*/

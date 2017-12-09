@@ -11,7 +11,6 @@ import android.widget.EditText;
 import java.util.Calendar;
 
 import ch.hevs.denisdaniel.androidmusicapp.Albums.Albums.Album;
-import ch.hevs.denisdaniel.androidmusicapp.AppDatabase;
 import ch.hevs.denisdaniel.androidmusicapp.R;
 
 /**
@@ -21,7 +20,7 @@ import ch.hevs.denisdaniel.androidmusicapp.R;
 public class AlbumEditionFragment extends android.support.v4.app.Fragment {
 
     private Album album;
-    private AppDatabase db;
+//    private AppDatabase db;
     private String newAlbumTitle;
     private EditText releaseDate;
 
@@ -31,8 +30,9 @@ public class AlbumEditionFragment extends android.support.v4.app.Fragment {
     public static AlbumEditionFragment newInstance(Album album) {
         AlbumEditionFragment fragment = new AlbumEditionFragment();
         Bundle args = new Bundle();
+        //TODO change
         if(album!=null)
-            args.putLong("ALBUM_ID", album.getUid());
+        //    args.putLong("ALBUM_ID", album.getUid());
 
         fragment.setArguments(args);
         return fragment;

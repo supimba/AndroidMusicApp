@@ -7,9 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
-import ch.hevs.denisdaniel.androidmusicapp.Albums.Albums.Album;
-import ch.hevs.denisdaniel.androidmusicapp.Albums.Albums.Views.AlbumEditionFragment;
-import ch.hevs.denisdaniel.androidmusicapp.AppDatabase;
 import ch.hevs.denisdaniel.androidmusicapp.Artists.Artist;
 import ch.hevs.denisdaniel.androidmusicapp.R;
 
@@ -20,7 +17,7 @@ import ch.hevs.denisdaniel.androidmusicapp.R;
 public class ArtistEditionFragment extends Fragment {
     private int albumId;
     private Artist artist;
-    private AppDatabase db;
+
     private String newAlbumTitle;
     public void setArtist(Artist artist){
         this.artist = artist;
@@ -29,8 +26,9 @@ public class ArtistEditionFragment extends Fragment {
     public static ArtistEditionFragment newInstance(Artist artist) {
         ArtistEditionFragment fragment = new ArtistEditionFragment();
         Bundle args = new Bundle();
+        //TODO change
         if(artist!=null)
-            args.putLong("ARITST_ID", artist.getUid());
+        //    args.putLong("ARITST_ID", artist.getUid());
         fragment.setArguments(args);
         return fragment;
     }

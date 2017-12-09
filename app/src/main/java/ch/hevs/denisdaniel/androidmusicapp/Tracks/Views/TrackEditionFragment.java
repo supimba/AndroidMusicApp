@@ -7,8 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
-import ch.hevs.denisdaniel.androidmusicapp.AppDatabase;
-import ch.hevs.denisdaniel.androidmusicapp.Artists.Artist;
 import ch.hevs.denisdaniel.androidmusicapp.R;
 import ch.hevs.denisdaniel.androidmusicapp.Tracks.Track;
 
@@ -19,7 +17,7 @@ import ch.hevs.denisdaniel.androidmusicapp.Tracks.Track;
 public class TrackEditionFragment extends Fragment {
     private int trackId;
     private Track track;
-    private AppDatabase db;
+
     private String newTrackTitle;
     public void setTrack(Track track){
         this.track = track;
@@ -28,8 +26,9 @@ public class TrackEditionFragment extends Fragment {
     public static TrackEditionFragment newInstance(Track track) {
         TrackEditionFragment fragment = new TrackEditionFragment();
         Bundle args = new Bundle();
+        //TODO change
         if(track!=null)
-            args.putLong("TRACK_ID", track.getUid());
+           // args.putLong("TRACK_ID", track.getUid());
         fragment.setArguments(args);
         return fragment;
     }

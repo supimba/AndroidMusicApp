@@ -1,49 +1,38 @@
 package ch.hevs.denisdaniel.androidmusicapp.Tracks;
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.ForeignKey;
-import android.arch.persistence.room.PrimaryKey;
+import com.google.firebase.database.Exclude;
 
-import ch.hevs.denisdaniel.androidmusicapp.Albums.Albums.Album;
-
-import static android.arch.persistence.room.ForeignKey.CASCADE;
-import static android.arch.persistence.room.ForeignKey.SET_NULL;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Denis Woeffray on 03.11.2017.
  */
 
-@Entity(tableName = "tracks",
-        foreignKeys = @ForeignKey(  entity = Album.class,
-                                    parentColumns = "uid",
-                                    childColumns = "album_id",
-                                    onDelete = SET_NULL)
-)
+
 public class Track {
     public Track(String name, String duration)
     {
         this.name = name;
         this.duration = duration;
     }
+    public Track()
+    {
+        this.name = name;
+        this.duration = duration;
+    }
 
-    @PrimaryKey(autoGenerate = true)
-    private Long uid;
-
-    @ColumnInfo(name = "name")
+    @Exclude
+    private String uid;
     private String name;
-
-    @ColumnInfo(name = "duration")
     private String duration;
+    private String albumId;
 
-    @ColumnInfo(name = "album_id")
-    private Long albumId;
-
-    public Long getUid() {
+    public String getUid() {
         return uid;
     }
 
-    public void setUid(Long uid) {
+    public void setUid(String uid) {
         this.uid = uid;
     }
 
@@ -65,12 +54,21 @@ public class Track {
         this.duration = duration;
     }
 
-    public Long getAlbumId() {
+    public String getAlbumId() {
         return albumId;
     }
 
-    public void setAlbumId(Long albumId) {
+    public void setAlbumId(String albumId) {
         this.albumId = albumId;
+    }
+
+    @Exclude
+    public Map<String, Object> toMap(){
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("albumUID", albumId);
+        result.put("trackTitle", name);
+        result.put("duration", duration);
+        return result;
     }
 
     @Override
