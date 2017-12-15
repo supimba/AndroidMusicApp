@@ -18,6 +18,8 @@ import android.widget.TextView;
 import com.amigold.fundapter.BindDictionary;
 import com.amigold.fundapter.FunDapter;
 import com.amigold.fundapter.extractors.StringExtractor;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -34,6 +36,9 @@ public class AlbumsFragment extends Fragment {
     private ArrayList<Album> data = null;
     private Album selectedAlbum ;
     private final String TAG = "ALbumsFragment";
+    private FirebaseDatabase database;
+    private DatabaseReference ref;
+
 
     public void deleteAlbum(Long id)
     {
@@ -76,9 +81,10 @@ public class AlbumsFragment extends Fragment {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-
-
         super.onCreate(savedInstanceState);
+
+        ref = database.getInstance().getReference();
+
 
     }
 
@@ -91,7 +97,7 @@ public class AlbumsFragment extends Fragment {
 /*
         try {
             //TODO Replace
-            ata = (ArrayList) new AlbumTask(db, "getAll", 0).execute().get();
+            data = (ArrayList) new AlbumTask(db, "getAll", 0).execute().get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {

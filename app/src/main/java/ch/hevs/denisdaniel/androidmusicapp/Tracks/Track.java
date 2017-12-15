@@ -1,5 +1,7 @@
 package ch.hevs.denisdaniel.androidmusicapp.Tracks;
 
+import android.support.annotation.NonNull;
+
 import com.google.firebase.database.Exclude;
 
 import java.util.HashMap;
@@ -11,6 +13,14 @@ import java.util.Map;
 
 
 public class Track {
+
+    @NonNull
+    private String uid;
+    private String albumUid;
+    private String name;
+    private String duration;
+
+
     public Track(String name, String duration)
     {
         this.name = name;
@@ -21,19 +31,21 @@ public class Track {
         this.name = name;
         this.duration = duration;
     }
-
     @Exclude
-    private String uid;
-    private String name;
-    private String duration;
-    private String albumId;
-
     public String getUid() {
         return uid;
     }
 
     public void setUid(String uid) {
         this.uid = uid;
+    }
+
+    public String getAlbumUid() {
+        return albumUid;
+    }
+
+    public void setAlbumUid(String albumUid) {
+        this.albumUid = albumUid;
     }
 
     public String getName() {
@@ -54,18 +66,12 @@ public class Track {
         this.duration = duration;
     }
 
-    public String getAlbumId() {
-        return albumId;
-    }
 
-    public void setAlbumId(String albumId) {
-        this.albumId = albumId;
-    }
 
     @Exclude
     public Map<String, Object> toMap(){
         HashMap<String, Object> result = new HashMap<>();
-        result.put("albumUID", albumId);
+        result.put("albumUID", albumUid);
         result.put("trackTitle", name);
         result.put("duration", duration);
         return result;
@@ -77,7 +83,7 @@ public class Track {
                 "uid=" + uid +
                 ", name='" + name + '\'' +
                 ", duration='" + duration + '\'' +
-                ", album_id=" + albumId +
+                ", album_id=" + albumUid +
                 '}';
     }
 }

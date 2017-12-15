@@ -13,6 +13,11 @@ import java.util.Map;
 
 @Entity
 public class Artist {
+    @Exclude
+    private String uid;
+    private String albumUid;
+    private String name;
+    private String description;
 
     public Artist(String name, String description)
     {
@@ -26,14 +31,16 @@ public class Artist {
     }
 
     @Exclude
-    private String uid;
-    private String name;
-    private String description;
     public String getUid() {
         return uid;
     }
     public void setUid(String uid) {
         this.uid = uid;
+    }
+
+
+    public String getAlbumUid() {
+        return albumUid;
     }
 
     public String getName() {
@@ -43,6 +50,9 @@ public class Artist {
         return name;
     }
 
+    public void setAlbumUid(String albumUid) {
+        this.albumUid = albumUid;
+    }
 
     public void setName(String name) {
         this.name = name;

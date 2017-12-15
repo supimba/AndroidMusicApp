@@ -431,36 +431,52 @@ changeFragment(new AlbumsFragment(), "Album");*/
         Artist artist1 = new Artist();
         Artist artist2 = new Artist();
 
-        Track track1Album1 = new Track();
-        Track track1Album2 = new Track();
+        Track track1 = new Track();
+        Track track2 = new Track();
+
+        String album1UID = UUID.randomUUID().toString();
+        String album2UID = UUID.randomUUID().toString();
 
         String artist1UID = UUID.randomUUID().toString();
+        String artist2UID = UUID.randomUUID().toString();
+
+        String track1UID = UUID.randomUUID().toString();
+        String track2UID = UUID.randomUUID().toString();
+
+
         artist1.setName("Red hot chili pepers");
         artist1.setDescription("Artist 1");
         artist1.setUid(artist1UID);
+        artist1.setAlbumUid(album1UID);
 
         artists.add(artist1);
 
-        String artist2UID = UUID.randomUUID().toString();
-        artist1.setUid(artist2UID);
+
+        artist2.setUid(artist2UID);
         artist2.setName("Rage against the machine");
-        artist1.setDescription("Artist 2");
+        artist2.setDescription("Artist 2");
+        artist2.setAlbumUid(album2UID);
 
         artists.add(artist2);
 
-        String track1UID = UUID.randomUUID().toString();
-        track1Album1.setName("Bombtrack");
-        track1Album1.setDuration("4:05");
-        track1Album1.setUid(track1UID);
-        tracksAlbum1.add(track1Album1);
 
-        String track2UID = UUID.randomUUID().toString();
-        track1Album2.setName("Arround the world");
-        track1Album2.setDuration("3:59");
-        track1Album2.setUid(track2UID);
-        tracksAlbum2.add(track1Album2);
+        track1.setUid(track1UID);
+        track1.setName("Bombtrack");
+        track1.setDuration("4:05");
+        track1.setAlbumUid(album1UID);
 
-        String album1UID = UUID.randomUUID().toString();
+
+        tracksAlbum1.add(track1);
+
+
+        track2.setUid(track2UID);
+        track2.setName("Arround the world");
+        track2.setDuration("3:59");
+        track2.setAlbumUid(album2UID);
+
+        tracksAlbum2.add(track2);
+
+
         album1.setUid(album1UID);
         album1.setArtistId(artist2UID);
         album1.setTitle("Californication");
@@ -468,7 +484,7 @@ changeFragment(new AlbumsFragment(), "Album");*/
         album1.setReleasedate("10.10.2017");
         albums.add(album1);
 
-        String album2UID = UUID.randomUUID().toString();
+
         album2.setUid(album2UID);
         album2.setArtistId(artist2UID);
         album2.setTitle("Kiling in the name");
@@ -490,8 +506,17 @@ changeFragment(new AlbumsFragment(), "Album");*/
 
 
 
-        for(Track track:tracksAlbum1)
+        for(Track track : tracksAlbum1) {
             ref.child("tracks").child(track.getUid()).setValue(track);
+            ref.child("tracks").child("Hellotest");
+        }
+
+        for(Track track : tracksAlbum2) {
+            ref.child("tracks").child(track.getUid()).setValue(track);
+            ref.child("tracks").child("Hellotest");
+        }
+
+
 
 
     }
