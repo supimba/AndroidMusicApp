@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AndroidMusicApp.iml" filepath="$PROJECT_DIR$/AndroidMusicApp.iml" />
+      <module fileurl="file://C:\Users\Denis Woeffray\OneDrive\Android Studio\AndroidFireBase\AndroidMusicAppFirebase\AndroidMusicApp.iml" filepath="C:\Users\Denis Woeffray\OneDrive\Android Studio\AndroidFireBase\AndroidMusicAppFirebase\AndroidMusicApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AndroidMusicAppFirebase.iml" filepath="$PROJECT_DIR$/AndroidMusicAppFirebase.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\Denis Woeffray\OneDrive\Android Studio\AndroidFireBase\AndroidMusicAppFirebase\app\app.iml" filepath="C:\Users\Denis Woeffray\OneDrive\Android Studio\AndroidFireBase\AndroidMusicAppFirebase\app\app.iml" />
     </modules>
   </component>
 </project>
