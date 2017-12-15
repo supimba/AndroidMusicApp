@@ -33,7 +33,7 @@ import ch.hevs.denisdaniel.androidmusicapp.R;
 public class AlbumsFragment extends Fragment {
 
 
-    private ArrayList<Album> data = null;
+    private ArrayList<Album> data;
     private Album selectedAlbum ;
     private final String TAG = "ALbumsFragment";
     private FirebaseDatabase database;
@@ -83,7 +83,12 @@ public class AlbumsFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ref = database.getInstance().getReference();
+        data = new ArrayList<Album>();
+
+        ref = database.getInstance().getReference("albums");
+
+
+
 
 
     }
