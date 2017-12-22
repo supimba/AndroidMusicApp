@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "418926533250",
+    "firebase_url": "https://andoidmusicapp.firebaseio.com",
+    "project_id": "andoidmusicapp",
+    "storage_bucket": "andoidmusicapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:418926533250:android:9521502bc42a13f0",
+        "android_client_info": {
+          "package_name": "ch.hevs.denisdaniel.androidmusicapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "418926533250-n3n5t7dl3k2dib6tg0rirnmq6nk1o22r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ch.hevs.denisdaniel.androidmusicapp",
+            "certificate_hash": "07502dc9dca10ca36250d8c115cb403b205e547d"
+          }
+        },
+        {
+          "client_id": "418926533250-59fs33lkf6ersj6tk753tdblhagkikg9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2jury6C9u1_VVfN-bJmcQHO-0k-NOVvw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "418926533250-59fs33lkf6ersj6tk753tdblhagkikg9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
