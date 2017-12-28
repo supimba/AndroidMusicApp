@@ -318,8 +318,8 @@ public class AlbumsFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View v, int i, long l) {
 
-                TextView albumIdTextView = (TextView) v.findViewById(R.id.albumID);
-                final int AlbumId = Integer.parseInt(albumIdTextView.getText().toString());
+//                TextView albumIdTextView = (TextView) v.findViewById(R.id.albumID);
+//                final int AlbumId = Integer.parseInt(albumIdTextView.getText().toString());
 
                 //TODO replace
                 /*try {
@@ -330,6 +330,7 @@ public class AlbumsFragment extends Fragment {
                     e.printStackTrace();
                 }*/
 
+                selectedAlbum = data.get(i);
                 showAlbum(selectedAlbum);
 
             }

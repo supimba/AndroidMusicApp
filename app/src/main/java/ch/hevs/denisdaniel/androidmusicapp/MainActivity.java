@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseError;
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity
         //database.getInstance();
         ref = database.getInstance().getReference();
 
-     addData();
+   //  addData();
 
 /*
         Fragment fragment = new SearchFragment();
@@ -215,9 +216,9 @@ public class MainActivity extends AppCompatActivity
     }
     //TODO Replace with firebase
     public void addAlbum(View view) throws ExecutionException, InterruptedException {
-/*
+
         // initiate database
-        db = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME).build();
+        //db = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME).build();
 
         // get album's data
         String albumTitle = ((EditText)findViewById(R.id.albumTitle)).getText().toString();
@@ -244,11 +245,35 @@ public class MainActivity extends AppCompatActivity
             toast.show();
             return;
         }
-        Artist artist = new Artist(artistName, artistDescription);
-        Album album = new Album(albumTitle,albumReleaseDate, albumDescription);
-        Long artistId = (Long)new ArtistTask(db, "add", artist).execute().get();
-        album.setArtistId(artistId);
-        Long albumId = (Long)new AlbumTask(db,"add",album).execute().get();
+
+        //Artist artist = new Artist(artistName, artistDescription);
+        Artist artist = new Artist();
+        String artistUID = UUID.randomUUID().toString();
+        artist.setUid(artistUID);
+        artist.setName(artistName);
+        artist.setDescription(artistDescription);
+
+
+
+
+        //Album album = new Album(albumTitle,albumReleaseDate, albumDescription);
+        //TODO replace
+        // Long artistId = (Long)new ArtistTask(db, "add", artist).execute().get(); delete
+        Album album = new Album();
+        String albumUID = UUID.randomUUID().toString();
+        album.setUid(albumUID);
+        album.setTitle(albumTitle);
+        album.setDescription(albumDescription);
+        album.setReleasedate(albumReleaseDate);
+
+
+     //   album.setArtistId(artistId);
+        //TODO replace
+        //Long albumId = (Long)new AlbumTask(db,"add",album).execute().get();
+        album.setArtistId(artistUID);
+        artist.setAlbumUid(albumUID);
+
+        ref.child("albums").child(albumUID).setValue(album);
         if(mainLayout!=null)
         {
             for (int i = 0;i<mainLayout.getChildCount();i++)
@@ -257,11 +282,22 @@ public class MainActivity extends AppCompatActivity
                 EditText editTrackDuration = (EditText)mainLayout.getChildAt(i).findViewById(R.id.trackDuration);
                 String name = editTrackName.getText().toString();
                 String duration = editTrackDuration.getText().toString();
-                Track track = new Track(name,duration);
-                track.setAlbumId(albumId);
-                new TrackTask(db,"add",track).execute().get();
+               // Track track = new Track(name,duration); to delete
+                Track track = new Track();
+                String trackUID = UUID.randomUUID().toString();
+                track.setUid(trackUID);
+                track.setName(name);
+                track.setDuration(duration);
+                track.setAlbumUid(albumUID);
+              //  new TrackTask(db,"add",track).execute().get();
+                ref.child("albums").child(albumUID).child("tracks").child(trackUID).setValue(true);
+                ref.child("tracks").child(trackUID).setValue(track);
             }
         }
+
+        ref.child("artists").child(artistUID).setValue(artist);
+
+
 
         Toast toast = Toast.makeText(getApplicationContext(), R.string.album_created+" : "+album.getTitle(), Toast.LENGTH_SHORT);
         toast.show();
@@ -276,7 +312,7 @@ public class MainActivity extends AppCompatActivity
         Fragment fragment = new AlbumsFragment();
         String fragmentTag  = "AddAlbumFragment";
         changeFragment(fragment, fragmentTag);
-*/
+
     }
     //TODO Replace with firebase ->OK && Delete
     public void updateAlbum(View view) throws ExecutionException, InterruptedException {
@@ -521,7 +557,7 @@ changeFragment(new AlbumsFragment(), "Album");
 
 
         track1.setUid(track1UID);
-        track1.setName("Bombtrack");
+        track1.setName("Arround the world");
         track1.setDuration("4:05");
         track1.setAlbumUid(album1UID);
 
@@ -530,7 +566,7 @@ changeFragment(new AlbumsFragment(), "Album");
 
 
         track2.setUid(track2UID);
-        track2.setName("Arround the world");
+        track2.setName("Bombtrack");
         track2.setDuration("3:59");
         track2.setAlbumUid(album2UID);
 
@@ -538,7 +574,7 @@ changeFragment(new AlbumsFragment(), "Album");
 
 
         album1.setUid(album1UID);
-        album1.setArtistId(artist2UID);
+        album1.setArtistId(artist1UID);
         album1.setTitle("Californication");
         album1.setDescription("Cool Album");
         album1.setReleasedate("10.10.2017");
@@ -553,14 +589,20 @@ changeFragment(new AlbumsFragment(), "Album");
         albums.add(album2);
 
 
-        for(Album album: albums) {
+       /* for(Album album: albums) {
             ref.child("albums").child(album.getUid()).setValue(album);
             Log.i("albums", album.toString());
 
             for(Track track:tracksAlbum1)
                 ref.child("albums").child(album.getUid()).child("tracks").child(track.getUid()).setValue(true);
 
-        }
+        }*/
+        ref.child("albums").child(album1UID).setValue(album1);
+        ref.child("albums").child(album1UID).child("tracks").child(track1UID).setValue(true);
+
+        ref.child("albums").child(album2UID).setValue(album2);
+        ref.child("albums").child(album2UID).child("tracks").child(track2UID).setValue(true);
+
         for(Artist artist:artists)
             ref.child("artists").child(artist.getUid()).setValue(artist);
 
@@ -568,13 +610,14 @@ changeFragment(new AlbumsFragment(), "Album");
 
         for(Track track : tracksAlbum1) {
             ref.child("tracks").child(track.getUid()).setValue(track);
-            ref.child("tracks").child("Hellotest");
+            //ref.child("tracks").child("Hellotest");
         }
 
         for(Track track : tracksAlbum2) {
             ref.child("tracks").child(track.getUid()).setValue(track);
-            ref.child("tracks").child("Hellotest");
+            //ref.child("tracks").child("Hellotest");
         }
+
 
 
 

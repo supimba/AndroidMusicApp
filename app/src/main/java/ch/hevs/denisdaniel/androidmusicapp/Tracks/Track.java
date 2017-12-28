@@ -71,9 +71,11 @@ public class Track {
     @Exclude
     public Map<String, Object> toMap(){
         HashMap<String, Object> result = new HashMap<>();
-        result.put("albumUid", albumUid);
-        result.put("duration", duration);
         result.put("name", name);
+        result.put("duration", duration);
+        result.put("albumUid", albumUid);
+
+
         return result;
     }
 /*

@@ -57,5 +57,6 @@
     <string name="noAlbumTitle">No album title</string>
     <string name="noArtistName">Unknow artist</string>
     <string name="fill_field_album">Please fill name</string>
+    <string name="descriptionAlbum">Description album</string>
 
 </resources>
