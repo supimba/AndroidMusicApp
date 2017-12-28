@@ -11,8 +11,13 @@ import android.widget.TextView;
 import com.amigold.fundapter.BindDictionary;
 import com.amigold.fundapter.FunDapter;
 import com.amigold.fundapter.extractors.StringExtractor;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import ch.hevs.denisdaniel.androidmusicapp.Albums.Albums.Album;
 import ch.hevs.denisdaniel.androidmusicapp.Artists.Artist;
@@ -25,6 +30,7 @@ public class AlbumDetailsFragment extends Fragment {
     private Long albumId ;
     private Album album;
     private Artist artist;
+    private ArrayList<Track> data;
 
 
     public static AlbumDetailsFragment newInstance(Album album) {
@@ -62,7 +68,7 @@ public class AlbumDetailsFragment extends Fragment {
         //db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
 //TODO change
       //  Long artistId = album.getArtistId();
-        ArrayList<Track> data = null;
+        data = null;
         /* récupération des tracks*/
        //TODO replace
         /*
@@ -75,6 +81,33 @@ public class AlbumDetailsFragment extends Fragment {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }*/
+        ArrayList<String> trackIdsList = new ArrayList<>();
+        trackIdsList = getTracksList(album.getUid());
+
+
+        FirebaseDatabase.getInstance()
+                .getReference("tracks")
+                .child(album.getUid())
+                .addListenerForSingleValueEvent(
+                        new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                if(dataSnapshot.exists()){
+                                    data.clear();
+                                    data.addAll(toAlbums(dataSnapshot));
+                                  //  adapter.updateData(data);
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        }
+                );
+
+
 
         if(artist.getName() != null){
             TextView artistName = view.findViewById(R.id.detailsArtistName);
@@ -120,5 +153,42 @@ public class AlbumDetailsFragment extends Fragment {
         tracks_listview.setAdapter(adapter);
         /* fin creation des listviews*/
         return view;
+    }
+    private List<Track> toAlbums(DataSnapshot snapshot){
+        List<Track> tracks = new ArrayList<>();
+
+        for (DataSnapshot childSnapshot : snapshot.getChildren()) {
+            Track entity = childSnapshot.getValue(Track.class);
+            entity.setUid(childSnapshot.getKey());
+            tracks.add(entity);
+        }
+        return tracks;
+
+    }
+
+    private ArrayList<String> getTracksList(String albumId){
+        final ArrayList<String> trackIdsList = new ArrayList<>();
+
+        FirebaseDatabase.getInstance()
+                .getReference("albums")
+                .child(albumId)
+                .child("tracks")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        trackIdsList.clear();
+                        for(DataSnapshot childDataSnapshot : dataSnapshot.getChildren())
+                        {
+                            trackIdsList.add(childDataSnapshot.getKey());
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+        return trackIdsList;
+
     }
 }

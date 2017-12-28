@@ -14,7 +14,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -40,6 +43,7 @@ public class MainActivity extends AppCompatActivity
     public static String PREFS_LANGUAGE = "Language";
     private final String BACK_STACK_ROOT_TAG = "SEARCHFRAGMENT";
     private final String TAG = "MainActivity";
+    private Object object;
 
 
     @Override
@@ -64,7 +68,7 @@ public class MainActivity extends AppCompatActivity
         //database.getInstance();
         ref = database.getInstance().getReference();
 
-       addData();
+     addData();
 
 /*
         Fragment fragment = new SearchFragment();
@@ -274,10 +278,11 @@ public class MainActivity extends AppCompatActivity
         changeFragment(fragment, fragmentTag);
 */
     }
-    //TODO Replace with firebase
-    public void udpateAlbum(View view) throws ExecutionException, InterruptedException {
-/*
-        db = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME).build();
+    //TODO Replace with firebase ->OK && Delete
+    public void updateAlbum(View view) throws ExecutionException, InterruptedException {
+
+
+        //db = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME).build();
 
         EditText editAlbumId = (EditText)findViewById(R.id.albumID);
         String albumId = editAlbumId.getText().toString();
@@ -291,11 +296,11 @@ public class MainActivity extends AppCompatActivity
         EditText editAlbumDescription = (EditText)findViewById(R.id.editAlbumDescriptionEdit);
         String artistDescription = editAlbumDescription.getText().toString();
 
-        Album album = (Album)new AlbumTask(db, "get", albumId).execute().get();*/
-/*        final  Album album;
-*/
-        //album = (Album) getDataObject();
-        /*
+        //Album album = (Album)new AlbumTask(db, "get", albumId).execute().get();
+        final  Album album;
+
+        album = (Album) getDataObject();
+
         album.setTitle(albumTitle);
         album.setReleasedate(albumReleaseDate);
         album.setDescription(artistDescription);
@@ -307,16 +312,32 @@ public class MainActivity extends AppCompatActivity
             toast.show();
             return;
         }
+        FirebaseDatabase.getInstance()
+                .getReference("albums")
+                .child(album.getUid())
+                .updateChildren(album.toMap(), new DatabaseReference.CompletionListener() {
+                    @Override
+                    public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                        if(databaseError!=null){
+                            Log.d(TAG, "Update failure!", databaseError.toException());
+                        }else
+                        {
+                            Log.d(TAG, "Update successful!");
+                        }
 
-        new AlbumTask(db,"update",album).execute().get();
+                    }
+                });
 
 
-changeFragment(new AlbumsFragment(), "Album");*/
+        //new AlbumTask(db,"update",album).execute().get();
+
+
+changeFragment(new AlbumsFragment(), "Album");
 
     }
     //TODO Replace with firebase
-    public void updateArtist(View view) throws ExecutionException, InterruptedException {/*
-        db = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME).build();
+    public void updateArtist(View view) throws ExecutionException, InterruptedException {
+       // db = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME).build();
 
         EditText editArtistId = (EditText) findViewById(R.id.editArtistId);
         String artistId = editArtistId.getText().toString();
@@ -326,19 +347,39 @@ changeFragment(new AlbumsFragment(), "Album");*/
         EditText editArtistDescription = (EditText) findViewById(R.id.editArtistDescription);
         String artistDescription = editArtistDescription.getText().toString();
 
-        Artist artist = (Artist)new ArtistTask(db, "get", artistId).execute().get();
+        //Artist artist = (Artist)new ArtistTask(db, "get", artistId).execute().get();
+        final  Artist artist;
+
+        artist = (Artist) getDataObject();
 
         artist.setName(artistName);
         artist.setDescription(artistDescription);
 
-        new ArtistTask(db,"update",artist).execute().get();
-        */
+        FirebaseDatabase.getInstance()
+                .getReference("artists")
+                .child(artist.getUid())
+                .updateChildren(artist.toMap(), new DatabaseReference.CompletionListener() {
+                    @Override
+                    public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                        if(databaseError!=null){
+                            Log.d(TAG, "Update failure!", databaseError.toException());
+                        }else
+                        {
+                            Log.d(TAG, "Update successful!");
+                        }
+
+                    }
+                });
+
+       // new ArtistTask(db,"update",artist).execute().get();
+        changeFragment(new ArtistsFragment(), "Artist");
+
 
     }
-
+    //TODO Replace -> OK && delete
     public void updateTrack(View view) throws ExecutionException, InterruptedException {
-        /*
-        db = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME).build();
+
+        // db = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME).build();
 
         EditText editTrackId = (EditText) findViewById(R.id.editTrackId);
         String trackId = editTrackId.getText().toString();
@@ -347,13 +388,30 @@ changeFragment(new AlbumsFragment(), "Album");*/
         EditText editTrackDuration = (EditText) findViewById(R.id.editTrackDuration);
         String trackDuration = editTrackDuration.getText().toString();
 
-        Track track = (Track) new TrackTask(db, "get", trackId).execute().get();
+        //Track track = (Track) new TrackTask(db, "get", trackId).execute().get();
+        final Track track;
+        track = (Track) getDataObject();
 
         track.setName(trackName);
         track.setDuration(trackDuration);
 
-        new TrackTask(db,"update",track).execute().get();
-        */
+        //new TrackTask(db,"update",track).execute().get();
+        FirebaseDatabase.getInstance()
+                .getReference("tracks")
+                .child(track.getUid())
+                .updateChildren(track.toMap(), new DatabaseReference.CompletionListener() {
+                    @Override
+                    public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                        if(databaseError!=null){
+                            Log.d(TAG, "Update failure!", databaseError.toException());
+                        }else
+                        {
+                            Log.d(TAG, "Update successful!");
+                        }
+
+                    }
+                });
+        changeFragment(new TracksFragment(), "Artist");
     }
 
     //TODO Replace with firebase
@@ -391,33 +449,35 @@ changeFragment(new AlbumsFragment(), "Album");*/
         */
     }
 
-    //TODO Replace with firebase
+    //TODO MAYBE Just DELETE Replace && Delete
+    /*
     public void deleteTrack(View view)
     {
-        /*
+
         db = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME).build();
         Button deleteButton = (Button)view.findViewById(R.id.deleteButton);
         new TrackTask(db, "delete",0);
         changeFragment(new ArtistsFragment(), "artist");
     }
-
+*/
    public void setDataObject(Object o ){
-        this.object = o ;
+        this.object= o ;
    }
 
     public Object getDataObject(){
         return this.object;
     }
 
-
+/*
     public void addArtistToAlbum(View view){
         Fragment fragment;
         String fragmentTitle;
         fragment = new AddArtistFragment();
         fragmentTitle = "add artist";
         changeFragment(fragment, fragmentTitle);
-*/
+
     }
+    */
 
     private void addData() {
         List<Album> albums = new ArrayList<>();
