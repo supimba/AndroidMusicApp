@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:background="@android:color/black"
             android:onClick="updateTrack"
-            android:text="@string/add"
+            android:text="@string/edit"
             android:textColor="@android:color/white" />
 
         <EditText

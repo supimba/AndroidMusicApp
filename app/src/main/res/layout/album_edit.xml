@@ -79,7 +79,7 @@
         android:layout_height="wrap_content"
         android:background="@android:color/black"
         android:onClick="updateAlbum"
-        android:text="@string/add"
+        android:text="@string/edit"
         android:textColor="@android:color/white" />
 
     </LinearLayout>
