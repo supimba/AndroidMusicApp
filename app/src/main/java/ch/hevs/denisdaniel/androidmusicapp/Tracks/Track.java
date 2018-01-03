@@ -71,12 +71,14 @@ public class Track {
     @Exclude
     public Map<String, Object> toMap(){
         HashMap<String, Object> result = new HashMap<>();
-        result.put("albumUID", albumUid);
-        result.put("trackTitle", name);
+        result.put("name", name);
         result.put("duration", duration);
+        result.put("albumUid", albumUid);
+
+
         return result;
     }
-
+/*
     @Override
     public String toString() {
         return "Track{" +
@@ -86,4 +88,5 @@ public class Track {
                 ", album_id=" + albumUid +
                 '}';
     }
+    */
 }

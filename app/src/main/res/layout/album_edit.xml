@@ -73,13 +73,13 @@
         android:theme="@style/EditTextTheme" />
 
 
-        <Button
-            android:id="@+id/buttonUpdateAlbum"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/black"
-            android:onClick="udpateAlbum"
-            android:text="@string/add"
-            android:textColor="@android:color/white" />
+    <Button
+        android:id="@+id/buttonUpdateAlbum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/black"
+        android:onClick="updateAlbum"
+        android:text="@string/add"
+        android:textColor="@android:color/white" />
 
     </LinearLayout>

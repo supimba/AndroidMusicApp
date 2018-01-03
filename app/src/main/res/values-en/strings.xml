@@ -52,6 +52,7 @@
     <string name="fill_field_album">Please fill name field</string>
     <string name="plus_icon" />
     <string name="edit">Edit</string>
+    <string name="descriptionAlbum">Description album</string>
 
     <!-- TODO ajouter string preferences -->
 

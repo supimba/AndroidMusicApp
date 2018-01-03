@@ -31,6 +31,7 @@ public class Album {
         this.description = description;
     }
 
+
     public Album() {
         this.uid = uid;
         this.title = title;
@@ -87,15 +88,15 @@ public class Album {
     @Exclude
     public Map<String, Object> toMap(){
         HashMap<String, Object> result = new HashMap<>();
-        result.put("artistUID", artistId);
-        result.put("albumTitle", title);
-        result.put("albumDescription", description);
-        result.put("releaseDate", releasedate);
+        result.put("artistId", artistId);
+        result.put("description", description);
+        result.put("releasedate", releasedate);
+        result.put("title", title);
 
         return result;
     }
 
-
+/*
     @Override
     public String toString() {
         return "Album{" +
@@ -106,4 +107,5 @@ public class Album {
                 ", artistId=" + artistId +
                 '}';
     }
+    */
 }

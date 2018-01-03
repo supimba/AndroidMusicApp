@@ -27,6 +27,7 @@ public class AlbumEditionFragment extends android.support.v4.app.Fragment {
     public void setAlbum(Album album){
         this.album = album;
     }
+
     public static AlbumEditionFragment newInstance(Album album) {
         AlbumEditionFragment fragment = new AlbumEditionFragment();
         Bundle args = new Bundle();

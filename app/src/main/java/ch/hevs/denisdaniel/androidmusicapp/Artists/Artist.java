@@ -69,11 +69,13 @@ public class Artist {
     @Exclude
     public Map<String, Object> toMap(){
         HashMap<String, Object> result = new HashMap<>();
-        result.put("artist", name);
+        result.put("albumUid", albumUid);
         result.put("description", description);
+        result.put("artist", name);
         return result;
     }
 
+    /*
     @Override
     public String toString() {
         return "Artist{" +
@@ -81,5 +83,5 @@ public class Artist {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 '}';
-    }
+    }*/
 }
