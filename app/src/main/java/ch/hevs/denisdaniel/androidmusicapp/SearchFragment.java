@@ -1,7 +1,9 @@
 package ch.hevs.denisdaniel.androidmusicapp;
 
 import android.os.Bundle;
+import android.os.Debug;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,10 @@ import android.widget.SearchView;
 import com.amigold.fundapter.BindDictionary;
 import com.amigold.fundapter.FunDapter;
 import com.amigold.fundapter.extractors.StringExtractor;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +30,6 @@ import ch.hevs.denisdaniel.androidmusicapp.Tracks.Track;
  */
 
 public class SearchFragment extends Fragment {
-    //private AppDatabase db;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -73,6 +78,8 @@ public class SearchFragment extends Fragment {
                 }
                 /* albums*/
                 List<Album> albums = searchAlbums(searchTerm);
+                Log.d("", "Albums: "+albums);
+
                 if (albums.size() > 0) {
                     BindDictionary<Album> dictionaryAlbums = new BindDictionary<Album>();
                     dictionaryAlbums.addStringField(R.id.albumTitle, new StringExtractor<Album>() {
@@ -130,23 +137,35 @@ public class SearchFragment extends Fragment {
     }
 
     public List<Album> searchAlbums(String searchTerm) {
-        List<Album> albums = new ArrayList();
+        final List<Album> albums = new ArrayList<Album>();
+        FirebaseDatabase.getInstance()
+                .getReference("albums")
+                .addListenerForSingleValueEvent(
+                        new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                if(dataSnapshot.exists()){
+                                    albums.clear();
+                                    albums.addAll(toAlbums(dataSnapshot));
+                                }
+                            }
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
 
-       //todo replace
-        //db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
-        /*
-        if (!searchTerm.equals("")) {
-            try {
-                albums = (List<Album>) new AlbumTask(db, "search", "%" + searchTerm + "%").execute().get();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            }
-        }
-        */
+                            }
+                        }
+                );
         return albums;
     }
+    private List<Album> toAlbums(DataSnapshot snapshot){
+        List<Album> albums = new ArrayList<>();
+        for (DataSnapshot childSnapshot : snapshot.getChildren()) {
+            Album entity = childSnapshot.getValue(Album.class);
+            entity.setUid(childSnapshot.getKey());
+            albums.add(entity);
+        }
+        return albums;
 
+    }
 
 }

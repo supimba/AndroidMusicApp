@@ -134,7 +134,6 @@ public class TracksFragment extends Fragment {
 
     private List<Track> toTracks(DataSnapshot snapshot){
         List<Track> tracks = new ArrayList<>();
-
         for (DataSnapshot childSnapshot : snapshot.getChildren()) {
             Track entity = childSnapshot.getValue(Track.class);
             entity.setUid(childSnapshot.getKey());
