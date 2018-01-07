@@ -26,9 +26,7 @@ public class TrackEditionFragment extends Fragment {
     public static TrackEditionFragment newInstance(Track track) {
         TrackEditionFragment fragment = new TrackEditionFragment();
         Bundle args = new Bundle();
-        //TODO change
-        if(track!=null)
-           // args.putLong("TRACK_ID", track.getUid());
+        //TODO change -> OK
         fragment.setArguments(args);
         return fragment;
     }

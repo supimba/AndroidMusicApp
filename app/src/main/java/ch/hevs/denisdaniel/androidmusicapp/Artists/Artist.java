@@ -1,7 +1,5 @@
 package ch.hevs.denisdaniel.androidmusicapp.Artists;
 
-import android.arch.persistence.room.Entity;
-
 import com.google.firebase.database.Exclude;
 
 import java.util.HashMap;
@@ -11,7 +9,7 @@ import java.util.Map;
  * Created by Denis Woeffray on 03.11.2017.
  */
 
-@Entity
+
 public class Artist {
     @Exclude
     private String uid;
@@ -70,18 +68,10 @@ public class Artist {
     public Map<String, Object> toMap(){
         HashMap<String, Object> result = new HashMap<>();
         result.put("albumUid", albumUid);
+        result.put("name", name);
         result.put("description", description);
-        result.put("artist", name);
+
         return result;
     }
 
-    /*
-    @Override
-    public String toString() {
-        return "Artist{" +
-                "uid=" + uid +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                '}';
-    }*/
 }

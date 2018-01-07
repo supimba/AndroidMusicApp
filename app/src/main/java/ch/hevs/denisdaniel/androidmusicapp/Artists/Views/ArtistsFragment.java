@@ -44,16 +44,12 @@ public class ArtistsFragment extends Fragment {
 
     void deleteArtist(final Artist artist)
     {
-        //TODO replace -> Ok && delete
-        //Replace
-    //    db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
-     //   new ArtistTask(db, "delete",id).execute();
-
+        //TODO replace with FB -> Ok && delete
         FirebaseDatabase.getInstance()
                 .getReference("artists")
                 .child(artist.getUid())
                 .removeValue(new DatabaseReference.CompletionListener() {
-                    @Override
+
                     public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                         if (databaseError != null) {
                             Log.d(TAG, "Delete failure!", databaseError.toException());
@@ -72,7 +68,7 @@ public class ArtistsFragment extends Fragment {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction ft = fragmentManager.beginTransaction();
         ft.replace(R.id.content_main, fragment);
-        ft.addToBackStack(null);
+        ft.addToBackStack(TAG);
         ft.commit();
     }
 
@@ -129,16 +125,7 @@ public class ArtistsFragment extends Fragment {
         //ArrayList<Artist> data = null;
 
 
-        //TODO replace and delete
-        /*
-        try {
-            data = (ArrayList) new ArtistTask(db, "getAll", 0).execute().get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-        */
+        //TODO replace with FB -> Ok
 
         BindDictionary<Artist> dictionary = new BindDictionary<>();
 
@@ -167,19 +154,8 @@ public class ArtistsFragment extends Fragment {
 
                 TextView editTextname = (TextView) v.findViewById(R.id.textViewId);
                 selectedArtist = data.get(pos);
-//TODO delete
-                // final int ArtistId = Integer.parseInt(editTextname.getText().toString());
 
-                //TODO Replace -> OK // Delete
-                /*
-                try {
-                    selectedArtist = (Artist) new ArtistTask(db, "get", ArtistId).execute().get();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                }
-                */
+                //TODO Replace with FB-> OK
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setView(R.layout.artists_list_popup);

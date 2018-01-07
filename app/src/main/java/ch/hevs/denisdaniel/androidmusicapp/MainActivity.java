@@ -37,15 +37,17 @@ import ch.hevs.denisdaniel.androidmusicapp.Tracks.Views.TracksFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    //TODO delete
-    //private AppDatabase db;
+    //TODO delete -> OK
     private FirebaseDatabase database;
     private DatabaseReference ref;
     public static String PREFS_LANGUAGE = "Language";
     private final String BACK_STACK_ROOT_TAG = "SEARCHFRAGMENT";
     private final String TAG = "MainActivity";
     private Object object;
-
+    //TODO set persistance
+    static {
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,14 +71,12 @@ public class MainActivity extends AppCompatActivity
         //database.getInstance();
         ref = database.getInstance().getReference();
 
-   //  addData();
+        //  addData();
+//        Fragment fragment = new SearchFragment();
+//        String fragmentTag = "SearchFragment";
+//        changeFragment(fragment, fragmentTag);
+//        fragmentManager.beginTransaction().replace(R.id.content_main, fragment, BACK_STACK_ROOT_TAG).commit();
 
-/*
-        Fragment fragment = new SearchFragment();
-        String fragmentTag = "SearchFragment";
-        changeFragment(fragment, fragmentTag);
-        fragmentManager.beginTransaction().replace(R.id.content_main, fragment, BACK_STACK_ROOT_TAG).commit();
-        */
     }
 
     @Override
@@ -120,13 +120,12 @@ public class MainActivity extends AppCompatActivity
 
         Fragment fragment = null;
         String fragmentTitle = null;
-        String fragmentTag  = null;
+        String fragmentTag = null;
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.popBackStack(BACK_STACK_ROOT_TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
 
-        switch(id)
-        {
+        switch (id) {
             case R.id.search:
                 fragment = new SearchFragment();
                 fragmentTag = "SearchFragment";
@@ -163,9 +162,8 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    public void changeFragment(Fragment fragment, String fragmentTag)
-    {
-        if(fragment!=null) {
+    public void changeFragment(Fragment fragment, String fragmentTag) {
+        if (fragment != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction ft = fragmentManager.beginTransaction();
             ft.replace(R.id.content_main, fragment);
@@ -175,72 +173,33 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void setActionBarTitle(String title){
+    public void setActionBarTitle(String title) {
         setTitle(title);
     }
 
-    //TODO Replace with firebase
-    public void addArtist(View view)
-    {
-/*
-       db = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME).build();
-        EditText editTextname = (EditText)findViewById(R.id.editTextName);
-        String artistName = editTextname.getText().toString();
-        EditText editTextDescription = (EditText)findViewById(R.id.editTextDescription);
-        String artistDescription = editTextDescription.getText().toString();
 
-        if(artistName.equals(""))
-        {
-            Toast toast = Toast.makeText(getApplicationContext(), R.string.fill_field_artist, Toast.LENGTH_SHORT);
-            toast.show();
-            return;
-        }
-        Artist artist = new Artist(artistName,artistDescription);
-        new ArtistTask(db,"add",artist);
-        editTextname.setText("");
-        editTextDescription.setText("");
-        Toast toast = Toast.makeText(getApplicationContext(), R.string.artist_created+" : "+artist.getName(), Toast.LENGTH_SHORT);
-        toast.show();
-        */
-    }
-
-//TODO Replace with firebase
-    public void deleteArtist(View view)
-    {
-        /*
-        db = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME).build();
-        Button deleteButton = (Button)view.findViewById(R.id.deleteButton);
-        new ArtistTask(db, "delete",0);
-        changeFragment(new ArtistsFragment(), "artist");
-        */
-    }
     //TODO Replace with firebase
     public void addAlbum(View view) throws ExecutionException, InterruptedException {
 
-        // initiate database
-        //db = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME).build();
-
         // get album's data
-        String albumTitle = ((EditText)findViewById(R.id.albumTitle)).getText().toString();
-        String albumDescription = ((EditText)findViewById(R.id.albumDescription)).getText().toString();
-        String albumReleaseDate = ((EditText)findViewById(R.id.albumReleaseDate)).getText().toString();
+        String albumTitle = ((EditText) findViewById(R.id.albumTitle)).getText().toString();
+        String albumDescription = ((EditText) findViewById(R.id.albumDescription)).getText().toString();
+        String albumReleaseDate = ((EditText) findViewById(R.id.albumReleaseDate)).getText().toString();
 
         // get artist's data
-        String artistName = ((EditText)findViewById(R.id.artistName)).getText().toString();
-        String artistDescription = ((EditText)findViewById(R.id.artistDescription)).getText().toString();
+        String artistName = ((EditText) findViewById(R.id.artistName)).getText().toString();
+        String artistDescription = ((EditText) findViewById(R.id.artistDescription)).getText().toString();
 
         // get tracks layout
-        LinearLayout mainLayout = (LinearLayout)findViewById(R.id.album_tracks);
+        LinearLayout mainLayout = (LinearLayout) findViewById(R.id.album_tracks);
 
-        if(albumTitle.equals(""))
-        {
+        if (albumTitle.equals("")) {
             Toast toast = Toast.makeText(getApplicationContext(), R.string.fill_field_album, Toast.LENGTH_SHORT);
             toast.show();
             return;
         }
 
-        if(artistName.equals(""))
-        {
+        if (artistName.equals("")) {
             Toast toast = Toast.makeText(getApplicationContext(), R.string.fill_field_artist, Toast.LENGTH_SHORT);
             toast.show();
             return;
@@ -254,11 +213,7 @@ public class MainActivity extends AppCompatActivity
         artist.setDescription(artistDescription);
 
 
-
-
-        //Album album = new Album(albumTitle,albumReleaseDate, albumDescription);
-        //TODO replace
-        // Long artistId = (Long)new ArtistTask(db, "add", artist).execute().get(); delete
+        //TODO replace -> Ok
         Album album = new Album();
         String albumUID = UUID.randomUUID().toString();
         album.setUid(albumUID);
@@ -266,30 +221,25 @@ public class MainActivity extends AppCompatActivity
         album.setDescription(albumDescription);
         album.setReleasedate(albumReleaseDate);
 
-
-     //   album.setArtistId(artistId);
-        //TODO replace
-        //Long albumId = (Long)new AlbumTask(db,"add",album).execute().get();
+        //TODO replace -> OK
         album.setArtistId(artistUID);
         artist.setAlbumUid(albumUID);
 
         ref.child("albums").child(albumUID).setValue(album);
-        if(mainLayout!=null)
-        {
-            for (int i = 0;i<mainLayout.getChildCount();i++)
-            {
-                EditText editTrackName = (EditText)mainLayout.getChildAt(i).findViewById(R.id.trackName);
-                EditText editTrackDuration = (EditText)mainLayout.getChildAt(i).findViewById(R.id.trackDuration);
+        if (mainLayout != null) {
+            for (int i = 0; i < mainLayout.getChildCount(); i++) {
+                EditText editTrackName = (EditText) mainLayout.getChildAt(i).findViewById(R.id.trackName);
+                EditText editTrackDuration = (EditText) mainLayout.getChildAt(i).findViewById(R.id.trackDuration);
                 String name = editTrackName.getText().toString();
                 String duration = editTrackDuration.getText().toString();
-               // Track track = new Track(name,duration); to delete
+
                 Track track = new Track();
                 String trackUID = UUID.randomUUID().toString();
                 track.setUid(trackUID);
                 track.setName(name);
                 track.setDuration(duration);
                 track.setAlbumUid(albumUID);
-              //  new TrackTask(db,"add",track).execute().get();
+
                 ref.child("albums").child(albumUID).child("tracks").child(trackUID).setValue(true);
                 ref.child("tracks").child(trackUID).setValue(track);
             }
@@ -298,42 +248,38 @@ public class MainActivity extends AppCompatActivity
         ref.child("artists").child(artistUID).setValue(artist);
 
 
-
-        Toast toast = Toast.makeText(getApplicationContext(), R.string.album_created+" : "+album.getTitle(), Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(getApplicationContext(), R.string.album_created + " : " + album.getTitle(), Toast.LENGTH_SHORT);
         toast.show();
 
         // reset form fields
-        ((EditText)findViewById(R.id.albumTitle)).setText("");
-        ((EditText)findViewById(R.id.albumDescription)).setText("");
-        ((EditText)findViewById(R.id.albumReleaseDate)).setText("");
-        ((EditText)findViewById(R.id.artistName)).setText("");
-        ((EditText)findViewById(R.id.artistDescription)).setText("");
+        ((EditText) findViewById(R.id.albumTitle)).setText("");
+        ((EditText) findViewById(R.id.albumDescription)).setText("");
+        ((EditText) findViewById(R.id.albumReleaseDate)).setText("");
+        ((EditText) findViewById(R.id.artistName)).setText("");
+        ((EditText) findViewById(R.id.artistDescription)).setText("");
 
         Fragment fragment = new AlbumsFragment();
-        String fragmentTag  = "AddAlbumFragment";
+        String fragmentTag = "AddAlbumFragment";
         changeFragment(fragment, fragmentTag);
 
     }
+
     //TODO Replace with firebase ->OK && Delete
     public void updateAlbum(View view) throws ExecutionException, InterruptedException {
 
-
-        //db = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME).build();
-
-        EditText editAlbumId = (EditText)findViewById(R.id.albumID);
+        EditText editAlbumId = (EditText) findViewById(R.id.albumID);
         String albumId = editAlbumId.getText().toString();
 
-        EditText albumTitleEdit = (EditText)findViewById(R.id.editAlbumTitle);
+        EditText albumTitleEdit = (EditText) findViewById(R.id.editAlbumTitle);
         String albumTitle = albumTitleEdit.getText().toString();
 
-        EditText editAlbumReleaseDate =(EditText)findViewById(R.id.editAlbumReleaseDateEdit);
+        EditText editAlbumReleaseDate = (EditText) findViewById(R.id.editAlbumReleaseDateEdit);
         String albumReleaseDate = editAlbumReleaseDate.getText().toString();
 
-        EditText editAlbumDescription = (EditText)findViewById(R.id.editAlbumDescriptionEdit);
+        EditText editAlbumDescription = (EditText) findViewById(R.id.editAlbumDescriptionEdit);
         String artistDescription = editAlbumDescription.getText().toString();
 
-        //Album album = (Album)new AlbumTask(db, "get", albumId).execute().get();
-        final  Album album;
+        final Album album;
 
         album = (Album) getDataObject();
 
@@ -342,8 +288,7 @@ public class MainActivity extends AppCompatActivity
         album.setDescription(artistDescription);
 
 
-        if(albumTitle.equals(""))
-        {
+        if (albumTitle.equals("")) {
             Toast toast = Toast.makeText(getApplicationContext(), R.string.fill_field_album, Toast.LENGTH_SHORT);
             toast.show();
             return;
@@ -354,10 +299,9 @@ public class MainActivity extends AppCompatActivity
                 .updateChildren(album.toMap(), new DatabaseReference.CompletionListener() {
                     @Override
                     public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                        if(databaseError!=null){
+                        if (databaseError != null) {
                             Log.d(TAG, "Update failure!", databaseError.toException());
-                        }else
-                        {
+                        } else {
                             Log.d(TAG, "Update successful!");
                         }
 
@@ -365,18 +309,16 @@ public class MainActivity extends AppCompatActivity
                 });
 
 
-        //new AlbumTask(db,"update",album).execute().get();
-
-
-changeFragment(new AlbumsFragment(), "Album");
+        changeFragment(new AlbumsFragment(), "Album");
 
     }
-    //TODO Replace with firebase
+
+    //TODO Replace with firebase -> OK
     public void updateArtist(View view) throws ExecutionException, InterruptedException {
-       // db = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME).build();
 
         EditText editArtistId = (EditText) findViewById(R.id.editArtistId);
         String artistId = editArtistId.getText().toString();
+
         EditText editArtistName = (EditText) findViewById(R.id.editArtistName);
         String artistName = editArtistName.getText().toString();
 
@@ -384,7 +326,7 @@ changeFragment(new AlbumsFragment(), "Album");
         String artistDescription = editArtistDescription.getText().toString();
 
         //Artist artist = (Artist)new ArtistTask(db, "get", artistId).execute().get();
-        final  Artist artist;
+        final Artist artist;
 
         artist = (Artist) getDataObject();
 
@@ -397,30 +339,30 @@ changeFragment(new AlbumsFragment(), "Album");
                 .updateChildren(artist.toMap(), new DatabaseReference.CompletionListener() {
                     @Override
                     public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                        if(databaseError!=null){
+                        if (databaseError != null) {
                             Log.d(TAG, "Update failure!", databaseError.toException());
-                        }else
-                        {
+                        } else {
                             Log.d(TAG, "Update successful!");
                         }
 
                     }
                 });
 
-       // new ArtistTask(db,"update",artist).execute().get();
         changeFragment(new ArtistsFragment(), "Artist");
 
 
     }
+
     //TODO Replace -> OK && delete
     public void updateTrack(View view) throws ExecutionException, InterruptedException {
 
-        // db = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME).build();
 
         EditText editTrackId = (EditText) findViewById(R.id.editTrackId);
         String trackId = editTrackId.getText().toString();
+
         EditText editTrackName = (EditText) findViewById(R.id.editTrackName);
         String trackName = editTrackName.getText().toString();
+
         EditText editTrackDuration = (EditText) findViewById(R.id.editTrackDuration);
         String trackDuration = editTrackDuration.getText().toString();
 
@@ -431,26 +373,24 @@ changeFragment(new AlbumsFragment(), "Album");
         track.setName(trackName);
         track.setDuration(trackDuration);
 
-        //new TrackTask(db,"update",track).execute().get();
         FirebaseDatabase.getInstance()
                 .getReference("tracks")
                 .child(track.getUid())
                 .updateChildren(track.toMap(), new DatabaseReference.CompletionListener() {
                     @Override
                     public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                        if(databaseError!=null){
+                        if (databaseError != null) {
                             Log.d(TAG, "Update failure!", databaseError.toException());
-                        }else
-                        {
+                        } else {
                             Log.d(TAG, "Update successful!");
                         }
 
                     }
                 });
-        changeFragment(new TracksFragment(), "Artist");
+        changeFragment(new TracksFragment(), "Track");
     }
 
-    //TODO Replace with firebase
+    //TODO Replace with firebase -> Keeped for future dev.
     public void addTrack(View view) {
         /*
         EditText editTextname = (EditText) findViewById(R.id.trackName);
@@ -496,25 +436,15 @@ changeFragment(new AlbumsFragment(), "Album");
         changeFragment(new ArtistsFragment(), "artist");
     }
 */
-   public void setDataObject(Object o ){
-        this.object= o ;
-   }
+    public void setDataObject(Object o) {
+        this.object = o;
+    }
 
-    public Object getDataObject(){
+    public Object getDataObject() {
         return this.object;
     }
 
-/*
-    public void addArtistToAlbum(View view){
-        Fragment fragment;
-        String fragmentTitle;
-        fragment = new AddArtistFragment();
-        fragmentTitle = "add artist";
-        changeFragment(fragment, fragmentTitle);
-
-    }
-    */
-
+    // seed firebase for tests
     private void addData() {
         List<Album> albums = new ArrayList<>();
         List<Artist> artists = new ArrayList<>();
@@ -595,7 +525,6 @@ changeFragment(new AlbumsFragment(), "Album");
 
             for(Track track:tracksAlbum1)
                 ref.child("albums").child(album.getUid()).child("tracks").child(track.getUid()).setValue(true);
-
         }*/
         ref.child("albums").child(album1UID).setValue(album1);
         ref.child("albums").child(album1UID).child("tracks").child(track1UID).setValue(true);
@@ -603,27 +532,19 @@ changeFragment(new AlbumsFragment(), "Album");
         ref.child("albums").child(album2UID).setValue(album2);
         ref.child("albums").child(album2UID).child("tracks").child(track2UID).setValue(true);
 
-        for(Artist artist:artists)
+        for (Artist artist : artists)
             ref.child("artists").child(artist.getUid()).setValue(artist);
 
 
-
-        for(Track track : tracksAlbum1) {
+        for (Track track : tracksAlbum1) {
             ref.child("tracks").child(track.getUid()).setValue(track);
             //ref.child("tracks").child("Hellotest");
         }
 
-        for(Track track : tracksAlbum2) {
+        for (Track track : tracksAlbum2) {
             ref.child("tracks").child(track.getUid()).setValue(track);
             //ref.child("tracks").child("Hellotest");
         }
-
-
-
-
 
     }
-
-
-
 }

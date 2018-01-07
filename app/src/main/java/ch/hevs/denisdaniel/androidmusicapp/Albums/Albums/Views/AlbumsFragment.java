@@ -39,21 +39,18 @@ public class AlbumsFragment extends Fragment {
 
 
     private ArrayList<Album> data;
-    private Album selectedAlbum ;
+    private Album selectedAlbum;
     private final String TAG = "ALbumsFragment";
     private FirebaseDatabase database;
     private DatabaseReference ref;
-    private FunDapter adapter ;
+    private FunDapter adapter;
 
-//Long id
-    public void deleteAlbumProc(final Album album)
-    {
+    //Long id
+    public void deleteAlbumProc(final Album album) {
         //TODO Replace -> OK && Delete
-        //db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
-        //new AlbumTask(db, "delete",id).execute();
 
         // get all tracks in a list
-        final ArrayList<String> trackIdsList= new ArrayList<>();
+        final ArrayList<String> trackIdsList = new ArrayList<>();
 
         String albumId = album.getUid();
 
@@ -65,8 +62,7 @@ public class AlbumsFragment extends Fragment {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         trackIdsList.clear();
-                        for(DataSnapshot childDataSnapshot : dataSnapshot.getChildren())
-                        {
+                        for (DataSnapshot childDataSnapshot : dataSnapshot.getChildren()) {
                             trackIdsList.add(childDataSnapshot.getKey());
                         }
                         deleteAlbumDependencies(trackIdsList);
@@ -79,12 +75,13 @@ public class AlbumsFragment extends Fragment {
                     }
                 });
 
-        changeFragment(new AlbumsFragment());
+
+
 
     }
 
-    private void deleteAlbum(final Album album){
-         FirebaseDatabase.getInstance()
+    private void deleteAlbum(final Album album) {
+        FirebaseDatabase.getInstance()
                 .getReference("albums")
                 .child(album.getUid())
                 .removeValue(new DatabaseReference.CompletionListener() {
@@ -99,13 +96,13 @@ public class AlbumsFragment extends Fragment {
                         }
                     }
                 });
-
+        changeFragment(new AlbumsFragment());
     }
 
     //TODO recupérer les ids de l'album dans firebase avant de le supprimer
     private void deleteAlbumDependencies(ArrayList<String> trackIds) {
 
-        for(String t : trackIds){
+        for (String t : trackIds) {
 
             FirebaseDatabase.getInstance()
                     .getReference("tracks")
@@ -125,31 +122,30 @@ public class AlbumsFragment extends Fragment {
 
     }
 
-    public void editAlbum(Album album)
-    {
+    public void editAlbum(Album album) {
         AlbumEditionFragment fragment = AlbumEditionFragment.newInstance(album);
 
         // save the selectedalbum in main
 
         //TODO replace
-       ((MainActivity) getActivity()).setDataObject(selectedAlbum);
+        ((MainActivity) getActivity()).setDataObject(selectedAlbum);
         fragment.setAlbum(album);
         changeFragment(fragment);
     }
 
-    public void showAlbum(Album album){
+    public void showAlbum(Album album) {
         AlbumDetailsFragment fragment = AlbumDetailsFragment.newInstance(album);
         fragment.setAlbum(album);
         changeFragment(fragment);
 
     }
+
     /* permet de modifier les fragments*/
-    public void changeFragment(Fragment fragment)
-    {
+    public void changeFragment(Fragment fragment) {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction ft = fragmentManager.beginTransaction();
         ft.replace(R.id.content_main, fragment);
-        ft.addToBackStack(null);
+        ft.addToBackStack(TAG);
         ft.commit();
     }
 
@@ -166,7 +162,7 @@ public class AlbumsFragment extends Fragment {
                         new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
-                                if(dataSnapshot.exists()){
+                                if (dataSnapshot.exists()) {
                                     data.clear();
                                     data.addAll(toAlbums(dataSnapshot));
                                     adapter.updateData(data);
@@ -182,7 +178,7 @@ public class AlbumsFragment extends Fragment {
                 );
     }
 
-    private List<String> tracksToDelete(DataSnapshot snapshot){
+    private List<String> tracksToDelete(DataSnapshot snapshot) {
         List<String> tracks = new ArrayList<>();
 
         for (DataSnapshot childSnapshot : snapshot.getChildren()) {
@@ -196,7 +192,7 @@ public class AlbumsFragment extends Fragment {
 
     }
 
-    private List<Album> toAlbums(DataSnapshot snapshot){
+    private List<Album> toAlbums(DataSnapshot snapshot) {
         List<Album> albums = new ArrayList<>();
 
         for (DataSnapshot childSnapshot : snapshot.getChildren()) {
@@ -213,18 +209,7 @@ public class AlbumsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.albums_list, container, false);
-        //TODO replace
-        //db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
-/*
-        try {
-            //TODO Replace
-            data = (ArrayList) new AlbumTask(db, "getAll", 0).execute().get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-*/
+        //TODO replace with Firebase ->OK
 
         // ajoute les données dans la listView
         BindDictionary<Album> dictionary = new BindDictionary<>();
@@ -237,7 +222,7 @@ public class AlbumsFragment extends Fragment {
         dictionary.addStringField(R.id.albumDescription, new StringExtractor<Album>() {
             @Override
             public String getStringValue(Album album, int position) {
-                return ""+ album.getDescription();
+                return "" + album.getDescription();
             }
         });
         dictionary.addStringField(R.id.albumID, new StringExtractor<Album>() {
@@ -253,7 +238,7 @@ public class AlbumsFragment extends Fragment {
             }
         });
 
-        adapter = new FunDapter(AlbumsFragment.this.getActivity(), data, R.layout.albums_list_item, dictionary) ;
+        adapter = new FunDapter(AlbumsFragment.this.getActivity(), data, R.layout.albums_list_item, dictionary);
 
         ListView album_listView = (ListView) view.findViewById(R.id.lvData);
         album_listView.setAdapter(adapter);
@@ -267,19 +252,9 @@ public class AlbumsFragment extends Fragment {
                                            final int pos, long id) {
 
                 TextView albumIdTextView = (TextView) v.findViewById(R.id.albumID);
-//                final Long AlbumId = Long.parseLong(albumIdTextView.getText().toString());
+
+                //TODO replace with Firebase -> OK
                 selectedAlbum = data.get(pos);
-
-               /* try {
-                   //TODO replace
-                    //selectedAlbum = (Album) new AlbumTask(db, "get", AlbumId).execute().get();
-
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                }*/
-
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setView(R.layout.albums_list_popup);
@@ -318,27 +293,13 @@ public class AlbumsFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View v, int i, long l) {
 
-//                TextView albumIdTextView = (TextView) v.findViewById(R.id.albumID);
-//                final int AlbumId = Integer.parseInt(albumIdTextView.getText().toString());
-
-                //TODO replace
-                /*try {
-                    selectedAlbum = (Album) new AlbumTask(db, "get", AlbumId).execute().get();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                }*/
+                //TODO replace with FB -> OK
 
                 selectedAlbum = data.get(i);
                 showAlbum(selectedAlbum);
 
             }
         });
-
-
-
-
         return view;
     }
 }

@@ -54,10 +54,6 @@ public class AlbumDetailsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         dataTracks = new ArrayList<Track>();
-        /*if (getArguments() != null)
-            albumId = getArguments().getLong(ALBUM_ID);
-*/
-
 
         ArrayList<String> trackIdsList = new ArrayList<>();
         albumId = album.getUid();
@@ -68,10 +64,6 @@ public class AlbumDetailsFragment extends Fragment {
 
         // get all track ids from album
         getTracksList(albumId);
-       // getArtistData(artistId);
-
-
-
 
     }
 
@@ -81,23 +73,8 @@ public class AlbumDetailsFragment extends Fragment {
         final View view = inflater.inflate(R.layout.album_details, container, false);
 
 
-        //todo replace
-        //db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
-//TODO change
-        //  Long artistId = album.getArtistId();
+        //TODO replace -> OK
 
-        /* récupération des tracks*/
-        //TODO replace
-        /*
-        try {
-            data = (ArrayList) new TrackTask(db, "getAlbumTracks", album.getUid()).execute().get();
-            artist = (Artist) new ArtistTask(db, "get", artistId).execute().get();
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }*/
 
         FirebaseDatabase
                 .getInstance()
@@ -107,7 +84,7 @@ public class AlbumDetailsFragment extends Fragment {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        String artistNameValue =dataSnapshot.getValue(String.class);
+                        String artistNameValue = dataSnapshot.getValue(String.class);
                         TextView artistName = view.findViewById(R.id.detailsArtistName);
                         artistName.setText(artistNameValue);
                     }
@@ -118,10 +95,7 @@ public class AlbumDetailsFragment extends Fragment {
                     }
                 });
 
-          /*  TextView artistName = view.findViewById(R.id.detailsArtistName);
-            artistName.setText(artist.getName());
 
-*/
         /* creation des textview*/
         TextView albumTitle = view.findViewById(R.id.detailsAlbumTitle);
         albumTitle.setText(album.getTitle());
@@ -172,7 +146,6 @@ public class AlbumDetailsFragment extends Fragment {
         return entity;
 
     }
-
 
 
     private void getTracksData(final ArrayList<String> trackIdsList) {
@@ -251,7 +224,7 @@ public class AlbumDetailsFragment extends Fragment {
 
     }
 
-    private void getArtistData(String artistId){
+    private void getArtistData(String artistId) {
         final ArrayList<Artist> artistList = new ArrayList<>();
         FirebaseDatabase.getInstance()
                 .getReference("artists")
