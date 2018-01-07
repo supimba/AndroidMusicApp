@@ -81,6 +81,7 @@ public class SearchFragment extends Fragment {
                 List<Album> albums = searchAlbums(searchTerm);
                 Log.d("", "Albums: "+albums);
 
+
                 if (albums.size() > 0) {
                     BindDictionary<Album> dictionaryAlbums = new BindDictionary<Album>();
                     dictionaryAlbums.addStringField(R.id.albumTitle, new StringExtractor<Album>() {
