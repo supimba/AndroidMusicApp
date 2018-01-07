@@ -78,7 +78,7 @@ public class Track {
 
         return result;
     }
-/*
+
     @Override
     public String toString() {
         return "Track{" +
@@ -88,5 +88,5 @@ public class Track {
                 ", album_id=" + albumUid +
                 '}';
     }
-    */
+
 }
