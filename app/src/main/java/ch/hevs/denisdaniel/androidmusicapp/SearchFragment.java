@@ -31,6 +31,7 @@ import ch.hevs.denisdaniel.androidmusicapp.Tracks.Track;
 
 public class SearchFragment extends Fragment {
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -135,6 +136,7 @@ public class SearchFragment extends Fragment {
         */
         return tracks;
     }
+
 
     public List<Album> searchAlbums(String searchTerm) {
         final List<Album> albums = new ArrayList<Album>();
