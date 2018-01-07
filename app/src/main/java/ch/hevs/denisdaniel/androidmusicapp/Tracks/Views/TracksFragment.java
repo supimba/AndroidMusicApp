@@ -45,13 +45,7 @@ public class TracksFragment extends Fragment {
 
     void deleteTrack(final Track track)
     {
-        //TODO replace -> OK and Delte
-        /*
-        db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
-        new TrackTask(db, "delete",id).execute();
-        changeFragment(new TracksFragment());
-        */
-
+        //TODO replace with FB -> OK and Delte
 
         FirebaseDatabase.getInstance()
             .getReference("tracks")
@@ -148,19 +142,7 @@ public class TracksFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         final View view = inflater.inflate(R.layout.tracks_list, container, false);
-        //TODO replace
-      //  db = Room.databaseBuilder(this.getActivity(), AppDatabase.class, AppDatabase.DB_NAME).build();
-
-
-        /*
-        try {
-            data = (ArrayList) new TrackTask(db, "getAll", 0).execute().get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-        */
+        //TODO replace -> OK
 
         BindDictionary<Track> dictionary = new BindDictionary<>();
 
@@ -195,18 +177,8 @@ public class TracksFragment extends Fragment {
                                            int pos, long id) {
 
                 TextView editTextId = (TextView) v.findViewById(R.id.textViewId);
-//TODO Delete
-               // final int trackId = Integer.parseInt(editTextId.getText().toString());
-                selectedTrack = data.get(pos);
-                /*
-                try {
-                    selectedTrack = (Track) new TrackTask(db, "get", trackId).execute().get();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                }*/
 
+                selectedTrack = data.get(pos);
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setView(R.layout.tracks_list_popup);
@@ -243,8 +215,7 @@ public class TracksFragment extends Fragment {
     public void editTrack(Track track)
     {
         Log.d("", "editTrack: "+track);
-        //TODO replace
-
+        //TODO replace -> OK
         TrackEditionFragment fragment = TrackEditionFragment.newInstance(track);
         ((MainActivity) getActivity()).setDataObject(selectedTrack);
         fragment.setTrack(track);

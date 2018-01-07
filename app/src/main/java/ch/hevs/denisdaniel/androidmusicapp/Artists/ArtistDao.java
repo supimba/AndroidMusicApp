@@ -1,16 +1,10 @@
 package ch.hevs.denisdaniel.androidmusicapp.Artists;
 
-import android.arch.persistence.room.Dao;
-import android.arch.persistence.room.Delete;
-import android.arch.persistence.room.Insert;
-import android.arch.persistence.room.Query;
-import android.arch.persistence.room.Update;
-
-import java.util.List;
-
 /**
  * Created by Denis Woeffray on 03.11.2017.
  */
+
+/*
 @Dao
 public interface ArtistDao {
     @Query("SELECT * FROM artist ORDER BY name")
@@ -34,3 +28,4 @@ public interface ArtistDao {
     @Query("SELECT * FROM artist WHERE name LIKE :searchTerm ORDER BY name")
     List<Artist> search(String searchTerm);
 }
+*/

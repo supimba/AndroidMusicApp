@@ -26,9 +26,7 @@ public class ArtistEditionFragment extends Fragment {
     public static ArtistEditionFragment newInstance(Artist artist) {
         ArtistEditionFragment fragment = new ArtistEditionFragment();
         Bundle args = new Bundle();
-        //TODO change
-        if(artist!=null)
-        //    args.putLong("ARITST_ID", artist.getUid());
+        //TODO change -> Ok
         fragment.setArguments(args);
         return fragment;
     }
@@ -41,12 +39,18 @@ public class ArtistEditionFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.artist_edit, container, false);
-        EditText editArtistName = view.findViewById(R.id.editArtistName);
-        editArtistName.setText(artist.getName());
-        EditText editArtistDescription = view.findViewById(R.id.editArtistDescription);
-        editArtistDescription.setText(artist.getDescription());
+
         EditText editArtistId = view.findViewById(R.id.editArtistId);
         editArtistId.setText(artist.getUid().toString());
+
+        EditText editArtistName = view.findViewById(R.id.editArtistName);
+        editArtistName.setText(artist.getName());
+
+        EditText editArtistDescription = view.findViewById(R.id.editArtistDescription);
+        editArtistDescription.setText(artist.getDescription());
+
+
+
         return view;
     }
 }

@@ -20,20 +20,17 @@ import ch.hevs.denisdaniel.androidmusicapp.R;
 public class AlbumEditionFragment extends android.support.v4.app.Fragment {
 
     private Album album;
-//    private AppDatabase db;
+    //    private AppDatabase db;
     private String newAlbumTitle;
     private EditText releaseDate;
 
-    public void setAlbum(Album album){
+    public void setAlbum(Album album) {
         this.album = album;
     }
 
     public static AlbumEditionFragment newInstance(Album album) {
         AlbumEditionFragment fragment = new AlbumEditionFragment();
         Bundle args = new Bundle();
-        //TODO change
-        if(album!=null)
-        //    args.putLong("ALBUM_ID", album.getUid());
 
         fragment.setArguments(args);
         return fragment;
@@ -65,7 +62,6 @@ public class AlbumEditionFragment extends android.support.v4.app.Fragment {
     }
 
 
-
     /* Prend en charge la saisie utilisateur de la date*/
 
     private TextWatcher mDateEntryWatcher = new TextWatcher() {
@@ -74,22 +70,21 @@ public class AlbumEditionFragment extends android.support.v4.app.Fragment {
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             String working = s.toString();
             boolean isValid = true;
-            if (working.length()==2 && before ==0) {
-                if (Integer.parseInt(working) < 1 || Integer.parseInt(working)>12) {
+            if (working.length() == 2 && before == 0) {
+                if (Integer.parseInt(working) < 1 || Integer.parseInt(working) > 12) {
                     isValid = false;
                 } else {
-                    working+="/";
+                    working += "/";
                     releaseDate.setText(working);
                     releaseDate.setSelection(working.length());
                 }
-            }
-            else if (working.length()==7 && before ==0) {
+            } else if (working.length() == 7 && before == 0) {
                 String enteredYear = working.substring(3);
                 int currentYear = Calendar.getInstance().get(Calendar.YEAR);
                 if (Integer.parseInt(enteredYear) < currentYear) {
                     isValid = false;
                 }
-            } else if (working.length()!=7) {
+            } else if (working.length() != 7) {
                 isValid = false;
             }
 
@@ -102,10 +97,12 @@ public class AlbumEditionFragment extends android.support.v4.app.Fragment {
         }
 
         @Override
-        public void afterTextChanged(Editable s) {}
+        public void afterTextChanged(Editable s) {
+        }
 
         @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
 
     };
 

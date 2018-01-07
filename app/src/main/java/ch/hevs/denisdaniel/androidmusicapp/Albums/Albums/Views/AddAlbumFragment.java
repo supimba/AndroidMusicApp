@@ -1,21 +1,21 @@
 package ch.hevs.denisdaniel.androidmusicapp.Albums.Albums.Views;
 
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
+        import android.os.Bundle;
+        import android.support.v4.app.Fragment;
+        import android.text.Editable;
+        import android.text.TextWatcher;
+        import android.view.LayoutInflater;
+        import android.view.View;
+        import android.view.ViewGroup;
+        import android.widget.AdapterView;
+        import android.widget.Button;
+        import android.widget.EditText;
+        import android.widget.ImageButton;
+        import android.widget.LinearLayout;
 
-import java.util.Calendar;
+        import java.util.Calendar;
 
-import ch.hevs.denisdaniel.androidmusicapp.R;
+        import ch.hevs.denisdaniel.androidmusicapp.R;
 
 /**
  * Created by Denis Woeffray on 27.10.2017.
@@ -24,7 +24,7 @@ import ch.hevs.denisdaniel.androidmusicapp.R;
 public class AddAlbumFragment extends Fragment {
 
 
-private EditText releaseDate;
+    private EditText releaseDate;
 
 
     @Override
@@ -36,7 +36,7 @@ private EditText releaseDate;
         ImageButton addTrack = view.findViewById(R.id.addTrack);
         Button addAlbum = view.findViewById(R.id.buttonAddAlbum);
         final LinearLayout mainLayout = view.findViewById(R.id.album_tracks);
-        addTrack.setOnClickListener(new AdapterView.OnClickListener(){
+        addTrack.setOnClickListener(new AdapterView.OnClickListener() {
 
             @Override
             public void onClick(View view) {
@@ -54,29 +54,27 @@ private EditText releaseDate;
     }
 
 
-
     private TextWatcher mDateEntryWatcher = new TextWatcher() {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             String working = s.toString();
             boolean isValid = true;
-            if (working.length()==2 && before ==0) {
-                if (Integer.parseInt(working) < 1 || Integer.parseInt(working)>12) {
+            if (working.length() == 2 && before == 0) {
+                if (Integer.parseInt(working) < 1 || Integer.parseInt(working) > 12) {
                     isValid = false;
                 } else {
-                    working+="/";
+                    working += "/";
                     releaseDate.setText(working);
                     releaseDate.setSelection(working.length());
                 }
-            }
-            else if (working.length()==7 && before ==0) {
+            } else if (working.length() == 7 && before == 0) {
                 String enteredYear = working.substring(3);
                 int currentYear = Calendar.getInstance().get(Calendar.YEAR);
                 if (Integer.parseInt(enteredYear) < currentYear) {
                     isValid = false;
                 }
-            } else if (working.length()!=7) {
+            } else if (working.length() != 7) {
                 isValid = false;
             }
 
@@ -89,12 +87,13 @@ private EditText releaseDate;
         }
 
         @Override
-        public void afterTextChanged(Editable s) {}
+        public void afterTextChanged(Editable s) {
+        }
 
         @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
 
     };
 
 }
-

@@ -96,16 +96,4 @@ public class Album {
         return result;
     }
 
-/*
-    @Override
-    public String toString() {
-        return "Album{" +
-                "uid=" + uid +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", releasedate='" + releasedate + '\'' +
-                ", artistId=" + artistId +
-                '}';
-    }
-    */
 }
